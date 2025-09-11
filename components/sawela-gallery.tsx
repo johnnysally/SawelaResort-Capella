@@ -45,11 +45,13 @@ export default function SawelaGallery() {
   ]
 
   return (
-    <section className="py-20 px-4 bg-card">
+    <section className="py-20 px-4 bg-gradient-to-b from-green-100 to-cream-100">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6">Resort Gallery</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-green-900 mb-6">
+            Resort Gallery
+          </h2>
+          <p className="text-xl text-green-700 max-w-2xl mx-auto text-pretty">
             Discover the beauty and elegance that awaits you at Sawela Resort through our curated collection of spaces.
           </p>
         </div>
@@ -58,15 +60,15 @@ export default function SawelaGallery() {
           {galleryImages.map((image, index) => (
             <div
               key={index}
-              className="relative group cursor-pointer hover-lift"
+              className="relative group cursor-pointer hover:scale-105 transition-transform duration-300"
               onClick={() => setSelectedImage(index)}
             >
               <img
                 src={image.src || "/placeholder.svg"}
                 alt={image.alt}
-                className="w-full h-80 object-cover rounded-xl luxury-shadow"
+                className="w-full h-80 object-cover rounded-xl shadow-lg"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl">
+              <div className="absolute inset-0 bg-gradient-to-t from-green-200/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl">
                 <div className="absolute bottom-4 left-4 text-white">
                   <p className="text-sm text-white/80 mb-1">{image.category}</p>
                   <p className="font-semibold text-lg">{image.title}</p>
@@ -79,7 +81,7 @@ export default function SawelaGallery() {
         {/* Lightbox Modal */}
         {selectedImage !== null && (
           <div
-            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-gradient-to-b from-green-200/95 to-cream-100/95 z-50 flex items-center justify-center p-4"
             onClick={() => setSelectedImage(null)}
           >
             <div className="relative max-w-4xl max-h-full">
@@ -90,7 +92,7 @@ export default function SawelaGallery() {
               />
               <button
                 onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 text-white bg-black/50 rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/70 transition-colors"
+                className="absolute top-4 right-4 text-white bg-green-600/70 rounded-full w-10 h-10 flex items-center justify-center hover:bg-green-700 transition-colors"
               >
                 ×
               </button>

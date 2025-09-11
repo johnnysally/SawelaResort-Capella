@@ -37,19 +37,16 @@ export default function KapelaDetails() {
       icon: Users,
       title: "All-Inclusive Experience",
       description: "Unlimited dining, premium beverages, and activities with our comprehensive package",
-      color: "bg-primary/5 text-primary",
     },
     {
       icon: Waves,
       title: "Water Adventure",
       description: "Complimentary water sports including snorkeling, jet skiing, and sailing",
-      color: "bg-secondary/5 text-secondary",
     },
     {
       icon: Music,
       title: "Live Entertainment",
       description: "Nightly shows, live music, and cultural performances in our amphitheater",
-      color: "bg-primary/5 text-primary",
     },
   ]
 
@@ -90,9 +87,13 @@ export default function KapelaDetails() {
           </div>
         </div>
 
+        {/* Highlight Cards */}
         <div className="grid md:grid-cols-3 gap-8 mt-20 mb-16">
           {highlights.slice(3).map((highlight, index) => (
-            <Card key={index} className="luxury-shadow hover-lift border-0">
+            <Card
+              key={index}
+              className="luxury-shadow hover-lift border-0 bg-gradient-to-br from-[#f5f9f5] to-[#fffef8]"
+            >
               <CardContent className="p-6">
                 <h4 className="font-semibold text-foreground mb-3">{highlight.title}</h4>
                 <p className="text-muted-foreground text-sm leading-relaxed">{highlight.description}</p>
@@ -101,15 +102,16 @@ export default function KapelaDetails() {
           ))}
         </div>
 
-        {/* Special Features */}
+        {/* Special Feature Cards */}
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <Card key={index} className={`luxury-shadow hover-lift border-0 ${feature.color.split(" ")[0]}`}>
+            <Card
+              key={index}
+              className="luxury-shadow hover-lift border-0 bg-gradient-to-br from-[#f5f9f5] to-[#fffef8]"
+            >
               <CardContent className="p-8 text-center">
-                <div
-                  className={`w-16 h-16 ${feature.color.split(" ")[0]}/20 rounded-full flex items-center justify-center mx-auto mb-6`}
-                >
-                  <feature.icon className={`h-8 w-8 ${feature.color.split(" ")[1]}`} />
+                <div className="w-16 h-16 bg-[#e0f2e9] rounded-full flex items-center justify-center mx-auto mb-6">
+                  <feature.icon className="h-8 w-8 text-[#2e7d32]" />
                 </div>
                 <h4 className="text-xl font-bold text-foreground mb-4">{feature.title}</h4>
                 <p className="text-muted-foreground leading-relaxed">{feature.description}</p>

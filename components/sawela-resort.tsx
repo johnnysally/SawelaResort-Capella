@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Wifi, Car, Utensils, Waves, Dumbbell, Space as Spa, Coffee, Shield } from "lucide-react"
+import { Wifi, Car, Utensils, Waves, Dumbbell, Coffee, Shield, Spa } from "lucide-react"
 
 interface SawelaResortProps {
   onBookingClick: () => void
@@ -62,7 +62,7 @@ export default function SawelaResort({ onBookingClick }: SawelaResortProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Resort Overview */}
         <div className="text-center mb-16">
-          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Sawela Resort</Badge>
+          <Badge className="mb-4 bg-[#e0f2e9] text-[#2e7d32] border border-[#c8e6c9]">Sawela Resort</Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">Serene Elegance</h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty">
             Nestled along a pristine coastline, Sawela Resort embodies tranquil luxury. With its minimalist design and
@@ -75,36 +75,32 @@ export default function SawelaResort({ onBookingClick }: SawelaResortProps) {
           <div>
             <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">Resort Highlights</h3>
             <ul className="space-y-4">
-              <li className="flex items-start">
-                <div className="w-2 h-2 bg-secondary rounded-full mt-2 mr-4 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-foreground">Oceanfront Suites</h4>
-                  <p className="text-muted-foreground">
-                    All 120 suites feature panoramic ocean views and private balconies
-                  </p>
-                </div>
-              </li>
-              <li className="flex items-start">
-                <div className="w-2 h-2 bg-secondary rounded-full mt-2 mr-4 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-foreground">Adults-Only Sanctuary</h4>
-                  <p className="text-muted-foreground">Peaceful environment designed for relaxation and romance</p>
-                </div>
-              </li>
-              <li className="flex items-start">
-                <div className="w-2 h-2 bg-secondary rounded-full mt-2 mr-4 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-foreground">Michelin-Star Dining</h4>
-                  <p className="text-muted-foreground">Culinary excellence with locally-sourced ingredients</p>
-                </div>
-              </li>
-              <li className="flex items-start">
-                <div className="w-2 h-2 bg-secondary rounded-full mt-2 mr-4 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-foreground">Wellness Retreat</h4>
-                  <p className="text-muted-foreground">Holistic spa treatments and meditation pavilions</p>
-                </div>
-              </li>
+              {[
+                {
+                  title: "Oceanfront Suites",
+                  desc: "All 120 suites feature panoramic ocean views and private balconies",
+                },
+                {
+                  title: "Adults-Only Sanctuary",
+                  desc: "Peaceful environment designed for relaxation and romance",
+                },
+                {
+                  title: "Michelin-Star Dining",
+                  desc: "Culinary excellence with locally-sourced ingredients",
+                },
+                {
+                  title: "Wellness Retreat",
+                  desc: "Holistic spa treatments and meditation pavilions",
+                },
+              ].map((item, i) => (
+                <li key={i} className="flex items-start">
+                  <div className="w-2 h-2 bg-[#2e7d32] rounded-full mt-2 mr-4 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">{item.title}</h4>
+                    <p className="text-muted-foreground">{item.desc}</p>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="relative">
@@ -131,7 +127,7 @@ export default function SawelaResort({ onBookingClick }: SawelaResortProps) {
                   alt={image.alt}
                   className="w-full h-64 object-cover rounded-lg luxury-shadow"
                 />
-                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                <div className="absolute inset-0 bg-[#81c784]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
                   <p className="text-white font-semibold text-lg">{image.title}</p>
                 </div>
               </div>
@@ -144,10 +140,13 @@ export default function SawelaResort({ onBookingClick }: SawelaResortProps) {
           <h3 className="text-2xl sm:text-3xl font-bold text-foreground text-center mb-12">World-Class Amenities</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {amenities.map((amenity, index) => (
-              <Card key={index} className="luxury-shadow hover-lift border-0">
+              <Card
+                key={index}
+                className="luxury-shadow hover-lift border-0 bg-gradient-to-br from-[#f5f9f5] to-[#fffef8]"
+              >
                 <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <amenity.icon className="h-6 w-6 text-primary" />
+                  <div className="w-12 h-12 bg-[#e0f2e9] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <amenity.icon className="h-6 w-6 text-[#2e7d32]" />
                   </div>
                   <h4 className="font-semibold text-foreground mb-2">{amenity.title}</h4>
                   <p className="text-sm text-muted-foreground">{amenity.description}</p>
@@ -158,7 +157,7 @@ export default function SawelaResort({ onBookingClick }: SawelaResortProps) {
         </div>
 
         {/* Booking Section */}
-        <div className="text-center bg-card rounded-2xl p-12 luxury-shadow">
+        <div className="text-center rounded-2xl p-12 luxury-shadow bg-gradient-to-br from-[#f5f9f5] to-[#fffef8]">
           <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Ready to Experience Sawela?</h3>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
             Book your stay at Sawela Resort and discover a world where tranquility meets luxury. Our team is ready to
@@ -167,12 +166,16 @@ export default function SawelaResort({ onBookingClick }: SawelaResortProps) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8 py-4 hover-lift"
+              className="bg-[#2e7d32] hover:bg-[#256628] text-white px-8 py-4 hover-lift"
               onClick={onBookingClick}
             >
               Book Sawela Resort
             </Button>
-            <Button size="lg" variant="outline" className="px-8 py-4 hover-lift bg-transparent">
+            <Button
+              size="lg"
+              variant="outline"
+              className="px-8 py-4 hover-lift border-[#2e7d32] text-[#2e7d32] hover:bg-[#e0f2e9]"
+            >
               View Rates & Availability
             </Button>
           </div>

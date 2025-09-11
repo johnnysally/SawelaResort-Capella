@@ -66,43 +66,47 @@ export default function KapelaAmenities({ onBookingClick }: KapelaAmenitiesProps
   ]
 
   return (
-    <section className="py-20 px-4 bg-background">
+    <section className="py-20 px-4 bg-gradient-to-b from-white via-cream-50 to-green-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6">Exciting Amenities</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-green-800 mb-6">Exciting Amenities</h2>
+          <p className="text-xl text-green-700 max-w-3xl mx-auto text-pretty">
             From thrilling water sports to relaxing pool bars, Kapela Resort offers endless possibilities for adventure
             and luxury in a vibrant, family-friendly environment.
           </p>
         </div>
 
+        {/* Amenities Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
           {amenities.map((amenity, index) => (
-            <Card key={index} className="luxury-shadow hover-lift border-0 group">
+            <Card
+              key={index}
+              className="luxury-shadow hover-lift border-0 group bg-gradient-to-br from-white via-cream-50 to-green-50"
+            >
               <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-secondary/20 transition-colors">
-                  <amenity.icon className="h-8 w-8 text-secondary" />
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
+                  <amenity.icon className="h-8 w-8 text-green-700" />
                 </div>
-                <h4 className="font-semibold text-foreground mb-2">{amenity.title}</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">{amenity.description}</p>
+                <h4 className="font-semibold text-green-800 mb-2">{amenity.title}</h4>
+                <p className="text-sm text-green-700 leading-relaxed">{amenity.description}</p>
               </CardContent>
             </Card>
           ))}
         </div>
 
         {/* Booking CTA */}
-        <div className="text-center bg-card rounded-2xl p-12 luxury-shadow">
-          <h3 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center bg-gradient-to-r from-cream-50 to-green-50 rounded-2xl p-12 luxury-shadow">
+          <h3 className="font-serif text-3xl md:text-4xl font-bold text-green-800 mb-4">
             Ready for Adventure at Capella?
           </h3>
-          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty leading-relaxed">
+          <p className="text-green-700 mb-8 max-w-2xl mx-auto text-pretty leading-relaxed">
             Join us at Kapela Resort for an unforgettable vacation filled with excitement, luxury, and endless
             possibilities. Perfect for families, couples, and adventure enthusiasts seeking vibrant experiences.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8 py-4 hover-lift font-semibold"
+              className="bg-green-700 hover:bg-green-800 text-white px-8 py-4 hover-lift font-semibold rounded-xl shadow-md"
               onClick={onBookingClick}
             >
               Book Capella Resort
@@ -110,7 +114,7 @@ export default function KapelaAmenities({ onBookingClick }: KapelaAmenitiesProps
             <Button
               size="lg"
               variant="outline"
-              className="px-8 py-4 hover-lift bg-transparent border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
+              className="px-8 py-4 hover-lift border-green-700 text-green-700 bg-white hover:bg-green-100 rounded-xl shadow-sm"
             >
               Explore All-Inclusive Packages
             </Button>

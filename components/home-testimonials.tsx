@@ -29,29 +29,37 @@ export default function HomeTestimonials() {
   ]
 
   return (
-    <section className="py-20 px-4 bg-card">
+    <section className="py-20 px-4 bg-gradient-to-b from-white via-cream-50 to-green-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6">Guest Experiences</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-green-800 mb-6">Guest Experiences</h2>
+          <p className="text-xl text-green-700 max-w-2xl mx-auto text-pretty">
             Discover what makes our resorts truly special through the words of our cherished guests.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="luxury-shadow hover-lift">
+            <Card
+              key={index}
+              className="luxury-shadow hover-lift bg-gradient-to-br from-white via-cream-50 to-green-50 border-0"
+            >
               <CardContent className="p-6">
+                {/* Rating Stars */}
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-secondary text-secondary" />
+                    <Star key={i} className="w-5 h-5 fill-green-600 text-green-600" />
                   ))}
                 </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed italic">"{testimonial.text}"</p>
+
+                {/* Testimonial Text */}
+                <p className="text-green-700 mb-6 leading-relaxed italic">"{testimonial.text}"</p>
+
+                {/* Guest Info */}
                 <div>
-                  <p className="font-semibold text-foreground">{testimonial.name}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.location}</p>
-                  <p className="text-sm text-primary font-medium mt-1">{testimonial.resort}</p>
+                  <p className="font-semibold text-green-800">{testimonial.name}</p>
+                  <p className="text-sm text-green-700">{testimonial.location}</p>
+                  <p className="text-sm text-green-800 font-medium mt-1">{testimonial.resort}</p>
                 </div>
               </CardContent>
             </Card>

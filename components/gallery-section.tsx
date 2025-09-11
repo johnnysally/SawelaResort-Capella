@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -160,12 +159,12 @@ export default function GallerySection() {
   }
 
   return (
-    <section id="gallery" className="py-20 bg-background">
+    <section id="gallery" className="py-20 bg-amber-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">Resort Gallery</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-900 mb-6">Resort Gallery</h2>
+          <p className="text-lg text-green-800 max-w-3xl mx-auto text-pretty">
             Explore the beauty and luxury of both Sawela and Kapela Resorts through our curated collection of stunning
             photography. Each image tells a story of elegance, comfort, and unforgettable experiences.
           </p>
@@ -180,12 +179,12 @@ export default function GallerySection() {
               onClick={() => setSelectedCategory(category.id)}
               className={`hover-lift ${
                 selectedCategory === category.id
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-transparent hover:bg-primary/10"
+                  ? "bg-green-200 text-green-900"
+                  : "bg-amber-50 hover:bg-green-100 text-green-800"
               }`}
             >
               {category.name}
-              <Badge variant="secondary" className="ml-2">
+              <Badge variant="secondary" className="ml-2 bg-green-100 text-green-800">
                 {category.count}
               </Badge>
             </Button>
@@ -197,7 +196,7 @@ export default function GallerySection() {
           {filteredImages.map((image, index) => (
             <Card
               key={`${image.src}-${index}`}
-              className="group cursor-pointer overflow-hidden border-0 luxury-shadow hover-lift"
+              className="group cursor-pointer overflow-hidden border border-green-200 bg-amber-50 hover:bg-green-50 hover-lift"
               onClick={() => openLightbox(index)}
             >
               <div className="relative aspect-square">
@@ -206,12 +205,14 @@ export default function GallerySection() {
                   alt={image.alt}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                  <ZoomIn className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-green-100/0 group-hover:bg-green-200/50 transition-all duration-300 flex items-center justify-center">
+                  <ZoomIn className="h-8 w-8 text-green-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                  <h3 className="text-white font-semibold text-sm">{image.title}</h3>
-                  {image.resort && <p className="text-white/80 text-xs">{image.resort}</p>}
+                {/* Caption */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-green-200/90 to-transparent p-4">
+                  <h3 className="text-green-900 font-semibold text-sm">{image.title}</h3>
+                  {image.resort && <p className="text-green-800 text-xs">{image.resort}</p>}
                 </div>
               </div>
             </Card>
@@ -221,7 +222,7 @@ export default function GallerySection() {
         {/* Lightbox Modal */}
         {lightboxOpen && (
           <div
-            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-green-100/90 flex items-center justify-center p-4"
             onClick={closeLightbox}
             onKeyDown={handleKeyDown}
             tabIndex={0}
@@ -231,7 +232,7 @@ export default function GallerySection() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="absolute top-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white"
+                className="absolute top-4 right-4 z-10 bg-green-200 hover:bg-green-300 text-green-900"
                 onClick={closeLightbox}
               >
                 <X className="h-6 w-6" />
@@ -243,7 +244,7 @@ export default function GallerySection() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-green-200 hover:bg-green-300 text-green-900"
                     onClick={prevImage}
                   >
                     <ChevronLeft className="h-8 w-8" />
@@ -251,7 +252,7 @@ export default function GallerySection() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-green-200 hover:bg-green-300 text-green-900"
                     onClick={nextImage}
                   >
                     <ChevronRight className="h-8 w-8" />
@@ -267,12 +268,12 @@ export default function GallerySection() {
               />
 
               {/* Image Info */}
-              <div className="absolute bottom-4 left-4 right-4 bg-black/50 rounded-lg p-4 text-white">
+              <div className="absolute bottom-4 left-4 right-4 bg-green-200/80 rounded-lg p-4 text-green-900">
                 <h3 className="text-xl font-semibold mb-1">{filteredImages[currentImageIndex]?.title}</h3>
                 {filteredImages[currentImageIndex]?.resort && (
-                  <p className="text-white/80">{filteredImages[currentImageIndex]?.resort}</p>
+                  <p className="text-green-800">{filteredImages[currentImageIndex]?.resort}</p>
                 )}
-                <p className="text-sm text-white/60 mt-2">
+                <p className="text-sm text-green-700 mt-2">
                   {currentImageIndex + 1} of {filteredImages.length}
                 </p>
               </div>

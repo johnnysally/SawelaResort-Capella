@@ -45,31 +45,33 @@ export default function KapelaGallery() {
   ]
 
   return (
-    <section className="py-20 px-4 bg-card">
+    <section className="py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6">Resort Gallery</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-brown-800 mb-6">Resort Gallery</h2>
+          <p className="text-xl text-brown-600 max-w-2xl mx-auto text-pretty">
             Explore the vibrant energy and endless possibilities that await you at Kapela Resort through our dynamic
             collection of spaces.
           </p>
         </div>
 
+        {/* Gallery Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {galleryImages.map((image, index) => (
             <div
               key={index}
-              className="relative group cursor-pointer hover-lift"
+              className="relative group cursor-pointer hover:scale-105 transition-transform"
               onClick={() => setSelectedImage(index)}
             >
               <img
                 src={image.src || "/placeholder.svg"}
                 alt={image.alt}
-                className="w-full h-80 object-cover rounded-xl luxury-shadow"
+                className="w-full h-80 object-cover rounded-xl shadow-lg"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl">
-                <div className="absolute bottom-4 left-4 text-white">
-                  <p className="text-sm text-white/80 mb-1">{image.category}</p>
+              {/* Brown + White Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-brown-800/70 via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl">
+                <div className="absolute bottom-4 left-4 text-white drop-shadow-lg">
+                  <p className="text-sm text-white/90 mb-1">{image.category}</p>
                   <p className="font-semibold text-lg">{image.title}</p>
                 </div>
               </div>
@@ -80,18 +82,18 @@ export default function KapelaGallery() {
         {/* Lightbox Modal */}
         {selectedImage !== null && (
           <div
-            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-brown-900/95 z-50 flex items-center justify-center p-4"
             onClick={() => setSelectedImage(null)}
           >
             <div className="relative max-w-4xl max-h-full">
               <img
                 src={galleryImages[selectedImage].src || "/placeholder.svg"}
                 alt={galleryImages[selectedImage].alt}
-                className="max-w-full max-h-full object-contain rounded-lg"
+                className="max-w-full max-h-full object-contain rounded-lg shadow-xl"
               />
               <button
                 onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 text-white bg-black/50 rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/70 transition-colors"
+                className="absolute top-4 right-4 text-brown-900 bg-white rounded-full w-10 h-10 flex items-center justify-center font-bold hover:bg-brown-200 transition-colors"
               >
                 ×
               </button>

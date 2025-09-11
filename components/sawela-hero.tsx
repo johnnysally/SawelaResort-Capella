@@ -25,9 +25,9 @@ export default function SawelaHero({ onBookingClick }: SawelaHeroProps) {
       {/* Content */}
       <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
         <Badge className="mb-6 bg-white/20 text-white border-white/30 backdrop-blur-sm">
-          Adults-Only Luxury Resort
+          Adults-Only Luxury Lodge
         </Badge>
-        <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-balance drop-shadow-lg">Sawela Resort</h1>
+        <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-balance drop-shadow-lg">Sawela Lodge</h1>
         <p className="text-xl md:text-2xl mb-8 text-pretty max-w-3xl mx-auto leading-relaxed drop-shadow-md">
           Where serene elegance meets oceanfront luxury. Experience tranquil sophistication in our adults-only
           sanctuary.

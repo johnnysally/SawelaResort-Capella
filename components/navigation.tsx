@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ChevronDown } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -13,21 +13,39 @@ interface NavigationProps {
 export default function Navigation({ onBookingClick }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
+  const [hash, setHash] = useState("")
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setHash(window.location.hash)
+
+      const onHashChange = () => setHash(window.location.hash)
+      window.addEventListener("hashchange", onHashChange)
+
+      return () => {
+        window.removeEventListener("hashchange", onHashChange)
+      }
+    }
+  }, [])
 
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "Sawela Resort", href: "/sawela" },
-    { name: "Capella Resort", href: "/capella" },
     { name: "About Us", href: "/about" },
-    { name: "Gallery", href: "/#gallery" },
+    { name: "Gallery", href: "/gallery" },
     { name: "Contact", href: "/#contact" },
+  ]
+
+  const hotelItems = [
+    { name: "Sawela Lodge", href: "/sawela" },
+    { name: "Capella Resort", href: "/capella" },
+    { name: "Sunset Villas", href: "/sunset" },
   ]
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/"
     if (href.startsWith("/#")) {
-      // Only show home page sections as active when on home page
-      return pathname === "/" && window.location.hash === href.substring(1)
+      return pathname === "/" && hash === href
     }
     return pathname === href
   }
@@ -42,26 +60,55 @@ export default function Navigation({ onBookingClick }: NavigationProps) {
               href="/"
               className="text-2xl font-serif font-bold text-primary hover:text-primary/80 transition-colors"
             >
-              Sawela & Capella
+              Sawela Lodge
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                    isActive(item.href)
-                      ? "text-primary border-b-2 border-primary"
-                      : "text-foreground hover:text-primary"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+                  isActive(item.href)
+                    ? "text-primary border-b-2 border-primary"
+                    : "text-foreground hover:text-primary"
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+
+            {/* Our Hotels Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
+            >
+              <button
+                className={`flex items-center px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+                  isDropdownOpen
+                    ? "text-primary border-b-2 border-primary"
+                    : "text-foreground hover:text-primary"
+                }`}
+              >
+                Our Hotels <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+
+              {isDropdownOpen && (
+                <div className="absolute left-0 mt-2 w-48 bg-background border border-border rounded-lg shadow-lg">
+                  {hotelItems.map((hotel) => (
+                    <Link
+                      key={hotel.name}
+                      href={hotel.href}
+                      className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary"
+                    >
+                      {hotel.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
@@ -102,6 +149,22 @@ export default function Navigation({ onBookingClick }: NavigationProps) {
                 {item.name}
               </Link>
             ))}
+
+            {/* Our Hotels in mobile menu */}
+            <div className="mt-2">
+              <p className="px-3 py-2 text-sm font-semibold text-foreground">Our Hotels</p>
+              {hotelItems.map((hotel) => (
+                <Link
+                  key={hotel.name}
+                  href={hotel.href}
+                  className="block px-5 py-2 text-base text-foreground hover:bg-muted hover:text-primary rounded-lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {hotel.name}
+                </Link>
+              ))}
+            </div>
+
             <div className="px-3 py-2">
               <Button
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground hover-lift"
