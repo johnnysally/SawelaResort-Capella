@@ -28,13 +28,13 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="bg-primary text-primary-foreground py-16">
+    <footer className="bg-gradient-to-br from-white via-white to-[#8B5E3C] text-[#4B2E20] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-bold mb-4">Sawela & Capella</h3>
-            <p className="text-primary-foreground mb-6 text-pretty">
+            <h3 className="text-2xl font-bold mb-4 text-[#5C4033]">Sawela & Capella</h3>
+            <p className="text-[#4B2E20] mb-6 text-pretty">
               Experience luxury beyond imagination at our two extraordinary resorts. Where elegance meets paradise.
             </p>
             <div className="flex space-x-4">
@@ -43,7 +43,7 @@ export default function Footer() {
                   key={index}
                   variant="ghost"
                   size="sm"
-                  className="hover:bg-primary-foreground/10 text-primary-foreground hover:text-primary-foreground"
+                  className="hover:bg-[#8B5E3C]/20 text-[#4B2E20] hover:text-[#8B5E3C]"
                   asChild
                 >
                   <a href={social.href} aria-label={social.label}>
@@ -56,13 +56,13 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <h4 className="text-lg font-semibold mb-4 text-[#5C4033]">Quick Links</h4>
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="text-primary-foreground hover:text-secondary transition-colors duration-200"
+                    className="text-[#4B2E20] hover:text-[#8B5E3C] transition-colors duration-200"
                   >
                     {link.name}
                   </a>
@@ -73,13 +73,13 @@ export default function Footer() {
 
           {/* Resort Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Resort Information</h4>
+            <h4 className="text-lg font-semibold mb-4 text-[#5C4033]">Resort Information</h4>
             <ul className="space-y-2">
               {resortInfo.map((info, index) => (
                 <li key={index}>
                   <a
                     href={info.href}
-                    className="text-primary-foreground hover:text-secondary transition-colors duration-200"
+                    className="text-[#4B2E20] hover:text-[#8B5E3C] transition-colors duration-200"
                   >
                     {info.name}
                   </a>
@@ -90,39 +90,41 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Contact Information</h4>
+            <h4 className="text-lg font-semibold mb-4 text-[#5C4033]">Contact Information</h4>
             <div className="space-y-3">
               <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-secondary mt-0.5 flex-shrink-0" />
+                <MapPin className="h-5 w-5 text-[#8B5E3C] mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-primary-foreground text-sm">Paradise Bay Resort Complex</p>
-                  <p className="text-primary-foreground text-sm">Tropical Island, Pacific Ocean</p>
+                  <p className="text-[#4B2E20] text-sm">Paradise Bay Resort Complex</p>
+                  <p className="text-[#4B2E20] text-sm">Tropical Island, Pacific Ocean</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-secondary flex-shrink-0" />
-                <p className="text-primary-foreground text-sm">+1 (555) 123-4567</p>
+                <Phone className="h-5 w-5 text-[#8B5E3C] flex-shrink-0" />
+                <p className="text-[#4B2E20] text-sm">+1 (555) 123-4567</p>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-secondary flex-shrink-0" />
-                <p className="text-primary-foreground text-sm">info@sawelacapella.com</p>
+                <Mail className="h-5 w-5 text-[#8B5E3C] flex-shrink-0" />
+                <p className="text-[#4B2E20] text-sm">info@sawelacapella.com</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-primary-foreground/20 pt-8">
+        <div className="border-t border-[#8B5E3C]/30 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-primary-foreground/80 text-sm">© 2024 Sawela & Capella Resorts. All rights reserved.</p>
+            <p className="text-[#4B2E20]/80 text-sm">
+              © 2024 Sawela & Capella Resorts. All rights reserved.
+            </p>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+              <a href="#" className="text-[#4B2E20]/80 hover:text-[#8B5E3C] transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+              <a href="#" className="text-[#4B2E20]/80 hover:text-[#8B5E3C] transition-colors">
                 Terms of Service
               </a>
-              <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+              <a href="#" className="text-[#4B2E20]/80 hover:text-[#8B5E3C] transition-colors">
                 Cookie Policy
               </a>
             </div>
