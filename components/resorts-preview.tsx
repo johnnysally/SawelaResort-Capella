@@ -100,7 +100,7 @@ export default function ResortsPreview() {
                   <span>Family Friendly</span>
                 </div>
               </div>
-              <Link href="/kapela">
+              <Link href="/capella">
                 <Button
                   className="w-full bg-gradient-to-r from-[#8B4513] to-[#D2B48C] hover:from-[#6F3A10] hover:to-[#C2A678] text-white font-semibold rounded-lg transition-colors"
                 >

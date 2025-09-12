@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -8,15 +9,34 @@ interface HomeHeroProps {
 }
 
 export default function HomeHero({ onBookingClick }: HomeHeroProps) {
+  const images = [
+    "/luxury-tropical-resort-with-infinity-pool-overlook.jpg",
+    "/sawela-infinity-pool-overlooking-turquoise-ocean.jpg",
+    "/barbare-kacharava-NSdtyyb2iGY-unsplash.jpg",
+  ]
+
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+    }, 5000) // Change image every 5s
+    return () => clearInterval(interval)
+  }, [images.length])
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/luxury-tropical-resort-with-infinity-pool-overlook.jpg')",
-        }}
-      >
+      {/* Background Slideshow */}
+      <div className="absolute inset-0">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+              index === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
+            style={{ backgroundImage: `url(${image})` }}
+          />
+        ))}
         <div className="absolute inset-0 hero-overlay" />
         <div className="absolute inset-0 hero-gradient" />
       </div>
