@@ -28,8 +28,14 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="bg-gradient-to-br from-white via-white to-[#8B5E3C] text-[#4B2E20] py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer
+      className="relative bg-cover bg-center text-[#4B2E20] py-16"
+      style={{ backgroundImage: "url('/lotus-design-n-print-WgkA3CSFrjc-unsplash.jpg')" }} // replace with your image
+    >
+      {/* Overlay with softer opacity */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/70 via-white/60 to-[#8B5E3C]/50"></div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div>

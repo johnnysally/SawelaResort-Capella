@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X, ChevronDown } from "lucide-react"
 import Link from "next/link"
@@ -15,6 +15,7 @@ export default function Navigation({ onBookingClick }: NavigationProps) {
   const pathname = usePathname()
   const [hash, setHash] = useState("")
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -26,6 +27,22 @@ export default function Navigation({ onBookingClick }: NavigationProps) {
       return () => {
         window.removeEventListener("hashchange", onHashChange)
       }
+    }
+  }, [])
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [])
 
@@ -80,13 +97,10 @@ export default function Navigation({ onBookingClick }: NavigationProps) {
               </Link>
             ))}
 
-            {/* Our Hotels Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setIsDropdownOpen(true)}
-              onMouseLeave={() => setIsDropdownOpen(false)}
-            >
+            {/* Our Hotels Dropdown (Click Toggle) */}
+            <div className="relative" ref={dropdownRef}>
               <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className={`flex items-center px-3 py-2 text-sm font-medium transition-colors duration-200 ${
                   isDropdownOpen
                     ? "text-primary border-b-2 border-primary"
@@ -103,6 +117,7 @@ export default function Navigation({ onBookingClick }: NavigationProps) {
                       key={hotel.name}
                       href={hotel.href}
                       className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary"
+                      onClick={() => setIsDropdownOpen(false)}
                     >
                       {hotel.name}
                     </Link>
@@ -124,8 +139,16 @@ export default function Navigation({ onBookingClick }: NavigationProps) {
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <Button variant="ghost" size="sm" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </Button>
           </div>
         </div>
@@ -152,7 +175,9 @@ export default function Navigation({ onBookingClick }: NavigationProps) {
 
             {/* Our Hotels in mobile menu */}
             <div className="mt-2">
-              <p className="px-3 py-2 text-sm font-semibold text-foreground">Our Hotels</p>
+              <p className="px-3 py-2 text-sm font-semibold text-foreground">
+                Our Hotels
+              </p>
               {hotelItems.map((hotel) => (
                 <Link
                   key={hotel.name}
