@@ -80,7 +80,7 @@ export default function HomeBookingForm({ onBookingSubmit }: HomeBookingFormProp
   }
 
   return (
-    <section className="py-20 bg-gradient-to-br from-cream to-warm-white">
+    <section className="py-20 bg-gradient-to-br from-[#8B5E3C] via-[#D2B48C] to-[#F5DEB3]">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
