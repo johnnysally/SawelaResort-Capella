@@ -76,7 +76,7 @@ export default function ContactSection() {
   ]
 
   return (
-    <section id="contact" className="py-20 bg-amber-90">
+    <section id="contact" className=" py-20 bg-gradient-to-br from-[#8B5E3C] via-[#F5F5DC] to-[#3A7D44]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
