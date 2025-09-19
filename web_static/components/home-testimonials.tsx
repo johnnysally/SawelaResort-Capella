@@ -32,8 +32,10 @@ export default function HomeTestimonials() {
     <section className="py-20 px-4 bg-gradient-to-b from-white via-cream-50 to-green-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-green-800 mb-6">Guest Experiences</h2>
-          <p className="text-xl text-green-700 max-w-2xl mx-auto text-pretty">
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-black mb-6">
+            Guest Experiences
+          </h2>
+          <p className="text-xl text-black max-w-2xl mx-auto text-pretty">
             Discover what makes our resorts truly special through the words of our cherished guests.
           </p>
         </div>
@@ -53,13 +55,15 @@ export default function HomeTestimonials() {
                 </div>
 
                 {/* Testimonial Text */}
-                <p className="text-green-700 mb-6 leading-relaxed italic">"{testimonial.text}"</p>
+                <p className="text-black mb-6 leading-relaxed italic">
+                  "{testimonial.text}"
+                </p>
 
                 {/* Guest Info */}
                 <div>
-                  <p className="font-semibold text-green-800">{testimonial.name}</p>
-                  <p className="text-sm text-green-700">{testimonial.location}</p>
-                  <p className="text-sm text-green-800 font-medium mt-1">{testimonial.resort}</p>
+                  <p className="font-semibold text-black">{testimonial.name}</p>
+                  <p className="text-sm text-black">{testimonial.location}</p>
+                  <p className="text-sm text-black font-medium mt-1">{testimonial.resort}</p>
                 </div>
               </CardContent>
             </Card>
@@ -69,3 +73,4 @@ export default function HomeTestimonials() {
     </section>
   )
 }
+
