@@ -1,24 +1,17 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { X, Calendar, Users, CreditCard, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { X, CheckCircle, CreditCard } from "lucide-react"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-interface BookingModalProps {
-  isOpen: boolean
-  onClose: () => void
-  resort?: "sawela" | "capella" | ""
-}
-
-export default function BookingModal({ isOpen, onClose, resort = "" }: BookingModalProps) {
+function BookingModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [currentStep, setCurrentStep] = useState(1)
-  const [bookingData, setBookingData] = useState({
-    resort: resort,
+  const [formData, setFormData] = useState({
+    lodge: "sawela",
     checkIn: "",
     checkOut: "",
     guests: "2",
@@ -30,30 +23,40 @@ export default function BookingModal({ isOpen, onClose, resort = "" }: BookingMo
     phone: "",
     specialRequests: "",
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isBooked, setIsBooked] = useState(false)
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setBookingData((prev) => ({ ...prev, [name]: value }))
+  if (!isOpen) return null
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+  const handleNext = () => {
+    if (currentStep < 3) setCurrentStep(currentStep + 1)
+  }
 
-    // Simulate booking submission
-    await new Promise((resolve) => setTimeout(resolve, 3000))
+  const handlePrevious = () => {
+    if (currentStep > 1) setCurrentStep(currentStep - 1)
+  }
 
-    setIsBooked(true)
-    setIsSubmitting(false)
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
 
-    // Reset after 5 seconds
-    setTimeout(() => {
-      setIsBooked(false)
+      if (!response.ok) {
+        const errorData = await response.json()
+        alert(`Booking failed: ${errorData.message || response.statusText}`)
+        return
+      }
+
+      alert("Booking confirmed! Thank you for choosing our lodge.")
+      onClose()
       setCurrentStep(1)
-      setBookingData({
-        resort: resort,
+      setFormData({
+        lodge: "sawela",
         checkIn: "",
         checkOut: "",
         guests: "2",
@@ -65,363 +68,338 @@ export default function BookingModal({ isOpen, onClose, resort = "" }: BookingMo
         phone: "",
         specialRequests: "",
       })
-      onClose()
-    }, 5000)
+    } catch (error) {
+      alert(`Booking failed: ${error instanceof Error ? error.message : "Unknown error"}`)
+    }
   }
 
-  const nextStep = () => {
-    if (currentStep < 3) setCurrentStep(currentStep + 1)
-  }
-
-  const prevStep = () => {
-    if (currentStep > 1) setCurrentStep(currentStep - 1)
-  }
-
-  const roomTypes = {
-    sawela: [
-      { value: "oceanview", label: "Oceanview Suite", price: "$850/night" },
-      { value: "presidential", label: "Presidential Suite", price: "$1,500/night" },
-      { value: "penthouse", label: "Penthouse Villa", price: "$2,200/night" },
-    ],
-    kapela: [
-      { value: "family", label: "Family Suite", price: "$650/night" },
-      { value: "oceanfront", label: "Oceanfront Villa", price: "$950/night" },
-      { value: "presidential", label: "Presidential Family Suite", price: "$1,800/night" },
-    ],
-  }
-
-  if (!isOpen) return null
+  const roomTypes = [
+    { value: "standard", label: "Standard Room - $150/night" },
+    { value: "deluxe", label: "Deluxe Room - $200/night" },
+    { value: "suite", label: "Suite - $300/night" },
+    { value: "presidential", label: "Presidential Suite - $500/night" },
+  ]
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 backdrop-blur-sm">
-      <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto luxury-shadow border-0">
-        <CardHeader className="relative">
-          <Button variant="ghost" size="sm" className="absolute top-4 right-4 hover:bg-muted" onClick={onClose}>
-            <X className="h-5 w-5" />
-          </Button>
-          <CardTitle className="text-2xl font-bold text-foreground">
-            {isBooked ? "Booking Confirmed!" : "Book Your Stay"}
-          </CardTitle>
-          {!isBooked && (
-            <div className="flex items-center space-x-2 mt-4">
-              {[1, 2, 3].map((step) => (
-                <div
-                  key={step}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                    step <= currentStep ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
-                  }`}
-                >
-                  {step}
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div className="bg-gradient-to-br from-amber-50 to-green-50 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-amber-200/50">
+        {/* Header */}
+        <div className="sticky top-0 bg-gradient-to-r from-amber-100 to-green-100 p-6 border-b border-amber-200/50 rounded-t-2xl">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-amber-900">Book Your Stay</h2>
+              <p className="text-amber-700">Step {currentStep} of 3</p>
+            </div>
+            <Button variant="ghost" size="icon" onClick={onClose} className="text-amber-700 hover:bg-amber-200/50">
+              <X className="h-5 w-5" />
+            </Button>
+          </div>
+
+          <div className="flex mt-4 space-x-2">
+            {[1, 2, 3].map((step) => (
+              <div
+                key={step}
+                className={`flex-1 h-2 rounded-full ${
+                  step <= currentStep ? "bg-gradient-to-r from-amber-500 to-green-500" : "bg-amber-200"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Steps Content */}
+        <div className="p-6">
+          {/* STEP 1 */}
+          {currentStep === 1 && (
+            <div className="space-y-6">
+              <div className="text-center mb-6">
+                <Calendar className="h-12 w-12 text-amber-600 mx-auto mb-2" />
+                <h3 className="text-xl font-semibold text-amber-900">Select Lodge, Dates & Guests</h3>
+              </div>
+
+              <div>
+                <Label htmlFor="lodge" className="text-amber-800 font-medium">
+                  Select Lodge
+                </Label>
+                <Select value={formData.lodge} onValueChange={(value) => handleInputChange("lodge", value)}>
+                  <SelectTrigger className="border-amber-300 focus:border-green-500 bg-white/80">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="sawela">Sawela Lodge</SelectItem>
+                    <SelectItem value="capella">Capella Lodge</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="checkIn" className="text-amber-800 font-medium">
+                    Check-in Date
+                  </Label>
+                  <Input
+                    id="checkIn"
+                    type="date"
+                    value={formData.checkIn}
+                    onChange={(e) => handleInputChange("checkIn", e.target.value)}
+                    className="border-amber-300 focus:border-green-500 bg-white/80"
+                  />
                 </div>
-              ))}
+                <div>
+                  <Label htmlFor="checkOut" className="text-amber-800 font-medium">
+                    Check-out Date
+                  </Label>
+                  <Input
+                    id="checkOut"
+                    type="date"
+                    value={formData.checkOut}
+                    onChange={(e) => handleInputChange("checkOut", e.target.value)}
+                    className="border-amber-300 focus:border-green-500 bg-white/80"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="guests" className="text-amber-800 font-medium">
+                    Guests
+                  </Label>
+                  <Select value={formData.guests} onValueChange={(value) => handleInputChange("guests", value)}>
+                    <SelectTrigger className="border-amber-300 focus:border-green-500 bg-white/80">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[1, 2, 3, 4, 5, 6].map((num) => (
+                        <SelectItem key={num} value={num.toString()}>
+                          {num}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="rooms" className="text-amber-800 font-medium">
+                    Rooms
+                  </Label>
+                  <Select value={formData.rooms} onValueChange={(value) => handleInputChange("rooms", value)}>
+                    <SelectTrigger className="border-amber-300 focus:border-green-500 bg-white/80">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[1, 2, 3, 4].map((num) => (
+                        <SelectItem key={num} value={num.toString()}>
+                          {num}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="roomType" className="text-amber-800 font-medium">
+                  Room Type
+                </Label>
+                <Select value={formData.roomType} onValueChange={(value) => handleInputChange("roomType", value)}>
+                  <SelectTrigger className="border-amber-300 focus:border-green-500 bg-white/80">
+                    <SelectValue placeholder="Select a room type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {roomTypes.map((room) => (
+                      <SelectItem key={room.value} value={room.value}>
+                        {room.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           )}
-        </CardHeader>
 
-        <CardContent className="p-6">
-          {isBooked ? (
-            <div className="text-center py-8">
-              <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-foreground mb-2">Reservation Confirmed!</h3>
-              <p className="text-muted-foreground mb-4">
-                Your booking at {bookingData.resort === "sawela" ? "Sawela Resort" : "Kapela Resort"} has been
-                confirmed.
-              </p>
-              <div className="bg-card p-4 rounded-lg text-left max-w-md mx-auto">
-                <p className="text-sm text-muted-foreground mb-2">Confirmation Details:</p>
-                <p className="font-medium">
-                  {bookingData.firstName} {bookingData.lastName}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {bookingData.checkIn} to {bookingData.checkOut}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {bookingData.guests} guests, {bookingData.rooms} room(s)
-                </p>
+          {/* STEP 2 */}
+          {currentStep === 2 && (
+            <div className="space-y-6">
+              <div className="text-center mb-6">
+                <Users className="h-12 w-12 text-amber-600 mx-auto mb-2" />
+                <h3 className="text-xl font-semibold text-amber-900">Guest Information</h3>
               </div>
-              <p className="text-sm text-muted-foreground mt-4">
-                A confirmation email has been sent to {bookingData.email}
-              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="firstName" className="text-amber-800 font-medium">
+                    First Name
+                  </Label>
+                  <Input
+                    id="firstName"
+                    value={formData.firstName}
+                    onChange={(e) => handleInputChange("firstName", e.target.value)}
+                    className="border-amber-300 focus:border-green-500 bg-white/80"
+                    placeholder="Enter your first name"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="lastName" className="text-amber-800 font-medium">
+                    Last Name
+                  </Label>
+                  <Input
+                    id="lastName"
+                    value={formData.lastName}
+                    onChange={(e) => handleInputChange("lastName", e.target.value)}
+                    className="border-amber-300 focus:border-green-500 bg-white/80"
+                    placeholder="Enter your last name"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="email" className="text-amber-800 font-medium">
+                  Email Address
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  className="border-amber-300 focus:border-green-500 bg-white/80"
+                  placeholder="Enter your email address"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="phone" className="text-amber-800 font-medium">
+                  Phone Number
+                </Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => handleInputChange("phone", e.target.value)}
+                  className="border-amber-300 focus:border-green-500 bg-white/80"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="specialRequests" className="text-amber-800 font-medium">
+                  Special Requests (Optional)
+                </Label>
+                <textarea
+                  id="specialRequests"
+                  value={formData.specialRequests}
+                  onChange={(e) => handleInputChange("specialRequests", e.target.value)}
+                  className="w-full p-3 border border-amber-300 rounded-lg focus:border-green-500 bg-white/80 resize-none"
+                  rows={3}
+                  placeholder="Any special requests or requirements..."
+                />
+              </div>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit}>
-              {/* Step 1: Dates & Guests */}
-              {currentStep === 1 && (
-                <div className="space-y-6">
-                  <h3 className="text-lg font-semibold text-foreground mb-4">Select Dates & Guests</h3>
+          )}
 
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Resort *</label>
-                    <select
-                      name="resort"
-                      value={bookingData.resort}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 py-2 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                    >
-                      <option value="">Select a resort</option>
-                      <option value="sawela">Sawela Resort - Serene Elegance</option>
-                      <option value="kapela">Kapela Resort - Vibrant Luxury</option>
-                    </select>
+          {/* STEP 3 */}
+          {currentStep === 3 && (
+            <div className="space-y-6">
+              <div className="text-center mb-6">
+                <CreditCard className="h-12 w-12 text-amber-600 mx-auto mb-2" />
+                <h3 className="text-xl font-semibold text-amber-900">Review & Confirm</h3>
+              </div>
+
+              <Card className="border-amber-200 bg-white/50">
+                <CardHeader className="bg-gradient-to-r from-amber-100 to-green-100">
+                  <CardTitle className="text-amber-900">Booking Summary</CardTitle>
+                </CardHeader>
+                <CardContent className="p-4 space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-amber-800">Lodge:</span>
+                    <span className="font-medium text-amber-900 capitalize">{formData.lodge}</span>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">Check-in Date *</label>
-                      <Input
-                        type="date"
-                        name="checkIn"
-                        value={bookingData.checkIn}
-                        onChange={handleInputChange}
-                        required
-                        min={new Date().toISOString().split("T")[0]}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">Check-out Date *</label>
-                      <Input
-                        type="date"
-                        name="checkOut"
-                        value={bookingData.checkOut}
-                        onChange={handleInputChange}
-                        required
-                        min={bookingData.checkIn || new Date().toISOString().split("T")[0]}
-                      />
-                    </div>
+                  <div className="flex justify-between">
+                    <span className="text-amber-800">Check-in:</span>
+                    <span className="font-medium text-amber-900">{formData.checkIn}</span>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">Guests *</label>
-                      <select
-                        name="guests"
-                        value={bookingData.guests}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-3 py-2 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                      >
-                        {[1, 2, 3, 4, 5, 6].map((num) => (
-                          <option key={num} value={num.toString()}>
-                            {num} {num === 1 ? "Guest" : "Guests"}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">Rooms *</label>
-                      <select
-                        name="rooms"
-                        value={bookingData.rooms}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-3 py-2 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                      >
-                        {[1, 2, 3, 4].map((num) => (
-                          <option key={num} value={num.toString()}>
-                            {num} {num === 1 ? "Room" : "Rooms"}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+                  <div className="flex justify-between">
+                    <span className="text-amber-800">Check-out:</span>
+                    <span className="font-medium text-amber-900">{formData.checkOut}</span>
                   </div>
-
-                  {bookingData.resort && (
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">Room Type *</label>
-                      <select
-                        name="roomType"
-                        value={bookingData.roomType}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-3 py-2 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                      >
-                        <option value="">Select room type</option>
-                        {roomTypes[bookingData.resort as keyof typeof roomTypes]?.map((room) => (
-                          <option key={room.value} value={room.value}>
-                            {room.label} - {room.price}
-                          </option>
-                        ))}
-                      </select>
+                  <div className="flex justify-between">
+                    <span className="text-amber-800">Guests:</span>
+                    <span className="font-medium text-amber-900">{formData.guests}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-amber-800">Rooms:</span>
+                    <span className="font-medium text-amber-900">{formData.rooms}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-amber-800">Room Type:</span>
+                    <span className="font-medium text-amber-900">
+                      {roomTypes.find((r) => r.value === formData.roomType)?.label || "Not selected"}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-amber-800">Guest:</span>
+                    <span className="font-medium text-amber-900">
+                      {formData.firstName} {formData.lastName}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-amber-800">Email:</span>
+                    <span className="font-medium text-amber-900">{formData.email}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-amber-800">Phone:</span>
+                    <span className="font-medium text-amber-900">{formData.phone}</span>
+                  </div>
+                  {formData.specialRequests && (
+                    <div className="pt-2 border-t border-amber-200">
+                      <span className="text-amber-800">Special Requests:</span>
+                      <p className="text-amber-900 mt-1">{formData.specialRequests}</p>
                     </div>
                   )}
-
-                  <Button
-                    type="button"
-                    onClick={nextStep}
-                    className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground hover-lift"
-                    disabled={
-                      !bookingData.resort || !bookingData.checkIn || !bookingData.checkOut || !bookingData.roomType
-                    }
-                  >
-                    Continue to Guest Information
-                  </Button>
-                </div>
-              )}
-
-              {/* Step 2: Guest Information */}
-              {currentStep === 2 && (
-                <div className="space-y-6">
-                  <h3 className="text-lg font-semibold text-foreground mb-4">Guest Information</h3>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">First Name *</label>
-                      <Input
-                        type="text"
-                        name="firstName"
-                        value={bookingData.firstName}
-                        onChange={handleInputChange}
-                        required
-                        placeholder="John"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">Last Name *</label>
-                      <Input
-                        type="text"
-                        name="lastName"
-                        value={bookingData.lastName}
-                        onChange={handleInputChange}
-                        required
-                        placeholder="Doe"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Email Address *</label>
-                    <Input
-                      type="email"
-                      name="email"
-                      value={bookingData.email}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="john.doe@example.com"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Phone Number *</label>
-                    <Input
-                      type="tel"
-                      name="phone"
-                      value={bookingData.phone}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="+1 (555) 123-4567"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Special Requests</label>
-                    <Textarea
-                      name="specialRequests"
-                      value={bookingData.specialRequests}
-                      onChange={handleInputChange}
-                      rows={3}
-                      placeholder="Any special requests or dietary requirements..."
-                      className="resize-none"
-                    />
-                  </div>
-
-                  <div className="flex gap-4">
-                    <Button
-                      type="button"
-                      onClick={prevStep}
-                      variant="outline"
-                      className="flex-1 hover-lift bg-transparent"
-                    >
-                      Back
-                    </Button>
-                    <Button
-                      type="button"
-                      onClick={nextStep}
-                      className="flex-1 bg-secondary hover:bg-secondary/90 text-secondary-foreground hover-lift"
-                      disabled={
-                        !bookingData.firstName || !bookingData.lastName || !bookingData.email || !bookingData.phone
-                      }
-                    >
-                      Review Booking
-                    </Button>
-                  </div>
-                </div>
-              )}
-
-              {/* Step 3: Review & Confirm */}
-              {currentStep === 3 && (
-                <div className="space-y-6">
-                  <h3 className="text-lg font-semibold text-foreground mb-4">Review Your Booking</h3>
-
-                  <div className="bg-card p-6 rounded-lg space-y-4">
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium text-foreground">Resort:</span>
-                      <span className="text-muted-foreground">
-                        {bookingData.resort === "sawela" ? "Sawela Resort" : "Kapela Resort"}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium text-foreground">Dates:</span>
-                      <span className="text-muted-foreground">
-                        {bookingData.checkIn} to {bookingData.checkOut}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium text-foreground">Guests & Rooms:</span>
-                      <span className="text-muted-foreground">
-                        {bookingData.guests} guests, {bookingData.rooms} room(s)
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium text-foreground">Room Type:</span>
-                      <span className="text-muted-foreground">
-                        {
-                          roomTypes[bookingData.resort as keyof typeof roomTypes]?.find(
-                            (room) => room.value === bookingData.roomType,
-                          )?.label
-                        }
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium text-foreground">Guest:</span>
-                      <span className="text-muted-foreground">
-                        {bookingData.firstName} {bookingData.lastName}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <Button
-                      type="button"
-                      onClick={prevStep}
-                      variant="outline"
-                      className="flex-1 hover-lift bg-transparent"
-                    >
-                      Back
-                    </Button>
-                    <Button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="flex-1 bg-secondary hover:bg-secondary/90 text-secondary-foreground hover-lift"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                          Processing...
-                        </>
-                      ) : (
-                        <>
-                          <CreditCard className="h-4 w-4 mr-2" />
-                          Confirm Booking
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                </div>
-              )}
-            </form>
+                </CardContent>
+              </Card>
+            </div>
           )}
-        </CardContent>
-      </Card>
+
+          {/* Buttons */}
+          <div className="flex justify-between mt-8 pt-6 border-t border-amber-200">
+            {currentStep > 1 && (
+              <Button
+                onClick={handlePrevious}
+                variant="outline"
+                className="border-amber-300 text-amber-700 hover:bg-amber-100 bg-transparent"
+              >
+                Previous
+              </Button>
+            )}
+            <div className="ml-auto">
+              {currentStep < 3 ? (
+                <Button
+                  onClick={handleNext}
+                  className="bg-gradient-to-r from-amber-600 to-green-600 hover:from-amber-700 hover:to-green-700 text-white"
+                  disabled={
+                    (currentStep === 1 &&
+                      (!formData.checkIn || !formData.checkOut || !formData.roomType)) ||
+                    (currentStep === 2 &&
+                      (!formData.firstName || !formData.lastName || !formData.email || !formData.phone))
+                  }
+                >
+                  Continue
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleSubmit}
+                  className="bg-gradient-to-r from-green-600 to-amber-600 hover:from-green-700 hover:to-amber-700 text-white"
+                >
+                  <Check className="h-4 w-4 mr-2" />
+                  Confirm Booking
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
+
+export default BookingModal
+
