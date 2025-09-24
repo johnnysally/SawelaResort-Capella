@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Luxury Safari Resort Design System - Inspired by African wilderness and modern hospitality */
+
+@layer base {
+  :root {
+    /* Luxury Safari Color Palette */
+    --background: 45 8% 97%;
+    --foreground: 20 14% 15%;
+
+    /* Card backgrounds with warm undertones */
+    --card: 45 15% 98%;
+    --card-foreground: 20 14% 15%;
+
+    --popover: 45 15% 98%;
+    --popover-foreground: 20 14% 15%;
+
+    /* Safari Gold - Luxury primary color */
+    --primary: 35 65% 45%;
+    --primary-glow: 35 75% 55%;
+    --primary-foreground: 45 15% 98%;
+
+    /* Earth tone secondary */
+    --secondary: 25 20% 85%;
+    --secondary-foreground: 20 14% 15%;
+
+    /* Muted wilderness tones */
+    --muted: 30 15% 92%;
+    --muted-foreground: 20 8% 45%;
+
+    /* Accent - Safari sunset */
+    --accent: 15 85% 65%;
+    --accent-foreground: 45 15% 98%;
+
+    /* Destructive - Warm red */
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 45 15% 98%;
+
+    /* Borders and inputs */
+    --border: 30 15% 88%;
+    --input: 30 15% 90%;
+    --ring: 35 65% 45%;
+
+    /* Luxury gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-sunset: linear-gradient(135deg, hsl(15, 85%, 65%), hsl(35, 75%, 55%), hsl(50, 70%, 45%));
+    --gradient-earth: linear-gradient(180deg, hsl(25, 20%, 85%), hsl(30, 15%, 90%));
+
+    /* Shadows with warm tones */
+    --shadow-luxury: 0 10px 40px -10px hsl(var(--primary) / 0.25);
+    --shadow-warm: 0 5px 20px -5px hsl(15, 25%, 45% / 0.15);
+    --shadow-glow: 0 0 30px hsl(var(--primary-glow) / 0.3);
+
+    /* Animation curves */
+    --ease-luxury: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
+
+    /* Glass morphism */
+    --glass-bg: hsl(45, 15%, 98% / 0.8);
+    --glass-border: hsl(30, 15%, 88% / 0.3);
+  }
+
+  .dark {
+    --background: 20 14% 8%;
+    --foreground: 45 15% 95%;
+
+    --card: 20 14% 10%;
+    --card-foreground: 45 15% 95%;
+
+    --popover: 20 14% 10%;
+    --popover-foreground: 45 15% 95%;
+
+    --primary: 35 75% 55%;
+    --primary-glow: 35 85% 65%;
+    --primary-foreground: 20 14% 8%;
+
+    --secondary: 20 8% 18%;
+    --secondary-foreground: 45 15% 95%;
+
+    --muted: 20 8% 15%;
+    --muted-foreground: 30 8% 65%;
+
+    --accent: 15 85% 65%;
+    --accent-foreground: 20 14% 8%;
+
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 45 15% 95%;
+
+    --border: 20 8% 18%;
+    --input: 20 8% 20%;
+    --ring: 35 75% 55%;
+
+    /* Dark mode glass */
+    --glass-bg: hsl(20, 14%, 10% / 0.8);
+    --glass-border: hsl(20, 8%, 18% / 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/60 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary;
+  }
+}
+
+@layer components {
+  /* Glass morphism components */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Card luxury styling */
+  .card-luxury {
+    @apply bg-card border border-border rounded-xl p-6 shadow-warm hover:shadow-luxury transition-all duration-300 backdrop-blur-sm;
+  }
+
+  /* Luxury button variants */
+  .btn-luxury {
+    @apply relative overflow-hidden bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-8 py-4 rounded-xl font-medium tracking-wide transition-all duration-300 shadow-luxury hover:shadow-glow hover:scale-105;
+  }
+
+  .btn-ghost-luxury {
+    @apply relative bg-transparent border-2 border-primary text-primary px-8 py-4 rounded-xl font-medium tracking-wide transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-luxury;
+  }
+
+  /* Parallax container */
+  .parallax {
+    transform-style: preserve-3d;
+  }
+
+  .parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    background: var(--gradient-sunset);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Luxury section spacing */
+  .section-padding {
+    @apply py-20 lg:py-32;
+  }
+
+  /* Safari-inspired animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes parallaxUp {
+    from { transform: translateY(100px) rotateX(45deg) rotateY(-10deg); }
+    to { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s var(--ease-luxury) forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.8s var(--ease-luxury) forwards;
+  }
+
+  .animate-parallax-up {
+    animation: parallaxUp 1.2s var(--ease-luxury) forwards;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Intersection observer animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s var(--ease-luxury);
+  }
+
+  .reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: all 0.8s var(--ease-luxury);
+  }
+
+  .reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
