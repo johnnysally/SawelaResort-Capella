@@ -221,8 +221,8 @@ export default function AccommodationsPage() {
           ))}
         </section>
 
-        {/* ✅ Luxury Amenities Section */}
-        <section className="container mx-auto mt-32">
+        {/* ✅ Luxury Amenities Section with bottom spacing */}
+        <section className="container mx-auto mt-32 mb-32">
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
