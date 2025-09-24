@@ -40,7 +40,7 @@ export const HeroSection = () => {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             <MapPin className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-foreground">Naivasha, Kenya</span>
+            <span className="text-sm font-medium text-primary">Naivasha, Kenya</span>
             <div className="flex items-center space-x-1 ml-2">
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star key={star} className="h-3 w-3 fill-primary text-primary" />

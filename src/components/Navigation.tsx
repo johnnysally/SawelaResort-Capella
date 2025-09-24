@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone, Mail } from 'lucide-react';
+import { Menu, X, Phone, Mail, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHotelsOpen, setIsHotelsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,19 +16,25 @@ export const Navigation = () => {
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'Accommodations', href: '#accommodations' },
+    { name: 'Home', href: '/' },
+    { name: 'Accommodations', href: '/accommodations' }, // now goes to its own page
     { name: 'Experiences', href: '#experiences' },
     { name: 'Dining', href: '#dining' },
-    { name: 'Wellness', href: '#wellness' },
     { name: 'Gallery', href: '#gallery' },
     { name: 'Contact', href: '#contact' },
   ];
 
+  // Dynamic color classes
+  const linkColor = isScrolled ? 'text-black' : 'text-[#FFFDD0]';
+  const iconColor = isScrolled ? 'text-black' : 'text-[#FFFDD0]';
+  const contactColor = isScrolled ? 'text-black' : 'text-[#FFFDD0]';
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'glass shadow-warm' : 'glass-dark'
-    }`}>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'glass shadow-warm' : 'glass-dark'
+      }`}
+    >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -43,29 +50,56 @@ export const Navigation = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-foreground hover:text-primary transition-colors duration-300 font-medium"
+                className={`${linkColor} hover:text-primary transition-colors duration-300 font-medium`}
               >
                 {item.name}
               </a>
             ))}
+
+            {/* Our Hotels Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsHotelsOpen(!isHotelsOpen)}
+                className={`flex items-center space-x-1 ${linkColor} hover:text-primary transition-colors duration-300 font-medium`}
+              >
+                <span>Our Hotels</span>
+                <ChevronDown className="h-4 w-4" />
+              </button>
+              {isHotelsOpen && (
+                <div className="absolute mt-2 w-40 bg-white shadow-lg rounded-lg overflow-hidden">
+                  <a
+                    href="/capella"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Capella Lodge
+                  </a>
+                  <a
+                    href="/sawela"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Sawela Lodge
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Contact Info & CTA */}
           <div className="hidden lg:flex items-center space-x-4">
-            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+            <div
+              className={`flex items-center space-x-2 text-sm ${contactColor}`}
+            >
               <Phone className="h-4 w-4" />
               <span>+254 712 215 434</span>
             </div>
-            <Button className="btn-luxury">
-              Book Now
-            </Button>
+            <Button className="btn-luxury">Book Now</Button>
           </div>
 
           {/* Mobile menu button */}
           <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-foreground hover:text-primary transition-colors duration-300"
+              className={`${iconColor} hover:text-primary transition-colors duration-300`}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -80,12 +114,36 @@ export const Navigation = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="block px-3 py-2 text-foreground hover:text-primary transition-colors duration-300 font-medium"
+                  className={`block px-3 py-2 ${linkColor} hover:text-primary transition-colors duration-300 font-medium`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
                 </a>
               ))}
+
+              {/* Our Hotels in mobile view */}
+              <div className="px-3 py-2">
+                <span
+                  className={`${linkColor} font-medium block mb-1`}
+                >
+                  Our Hotels
+                </span>
+                <a
+                  href="/capella"
+                  className="block px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Capella Lodge
+                </a>
+                <a
+                  href="/sawela"
+                  className="block px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Sawela Lodge
+                </a>
+              </div>
+
               <div className="px-3 py-2 border-t border-border mt-2 pt-4">
                 <div className="flex items-center space-x-2 text-sm text-muted-foreground mb-3">
                   <Phone className="h-4 w-4" />
@@ -95,9 +153,7 @@ export const Navigation = () => {
                   <Mail className="h-4 w-4" />
                   <span>reservations@sawelalodge.com</span>
                 </div>
-                <Button className="btn-luxury w-full">
-                  Book Now
-                </Button>
+                <Button className="btn-luxury w-full">Book Now</Button>
               </div>
             </div>
           </div>
