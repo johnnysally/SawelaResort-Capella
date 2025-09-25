@@ -127,7 +127,7 @@ export const CapellaSection = () => {
         {/* Pricing & CTA */}
         <div className="text-center bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl p-12">
           <h3 className="text-3xl font-playfair font-bold text-foreground mb-4">
-            Reserve Your Capella Experience
+            Reserve Your Lodge Experience
           </h3>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
             Limited to just three suites, the Capella Collection offers the ultimate in exclusivity. 
@@ -135,7 +135,7 @@ export const CapellaSection = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="btn-luxury">
-              Reserve Capella Suite
+              Reserve Lodge Suite
             </Button>
             <Button size="lg" variant="outline" className="btn-ghost-luxury">
               Schedule Private Tour
