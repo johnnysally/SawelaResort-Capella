@@ -7,43 +7,51 @@ export const WellnessSection = () => {
     {
       name: "African Sunset Massage",
       duration: "90 minutes",
-      description: "Rejuvenating full-body massage using indigenous oils and traditional techniques",
-      icon: Heart
+      description:
+        "Rejuvenating full-body massage using indigenous oils and traditional techniques",
+      icon: Heart,
     },
     {
       name: "Baobab Body Ritual",
       duration: "120 minutes",
-      description: "Complete wellness journey with exfoliation, wrap, and hydrating massage",
-      icon: Sparkles
+      description:
+        "Complete wellness journey with exfoliation, wrap, and hydrating massage",
+      icon: Sparkles,
     },
     {
       name: "Lake Naivasha Facial",
       duration: "75 minutes",
-      description: "Purifying facial treatment using mineral-rich lake waters and local botanicals",
-      icon: Flower
-    }
+      description:
+        "Purifying facial treatment using mineral-rich lake waters and local botanicals",
+      icon: Flower,
+    },
   ];
 
   const facilities = [
     "Infinity Pool with Lake Views",
-    "Steam Room & Sauna",
+    "Steam Room & Sauna", 
     "Meditation Garden",
     "Yoga Pavilion",
     "Fitness Center",
-    "Private Treatment Suites"
+    "Private Treatment Suites",
   ];
 
   return (
-    <section id="wellness" className="py-20 bg-gradient-to-b from-secondary/20 to-background">
-      <div className="container mx-auto px-6">
+    <section
+      id="wellness"
+      className="py-20 bg-background"
+    >
+      <div className="container mx-auto px-7">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-playfair font-bold text-gradient mb-6">
+          <h2 className="text-3xl md:text-6xl font-playfair font-bold text-gradient mb-6 leading-normal pb-2">
             Wellness & Spa
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Reconnect with your inner self in our tranquil wellness sanctuary. Experience healing treatments 
-            inspired by ancient African traditions and modern wellness practices.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
+            Reconnect with your inner self in our tranquil wellness sanctuary.
+            Experience healing treatments inspired by ancient African traditions
+            and modern wellness practices that bring harmony to body, mind, and
+            spirit.
           </p>
         </div>
 
@@ -58,11 +66,13 @@ export const WellnessSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
             </div>
-            
+
             {/* Floating card */}
             <div className="absolute -bottom-8 -right-8 glass p-6 rounded-xl">
               <div className="text-center">
-                <div className="text-3xl font-playfair font-bold text-white mb-1">4.9</div>
+                <div className="text-3xl font-playfair font-bold text-white mb-1">
+                  4.9
+                </div>
                 <div className="text-sm text-white/80">Spa Rating</div>
               </div>
             </div>
@@ -71,32 +81,40 @@ export const WellnessSection = () => {
           {/* Content */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-3xl font-playfair font-bold text-foreground mb-4">
+              <h3 className="text-3xl font-playfair font-bold text-foreground mb-4 heading-safe">
                 Signature Treatments
               </h3>
-              <p className="text-muted-foreground leading-relaxed mb-8">
-                Our spa treatments blend time-honored African healing traditions with contemporary wellness practices, 
-                creating unique experiences that restore balance to body, mind, and spirit.
+              <p className="text-muted-foreground text-safe">
+                Our spa treatments blend time-honored African healing traditions
+                with contemporary wellness practices, creating unique experiences
+                that restore balance to body, mind, and spirit.
               </p>
             </div>
 
             <div className="space-y-6">
-              {treatments.map((treatment, index) => {
+              {treatments.map((treatment) => {
                 const Icon = treatment.icon;
                 return (
-                  <div key={treatment.name} className="flex items-start space-x-4">
+                  <div
+                    key={treatment.name}
+                    className="flex items-start space-x-4"
+                  >
                     <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
                       <Icon className="h-6 w-6 text-primary" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h4 className="text-lg font-semibold text-foreground">{treatment.name}</h4>
+                        <h4 className="text-lg font-semibold text-foreground heading-safe">
+                          {treatment.name}
+                        </h4>
                         <div className="flex items-center space-x-1 text-sm text-muted-foreground">
                           <Timer className="h-4 w-4" />
                           <span>{treatment.duration}</span>
                         </div>
                       </div>
-                      <p className="text-muted-foreground text-sm">{treatment.description}</p>
+                      <p className="text-muted-foreground text-sm text-safe">
+                        {treatment.description}
+                      </p>
                     </div>
                   </div>
                 );
@@ -107,16 +125,21 @@ export const WellnessSection = () => {
 
         {/* Facilities */}
         <div className="mb-12">
-          <h3 className="text-3xl font-playfair font-bold text-center text-foreground mb-8">
+          <h3 className="text-3xl font-playfair font-bold text-center text-foreground mb-8 heading-safe">
             Wellness Facilities
           </h3>
           <div className="grid md:grid-cols-3 gap-6">
-            {facilities.map((facility, index) => (
-              <div key={facility} className="text-center p-6 card-luxury">
+            {facilities.map((facility) => (
+              <div
+                key={facility}
+                className="text-center p-6 card-luxury"
+              >
                 <div className="w-12 h-12 bg-gradient-primary rounded-full mx-auto mb-4 flex items-center justify-center">
                   <Sparkles className="h-6 w-6 text-white" />
                 </div>
-                <h4 className="text-lg font-semibold text-foreground">{facility}</h4>
+                <h4 className="text-lg font-semibold text-foreground heading-safe">
+                  {facility}
+                </h4>
               </div>
             ))}
           </div>

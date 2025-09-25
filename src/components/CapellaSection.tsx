@@ -46,8 +46,8 @@ export const CapellaSection = () => {
             <Crown className="h-5 w-5 text-primary" />
             <span className="text-sm font-medium text-foreground">Ultra-Luxury Experience</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-playfair font-bold text-gradient mb-6">
-            Capella Collection
+          <h2 className="text-3xl md:text-6xl font-playfair font-bold text-gradient mb-6 leading-normal pb-2">
+            Our Collection
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Ascend to the pinnacle of luxury at our exclusive Capella wing. Where extraordinary service 

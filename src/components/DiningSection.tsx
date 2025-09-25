@@ -32,7 +32,7 @@ export const DiningSection = () => {
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-playfair font-bold text-gradient mb-6">
+          <h2 className="text-3xl md:text-6xl font-playfair font-bold text-gradient mb-6 leading-normal pb-2">
             Culinary Excellence
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
