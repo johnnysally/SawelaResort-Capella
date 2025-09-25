@@ -130,7 +130,7 @@ export const CapellaSection = () => {
             Reserve Your Lodge Experience
           </h3>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Limited to just three suites, the Capella Collection offers the ultimate in exclusivity. 
+            Limited to just three suites, the Lodge Collection offers the ultimate in exclusivity. 
             Advanced reservations required.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -19,6 +19,9 @@ import villaImg from "@/assets/room-luxury.jpg";
 import honeymoonImg from "@/assets/hero-image.jpg";
 import heroImg from "@/assets/spa-wellness.jpg";
 
+// ✅ Import the new ConferenceGallery component
+import ConferenceGallery from "@/components/ConferenceGallery";
+
 const rooms = [
   {
     title: "Luxury Safari Suite",
@@ -220,6 +223,9 @@ export default function AccommodationsPage() {
             </motion.div>
           ))}
         </section>
+
+        {/* ✅ Insert ConferenceGallery Section */}
+        <ConferenceGallery />
 
         {/* ✅ Luxury Amenities Section with bottom spacing */}
         <section className="container mx-auto mt-32 mb-32">
