@@ -69,7 +69,7 @@ export const HeroSection = () => {
           <div className={`flex flex-col sm:flex-row gap-4 mb-12 transition-all duration-1000 delay-900 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
-            <Button size="lg" className="btn-luxury text-lg px-8 py-4">
+            <Button size="lg" className="btn-luxury text-lg px-8 py-4" onClick={() => window.dispatchEvent(new Event('openBooking'))}>
               Book Your Escape
             </Button>
             <Button size="lg" variant="outline" className="btn-ghost-luxury text-lg px-8 py-4">
@@ -108,12 +108,12 @@ export const HeroSection = () => {
       </div>
 
       {/* Floating Elements */}
-      <div className="absolute top-1/4 right-8 hidden lg:block">
+      <div className="absolute top-1/4 right-8 hidden md:block">
         <div className="animate-float">
           <div className="w-16 h-16 bg-gradient-primary rounded-full opacity-20"></div>
         </div>
       </div>
-      <div className="absolute bottom-1/4 left-8 hidden lg:block">
+      <div className="absolute bottom-1/4 left-8 hidden md:block">
         <div className="animate-float" style={{ animationDelay: '2s' }}>
           <div className="w-12 h-12 bg-gradient-sunset rounded-full opacity-30"></div>
         </div>

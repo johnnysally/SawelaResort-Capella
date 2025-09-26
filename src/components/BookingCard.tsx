@@ -30,7 +30,7 @@ interface BookingState {
   extras: string[];
 }
 
-const HOTELS = ["Capella Resort", "Sawela Lodge"];
+const HOTELS = ["Capella Lodge", "Sawela Lodge"];
 
 const SERVICES = [
   { id: "room", name: "Room Booking", icon: BedDouble },

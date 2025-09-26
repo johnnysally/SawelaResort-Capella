@@ -32,6 +32,25 @@ const accommodations = [
     image: roomLuxury,
     amenities: ['Three Bedrooms', 'Private Chef', 'Game Drive Vehicle', 'Spa Services', 'Butler'],
   },
+  // Capella additions
+  {
+    id: 4,
+    name: 'Capella Presidential Suite',
+    description: 'Ultra-private suite in the Capella wing with lake views and butler service',
+    price: 'From $2500/night',
+    guests: 4,
+    image: roomLuxury,
+    amenities: ['Private Terrace', 'Butler', 'Infinity Pool', 'Private Dining'],
+  },
+  {
+    id: 5,
+    name: 'Capella Lake Villa',
+    description: 'Secluded villa with private chef and exclusive suite amenities',
+    price: 'From $1800/night',
+    guests: 6,
+    image: roomLuxury,
+    amenities: ['Two Bedrooms', 'Private Chef', 'Garden View', 'Luxury Transfers'],
+  },
 ];
 
 export const AccommodationsSection = () => {
@@ -148,7 +167,7 @@ export const AccommodationsSection = () => {
 
             {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
-              <Button className="btn-luxury flex-1">
+              <Button className="btn-luxury flex-1" onClick={() => window.dispatchEvent(new Event('openBooking'))}>
                 Book This Suite
               </Button>
               <Button variant="outline" className="btn-ghost-luxury flex-1">

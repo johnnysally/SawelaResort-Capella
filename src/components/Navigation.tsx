@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Mail, ChevronDown } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import BookingCard from '@/components/BookingCard';
 
@@ -9,6 +10,17 @@ export const Navigation = () => {
   const [isHotelsOpen, setIsHotelsOpen] = useState(false);
   const [isDiningOpen, setIsDiningOpen] = useState(false);
   const [showBooking, setShowBooking] = useState(false);
+  const location = useLocation();
+
+  // Show proper hotel name in the navbar depending on current route
+  const hotelName = location.pathname.startsWith('/capella') ? 'Capella Lodge' : 'Sawela Lodge';
+
+  // Listen for a global event so other components can open the booking modal
+  useEffect(() => {
+    const handler = (() => setShowBooking(true)) as EventListener;
+    window.addEventListener('openBooking', handler);
+    return () => window.removeEventListener('openBooking', handler);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -25,11 +37,11 @@ export const Navigation = () => {
   ];
 
   const diningOptions = [
-    { name: 'Tea & Breakfast', href: '/dining/tea-breakfast' },
-    { name: 'Bar', href: '/dining/bar' },
-    { name: 'Restaurant', href: '/dining/restaurant' },
-    { name: 'Our Foods', href: '/dining/our-foods' },
-    { name: 'Dining Areas', href: '/dining/areas' },
+    { name: 'Tea & Breakfast', href: '/dining#tea-breakfast' },
+    { name: 'Bar', href: '/dining#bar' },
+    { name: 'Restaurant', href: '/dining#restaurant' },
+    { name: 'Our Foods', href: '/dining#our-foods' },
+    { name: 'Dining Areas', href: '/dining#areas' },
   ];
 
   const hotelsOptions = [
@@ -56,7 +68,7 @@ export const Navigation = () => {
             {/* Logo */}
             <div className="flex-shrink-0 mr-12">
               <h1 className="text-3xl font-playfair font-bold text-gradient whitespace-nowrap">
-                Sawela Lodge
+                {hotelName}
               </h1>
             </div>
 
@@ -143,13 +155,13 @@ export const Navigation = () => {
                     }}
                   >
                     {hotelsOptions.map((hotel) => (
-                      <a
+                      <Link
                         key={hotel.name}
-                        href={hotel.href}
+                        to={hotel.href}
                         className="block px-10 py-5 text-xl text-gray-700 hover:bg-gray-100 whitespace-nowrap"
                       >
                         {hotel.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -166,7 +178,7 @@ export const Navigation = () => {
               </div>
               <Button
                 className="btn-luxury text-lg px-8 py-3 whitespace-nowrap"
-                onClick={() => setShowBooking(!showBooking)}
+                onClick={() => window.dispatchEvent(new Event('openBooking'))}
               >
                 Book Now
               </Button>
@@ -225,14 +237,14 @@ export const Navigation = () => {
                     Our Hotels
                   </span>
                   {hotelsOptions.map((hotel) => (
-                    <a
+                    <Link
                       key={hotel.name}
-                      href={hotel.href}
+                      to={hotel.href}
                       className="block px-4 py-4 text-lg text-gray-700 hover:bg-gray-100 rounded whitespace-nowrap"
                       onClick={() => setIsOpen(false)}
                     >
                       {hotel.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
 
@@ -248,7 +260,7 @@ export const Navigation = () => {
                   </div>
                   <Button
                     className="btn-luxury w-full text-lg py-3 whitespace-nowrap"
-                    onClick={() => setShowBooking(!showBooking)}
+                    onClick={() => window.dispatchEvent(new Event('openBooking'))}
                   >
                     Book Now
                   </Button>

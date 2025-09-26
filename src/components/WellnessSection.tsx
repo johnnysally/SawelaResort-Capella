@@ -67,8 +67,8 @@ export const WellnessSection = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
             </div>
 
-            {/* Floating card */}
-            <div className="absolute -bottom-8 -right-8 glass p-6 rounded-xl">
+            {/* Floating card (hidden on small screens) */}
+            <div className="absolute -bottom-8 -right-8 glass p-6 rounded-xl hidden sm:block">
               <div className="text-center">
                 <div className="text-3xl font-playfair font-bold text-white mb-1">
                   4.9

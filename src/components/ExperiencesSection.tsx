@@ -140,6 +140,7 @@ export const ExperiencesSection = () => {
                   <Button 
                     size="sm" 
                     className="btn-luxury opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    onClick={() => window.dispatchEvent(new Event('openBooking'))}
                   >
                     Book Experience
                   </Button>

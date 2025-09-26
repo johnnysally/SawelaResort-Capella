@@ -47,6 +47,23 @@ const rooms = [
     price: "KSh 30,000 / night",
     features: ["Jacuzzi", "Candlelit Dining", "Personal Concierge", "Spa Access"],
   },
+  // Capella offerings merged into accommodations page
+  {
+    title: "Capella Presidential Suite",
+    description:
+      "An ultra-luxury suite in the Capella wing with private terrace, lake views, and dedicated butler service.",
+    image: suiteImg,
+    price: "KSh 300,000 / night",
+    features: ["Private Terrace", "Lake View", "Butler Service", "Private Pool"],
+  },
+  {
+    title: "Capella Lake Villa",
+    description:
+      "Secluded villa with private chef, infinity pool and direct access to exclusive Capella amenities.",
+    image: villaImg,
+    price: "KSh 220,000 / night",
+    features: ["2 Bedrooms", "Private Chef", "Infinity Pool", "Private Guide"],
+  },
 ];
 
 export default function AccommodationsPage() {
@@ -146,7 +163,7 @@ export default function AccommodationsPage() {
                     : "opacity-0 translate-y-8"
                 }`}
               >
-                <Button size="lg" className="btn-luxury text-lg px-8 py-4">
+                <Button size="lg" className="btn-luxury text-lg px-8 py-4" onClick={() => window.dispatchEvent(new Event('openBooking'))}>
                   Book Your Stay
                 </Button>
                 <Button
@@ -218,7 +235,7 @@ export default function AccommodationsPage() {
                     </li>
                   ))}
                 </ul>
-                <Button className="btn-luxury w-full">Book Now</Button>
+                <Button className="btn-luxury w-full" onClick={() => window.dispatchEvent(new Event('openBooking'))}>Book Now</Button>
               </div>
             </motion.div>
           ))}

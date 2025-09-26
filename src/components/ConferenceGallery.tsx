@@ -39,6 +39,17 @@ const galleryItems: GalleryItem[] = [
     image: "https://source.unsplash.com/800x600/?spa,room",
     price: "$220 / Night",
   },
+  // Capella-specific conference & accommodation offerings
+  {
+    title: "Capella Private Pavilion",
+    image: "https://source.unsplash.com/800x600/?pavilion,luxury",
+    price: "$3,000 / Day",
+  },
+  {
+    title: "Capella Presidential Suite",
+    image: "https://source.unsplash.com/800x600/?presidential,suite",
+    price: "$2,500 / Night",
+  },
 ];
 
 export default function ConferenceGallery() {

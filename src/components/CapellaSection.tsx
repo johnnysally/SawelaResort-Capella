@@ -96,8 +96,8 @@ export const CapellaSection = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
             </div>
             
-            {/* Floating price card */}
-            <div className="absolute -bottom-8 -left-8 glass p-6 rounded-xl">
+            {/* Floating price card, hidden on small screens for better fit */}
+            <div className="absolute -bottom-8 -left-8 glass p-6 rounded-xl hidden sm:block">
               <div className="text-center">
                 <div className="text-sm text-white/80 mb-1">Starting from</div>
                 <div className="text-2xl font-playfair font-bold text-white mb-1">$2,500</div>
@@ -133,11 +133,11 @@ export const CapellaSection = () => {
             Limited to just three suites, the Lodge Collection offers the ultimate in exclusivity. 
             Advanced reservations required.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="btn-luxury">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="btn-luxury" onClick={() => window.dispatchEvent(new Event('openBooking'))}>
               Reserve Lodge Suite
             </Button>
-            <Button size="lg" variant="outline" className="btn-ghost-luxury">
+            <Button size="lg" variant="outline" className="btn-ghost-luxury" onClick={() => window.dispatchEvent(new Event('openBooking'))}>
               Schedule Private Tour
             </Button>
           </div>
