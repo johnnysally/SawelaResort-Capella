@@ -59,7 +59,7 @@ export const Footer = () => {
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-playfair font-bold text-gradient mb-3 sm:mb-4">
                 Sawela Lodge
               </h3>
-              <p className="text-sm sm:text-base text-white/80 leading-relaxed mb-4 sm:mb-6">
+              <p className="text-xs xs:text-sm sm:text-base text-white/80 leading-relaxed mb-4 sm:mb-6">
                 Where luxury meets wild in the heart of Kenya's most beautiful landscape. 
                 Experience the pinnacle of African hospitality at Lake Naivasha.
               </p>
@@ -68,15 +68,15 @@ export const Footer = () => {
               <div className="space-y-2 sm:space-y-3">
                 <div className="flex items-center space-x-2 sm:space-x-3 text-white/80">
                   <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
-                  <span className="text-sm sm:text-base">+254 712 215 434</span>
+                  <span className="text-xs xs:text-sm sm:text-base">+254 712 215 434</span>
                 </div>
                 <div className="flex items-center space-x-2 sm:space-x-3 text-white/80">
                   <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
-                  <span className="text-sm sm:text-base">reservations@sawelalodge.com</span>
+                  <span className="text-xs xs:text-sm sm:text-base">reservations@sawelalodge.com</span>
                 </div>
                 <div className="flex items-start space-x-2 sm:space-x-3 text-white/80">
                   <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-sm sm:text-base">Lake Naivasha, Nakuru County, Kenya</span>
+                  <span className="text-xs xs:text-sm sm:text-base">Lake Naivasha, Nakuru County, Kenya</span>
                 </div>
               </div>
             </div>
@@ -84,13 +84,13 @@ export const Footer = () => {
             {/* Links Sections */}
             {Object.entries(footerLinks).map(([title, links]) => (
               <div key={title}>
-                <h4 className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6">{title}</h4>
+                <h4 className="text-base xs:text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6">{title}</h4>
                 <ul className="space-y-2 sm:space-y-3">
                   {links.map((link) => (
                     <li key={link.name}>
                       <a
                         href={link.href}
-                        className="text-sm sm:text-base text-white/70 hover:text-primary transition-colors duration-300"
+                        className="text-xs xs:text-sm sm:text-base text-white/70 hover:text-primary transition-colors duration-300"
                       >
                         {link.name}
                       </a>
@@ -104,19 +104,19 @@ export const Footer = () => {
           {/* Newsletter Signup */}
           <div className="border-t border-white/20 pt-8 sm:pt-10 lg:pt-12 pb-6 sm:pb-8">
             <div className="text-center mb-6 sm:mb-8">
-              <h4 className="text-xl sm:text-2xl font-playfair font-bold text-white mb-3 sm:mb-4">
+              <h4 className="text-lg xs:text-xl sm:text-2xl font-playfair font-bold text-white mb-3 sm:mb-4">
                 Stay Connected
               </h4>
-              <p className="text-sm sm:text-base text-white/80 mb-4 sm:mb-6 max-w-2xl mx-auto px-2">
+              <p className="text-xs xs:text-sm sm:text-base text-white/80 mb-4 sm:mb-6 max-w-2xl mx-auto px-2">
                 Subscribe to our newsletter for exclusive offers, safari tips, and updates on our latest experiences.
               </p>
               <div className="flex flex-col sm:flex-row max-w-sm sm:max-w-md mx-auto gap-2 sm:gap-3 px-4 sm:px-0">
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg bg-white/10 border border-white/20 text-white text-sm sm:text-base placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="flex-1 px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg bg-white/10 border border-white/20 text-white text-xs xs:text-sm sm:text-base placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary"
                 />
-                <Button className="btn-luxury whitespace-nowrap text-sm sm:text-base px-4 py-2.5 sm:px-6 sm:py-3">
+                <Button className="btn-luxury whitespace-nowrap text-xs xs:text-sm sm:text-base px-4 py-2.5 sm:px-6 sm:py-3">
                   Subscribe
                 </Button>
               </div>
@@ -143,10 +143,10 @@ export const Footer = () => {
           {/* Bottom Bar */}
           <div className="border-t border-white/20 pt-6 sm:pt-8">
             <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0 px-2">
-              <div className="text-white/60 text-xs sm:text-sm text-center sm:text-left">
+              <div className="text-white/60 text-xs xs:text-xs sm:text-sm text-center sm:text-left">
                 © 2024 Sawela Lodge. All rights reserved.
               </div>
-              <div className="flex flex-wrap justify-center sm:justify-end space-x-4 sm:space-x-6 text-xs sm:text-sm">
+              <div className="flex flex-wrap justify-center sm:justify-end space-x-4 sm:space-x-6 text-xs xs:text-xs sm:text-sm">
                 <a href="#privacy" className="text-white/60 hover:text-primary transition-colors duration-300">
                   Privacy Policy
                 </a>

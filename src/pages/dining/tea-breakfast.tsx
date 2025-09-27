@@ -1,13 +1,97 @@
+import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { Coffee, Clock, Utensils, MapPin, Phone, Star, Leaf, Sun, Heart } from 'lucide-react';
+import { Coffee, Clock, Utensils, MapPin, Phone, Star, Leaf, Sun, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 import diningImage from '@/assets/dining-experience.jpg';
 import heroImage from '@/assets/hero-image.jpg';
 import spaImage from '@/assets/spa-wellness.jpg';
 import roomImage from '@/assets/room-luxury.jpg';
 
+// Import hero images
+import breadcrumb from '@/assets/hero_section/breadcrumb.jpg';
+import gallery1 from '@/assets/hero_section/gallery1.jpg.jpg';
+import gallery4 from '@/assets/hero_section/gallery4.jpg.jpg';
+import gallery6 from '@/assets/hero_section/gallery6.jpg.jpg';
+import gallery10 from '@/assets/hero_section/gallery10.jpg.jpg';
+
+// Tea & Breakfast hero slides data
+const teaBreakfastHeroSlides = [
+  {
+    id: 1,
+    image: breadcrumb,
+    title: "Tea & Breakfast",
+    subtitle: "Start your day with exquisite flavors and stunning lake views. Experience morning dining that awakens all your senses.",
+    theme: "Morning Bliss"
+  },
+  {
+    id: 2,
+    image: gallery1,
+    title: "Premium Tea Collection",
+    subtitle: "Discover our curated selection of world-class teas and locally sourced coffee blends, served with breathtaking views.",
+    theme: "Tea Excellence"
+  },
+  {
+    id: 3,
+    image: gallery4,
+    title: "Lakeside Breakfast",
+    subtitle: "Enjoy continental and local breakfast delicacies while watching the sunrise paint Lake Naivasha in golden hues.",
+    theme: "Scenic Dining"
+  },
+  {
+    id: 4,
+    image: gallery6,
+    title: "Fresh Local Ingredients",
+    subtitle: "Farm-to-table freshness with ingredients sourced from local gardens and the finest Kenyan producers.",
+    theme: "Local Flavors"
+  },
+  {
+    id: 5,
+    image: gallery10,
+    title: "Artisan Breakfast Experience",
+    subtitle: "Handcrafted breakfast creations that blend international favorites with authentic Kenyan morning traditions.",
+    theme: "Culinary Art"
+  }
+];
+
 export default function TeaBreakfastPage() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Auto-advance slides
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsTransitioning(true);
+      setCurrentSlide((prev) => (prev + 1) % teaBreakfastHeroSlides.length);
+      setTimeout(() => setIsTransitioning(false), 500);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const nextSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentSlide((prev) => (prev + 1) % teaBreakfastHeroSlides.length);
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
+
+  const prevSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentSlide((prev) => (prev - 1 + teaBreakfastHeroSlides.length) % teaBreakfastHeroSlides.length);
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
+
+  const goToSlide = (index: number) => {
+    if (isTransitioning || index === currentSlide) return;
+    setIsTransitioning(true);
+    setCurrentSlide(index);
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
+
+  const currentHero = teaBreakfastHeroSlides[currentSlide];
+
   const menuCategories = [
     {
       title: "Premium Teas & Coffee",
@@ -77,21 +161,62 @@ export default function TeaBreakfastPage() {
     <div className="bg-background min-h-screen flex flex-col">
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="relative h-[60vh] sm:h-[65vh] lg:h-[70vh] flex items-center justify-center">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${diningImage})` }}
-        >
-          <div className="absolute inset-0 bg-black/40"></div>
+      {/* Dynamic Hero Section */}
+      <section className="relative h-[60vh] sm:h-[65vh] lg:h-[70vh] flex items-center justify-center overflow-hidden">
+        {/* Background Images with Transition */}
+        <div className="absolute inset-0">
+          {teaBreakfastHeroSlides.map((slide, index) => (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-500 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{ backgroundImage: `url(${slide.image})` }}
+            >
+              <div className="absolute inset-0 bg-black/40"></div>
+            </div>
+          ))}
         </div>
+
+        {/* Navigation Controls */}
+        <div className="absolute left-4 sm:left-8 top-1/2 transform -translate-y-1/2 z-20">
+          <button
+            onClick={prevSlide}
+            disabled={isTransitioning}
+            className="glass p-2 sm:p-3 rounded-full hover:bg-primary/20 transition-all duration-300 disabled:opacity-50"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
+          </button>
+        </div>
+        
+        <div className="absolute right-4 sm:right-8 top-1/2 transform -translate-y-1/2 z-20">
+          <button
+            onClick={nextSlide}
+            disabled={isTransitioning}
+            className="glass p-2 sm:p-3 rounded-full hover:bg-primary/20 transition-all duration-300 disabled:opacity-50"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
+          </button>
+        </div>
+
+        {/* Content */}
         <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-bold mb-4 sm:mb-6 leading-tight">
-            Tea & Breakfast
+          <div className={`mb-2 sm:mb-3 text-xs sm:text-sm text-primary font-medium uppercase tracking-wider transition-all duration-300 ${
+            isTransitioning ? 'opacity-50' : 'opacity-100'
+          }`}>
+            {currentHero.theme}
+          </div>
+          <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-bold mb-4 sm:mb-6 leading-tight transition-all duration-300 ${
+            isTransitioning ? 'opacity-50 translate-y-2' : 'opacity-100 translate-y-0'
+          }`}>
+            {currentHero.title}
           </h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed px-2">
-            Start your day with exquisite flavors and stunning lake views. 
-            Experience morning dining that awakens all your senses.
+          <p className={`text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed px-2 transition-all duration-300 ${
+            isTransitioning ? 'opacity-50 translate-y-2' : 'opacity-100 translate-y-0'
+          }`}>
+            {currentHero.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
             <Button size="lg" className="btn-luxury text-sm sm:text-base lg:text-lg px-6 py-3 sm:px-8 sm:py-4">
@@ -102,6 +227,23 @@ export default function TeaBreakfastPage() {
               View Full Menu
             </Button>
           </div>
+        </div>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-3 z-20">
+          {teaBreakfastHeroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              disabled={isTransitioning}
+              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 disabled:cursor-not-allowed ${
+                index === currentSlide 
+                  ? 'bg-primary shadow-glow scale-125' 
+                  : 'bg-white/40 hover:bg-white/60 hover:scale-110'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </section>
 
