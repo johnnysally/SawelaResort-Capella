@@ -5,7 +5,7 @@ import { Leaf, Sprout, Fish, Beef, Phone, Heart, Globe, Tractor, Sun, Award } fr
 import diningImage from '@/assets/dining-experience.jpg';
 import heroImage from '@/assets/hero-image.jpg';
 import spaImage from '@/assets/spa-wellness.jpg';
-import roomImage from '@/assets/room-luxury.jpg';
+import roomImage from '@/assets/rooms/deluxe-romms8.jpg.jpg';
 
 export default function OurFoodsPage() {
   const philosophyPillars = [

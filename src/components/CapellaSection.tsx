@@ -1,6 +1,6 @@
 import { Crown, Sparkles, MapPin, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import roomImage from '@/assets/room-luxury.jpg';
+import roomImage from '@/assets/rooms/deluxe-romms4.jpg.jpg';
 
 export const CapellaSection = () => {
   const capellaFeatures = [

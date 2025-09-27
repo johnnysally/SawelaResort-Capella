@@ -5,7 +5,7 @@ import { MapPin, Users, Heart, Star, Phone, Sunset, TreePine, Waves, Home, Crown
 import diningImage from '@/assets/dining-experience.jpg';
 import heroImage from '@/assets/hero-image.jpg';
 import spaImage from '@/assets/spa-wellness.jpg';
-import roomImage from '@/assets/room-luxury.jpg';
+import roomImage from '@/assets/rooms/deluxe-romms9.jpg.jpg';
 
 export default function DiningAreasPage() {
   const diningVenues = [

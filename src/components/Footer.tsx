@@ -1,6 +1,7 @@
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import heroImage from '@/assets/hero-image.jpg';
+import breadcrumbImage from '@/assets/hero_section/breadcrumb.jpg';
+import logo from '@/assets/logo.png.png';
 
 export const Footer = () => {
   const footerLinks = {
@@ -42,8 +43,8 @@ export const Footer = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src={heroImage}
-          alt="Footer background - serene lake view at sunset"
+          src={breadcrumbImage}
+          alt="Footer background - luxury resort breadcrumb view"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-black/50" />
@@ -56,9 +57,16 @@ export const Footer = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 mb-8 sm:mb-10 lg:mb-12">
             {/* Brand Section */}
             <div className="sm:col-span-2 lg:col-span-1">
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-playfair font-bold text-gradient mb-3 sm:mb-4">
-                Sawela Lodge
-              </h3>
+              <div className="flex items-center space-x-3 mb-3 sm:mb-4">
+                <img 
+                  src={logo} 
+                  alt="Sawela Lodge Logo" 
+                  className="h-8 w-auto sm:h-10 object-contain"
+                />
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-playfair font-bold text-gradient">
+                  Sawela Lodge
+                </h3>
+              </div>
               <p className="text-xs xs:text-sm sm:text-base text-white/80 leading-relaxed mb-4 sm:mb-6">
                 Where luxury meets wild in the heart of Kenya's most beautiful landscape. 
                 Experience the pinnacle of African hospitality at Lake Naivasha.

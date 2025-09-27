@@ -3,6 +3,7 @@ import { Menu, X, Phone, Mail, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import BookingCard from '@/components/BookingCard';
+import logo from '@/assets/logo.png.png';
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -122,12 +123,16 @@ export const Navigation = () => {
           <div className="flex items-center justify-between h-20 sm:h-24">
             {/* Logo */}
             <div className="flex-shrink-0 mr-4 sm:mr-12">
-              <h1 className="text-2xl sm:text-3xl font-playfair font-bold text-gradient">
-                <span className="hidden sm:inline">{hotelName}</span>
-                <span className="sm:hidden">
-                  {location.pathname.startsWith('/capella') ? 'Capella' : 'Sawela'}
-                </span>
-              </h1>
+              <Link to="/" className="flex items-center space-x-3">
+                <img 
+                  src={logo} 
+                  alt="Sawela Lodge Logo" 
+                  className="h-12 w-auto sm:h-16 object-contain"
+                />
+                <h1 className="text-xl sm:text-2xl font-playfair font-bold text-gradient hidden md:block">
+                  {hotelName}
+                </h1>
+              </Link>
             </div>
 
             {/* Desktop Navigation */}

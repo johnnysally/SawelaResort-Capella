@@ -16,85 +16,89 @@ const heroSlides = [
     image: breadcrumb,
     location: "Naivasha, Kenya",
     headline: {
-      text1: "Where ",
-      highlight1: "Luxury ",
-      text2: "Meets ",
-      highlight2: "Wild"
+      text1: "We Look Forward to ",
+      highlight1: "Welcoming You ",
+      text2: "Through Our ",
+      highlight2: "Doors"
     },
-    subtitle: "Experience the pinnacle of African hospitality at Sawela Lodge, where every moment is crafted to perfection amidst the breathtaking landscapes of Naivasha.",
-    stats: [
-      { number: "25+", label: "Luxury Suites" },
-      { number: "50+", label: "Wildlife Species" },
-      { number: "4.9", label: "Guest Rating" }
-    ]
+    subtitle: "Simple Pleasure of Just Being",
+    supportingLines: [
+      "Guarantee Maximum Comfort",
+      "Leave time to explore the sights!"
+    ],
+    ctaText: "Book Your Stay"
   },
   {
     id: 2,
     image: gallery1,
-    location: "Lake Naivasha, Kenya",
+    location: "Naivasha, Kenya",
     headline: {
-      text1: "Discover ",
-      highlight1: "Authentic ",
-      text2: "Safari ",
-      highlight2: "Elegance"
+      text1: "Spacious ",
+      highlight1: "Stays ",
+      text2: "in Naivasha, ",
+      highlight2: "Kenya"
     },
-    subtitle: "Immerse yourself in the raw beauty of Africa while enjoying world-class amenities and personalized service that defines true luxury hospitality.",
-    stats: [
-      { number: "100+", label: "Acres Wildlife" },
-      { number: "12", label: "Unique Experiences" },
-      { number: "24/7", label: "Concierge Service" }
-    ]
+    subtitle: "The best of Naivasha with our curated experiences",
+    supportingLines: [
+      "Travel + Leisure. Contemporary Luxury",
+      "Highest Level of Personalised Service",
+      "Tranquillity And Luxury"
+    ],
+    ctaText: "Explore Our Rooms"
   },
   {
     id: 3,
     image: gallery4,
-    location: "Great Rift Valley, Kenya",
+    location: "Naivasha, Kenya",
     headline: {
-      text1: "Embrace ",
-      highlight1: "Nature's ",
-      text2: "Ultimate ",
-      highlight2: "Sanctuary"
+      text1: "Whether it's for ",
+      highlight1: "Business ",
+      text2: "or ",
+      highlight2: "Pleasure"
     },
-    subtitle: "Wake up to breathtaking sunrises over Lake Naivasha and fall asleep to the symphony of African wildlife in your luxurious safari retreat.",
-    stats: [
-      { number: "365", label: "Days Paradise" },
-      { number: "5★", label: "Luxury Rating" },
-      { number: "∞", label: "Memories Created" }
-    ]
+    subtitle: "We Are Always in Tune With The Needs of Our Guests",
+    supportingLines: [
+      "Unlock The Captivating Secrets of Naivasha",
+      "Spacious Rooms And Suites",
+      "Large, Lush Lawns for Running Around—or Doing Nothing at All"
+    ],
+    ctaText: "Discover Naivasha"
   },
   {
     id: 4,
     image: gallery6,
-    location: "Sawela Lodge, Kenya",
+    location: "Naivasha, Kenya",
     headline: {
-      text1: "Create ",
-      highlight1: "Unforgettable ",
-      text2: "Safari ",
-      highlight2: "Memories"
+      text1: "Exclusive Accommodation, ",
+      highlight1: "Sensory Comforts, ",
+      text2: "Intuitive Service, ",
+      highlight2: "Good Food"
     },
-    subtitle: "From intimate dining under the stars to private game drives, every experience is tailored to exceed your expectations and create lifelong memories.",
-    stats: [
-      { number: "200+", label: "Bird Species" },
-      { number: "15", label: "Safari Vehicles" },
-      { number: "99%", label: "Guest Satisfaction" }
-    ]
+    subtitle: "The Best of Both Worlds",
+    supportingLines: [
+      "Our Great Hospitality is Warm",
+      "We Aim To Create A Unique And Memorable Experience for Each of Our Guests",
+      "From Tranquil Rambles Through The Lush Surrounds, Dips in The Pool And Elegant Picnics"
+    ],
+    ctaText: "Plan Your Experience"
   },
   {
     id: 5,
     image: gallery10,
-    location: "Exclusive Safari, Kenya",
+    location: "Naivasha, Kenya",
     headline: {
-      text1: "Indulge in ",
-      highlight1: "Premium ",
-      text2: "African ",
-      highlight2: "Adventure"
+      text1: "Experience ",
+      highlight1: "Unmatched ",
+      text2: "Safari ",
+      highlight2: "Luxury"
     },
-    subtitle: "Experience the perfect fusion of adventure and luxury with private game drives, gourmet dining, and spa treatments overlooking the pristine wilderness.",
-    stats: [
-      { number: "3", label: "Restaurants" },
-      { number: "2", label: "Swimming Pools" },
-      { number: "1", label: "Unforgettable Stay" }
-    ]
+    subtitle: "Where Every Detail is Crafted to Perfection",
+    supportingLines: [
+      "Immerse Yourself in Nature's Grandest Theater",
+      "Personalized Service Beyond Expectations",
+      "Create Memories That Last a Lifetime"
+    ],
+    ctaText: "Start Your Journey"
   }
 ];
 
@@ -114,69 +118,93 @@ export const HeroSection = () => {
   // Auto-advance slides
   useEffect(() => {
     const interval = setInterval(() => {
-      nextSlide();
-    }, 6000); // Change slide every 6 seconds
+      setIsTransitioning(true);
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+      setTimeout(() => setIsTransitioning(false), 1500);
+    }, 6000); // Change slide every 6 seconds for cinematic timing
 
     return () => clearInterval(interval);
-  }, [currentSlide]);
+  }, []); // Remove currentSlide dependency to prevent interval reset
 
   const nextSlide = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    setTimeout(() => setIsTransitioning(false), 500);
+    setTimeout(() => setIsTransitioning(false), 1500); // Cinematic transition timing
   };
 
   const prevSlide = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-    setTimeout(() => setIsTransitioning(false), 500);
+    setTimeout(() => setIsTransitioning(false), 1500); // Cinematic transition timing
   };
 
   const goToSlide = (index: number) => {
     if (isTransitioning || index === currentSlide) return;
     setIsTransitioning(true);
     setCurrentSlide(index);
-    setTimeout(() => setIsTransitioning(false), 500);
+    setTimeout(() => setIsTransitioning(false), 1500); // Cinematic transition timing
   };
 
   const currentHero = heroSlides[currentSlide];
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Images with Parallax and Transition */}
+      {/* Background Images with Parallax and Modern Sliding Transition */}
       <div 
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full overflow-hidden"
         style={{
           transform: `translateY(${scrollY * 0.5}px)`,
         }}
       >
-        {heroSlides.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <img
-              src={slide.image}
-              alt={`Luxury Safari Lodge - ${slide.headline.text1}${slide.headline.highlight1}${slide.headline.text2}${slide.headline.highlight2}`}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ))}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        {heroSlides.map((slide, index) => {
+          const isActive = index === currentSlide;
+          
+          return (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 w-full h-full`}
+              style={{
+                opacity: isActive ? 1 : 0,
+                transition: 'opacity 4000ms ease-in-out',
+                zIndex: isActive ? 2 : 1,
+              }}
+            >
+              {/* Ultra-smooth crossfade background */}
+              <div className="absolute inset-0 w-full h-full">
+                <img
+                  src={slide.image}
+                  alt={`Luxury Safari Lodge - ${slide.headline.text1}${slide.headline.highlight1}${slide.headline.text2}${slide.headline.highlight2}`}
+                  className="w-full h-full object-cover"
+                  style={{
+                    transform: isActive ? 'scale(1.02)' : 'scale(1)',
+                    transition: 'transform 8000ms ease-out',
+                  }}
+                />
+              </div>
+              
+              {/* Subtle gradient overlay */}
+              <div 
+                className="absolute inset-0"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.45) 100%)',
+                  opacity: 1,
+                }}
+              />
+            </div>
+          );
+        })}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl">
-          {/* Location Badge */}
-          <div className={`inline-flex items-center space-x-2 glass px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-4 sm:mb-6 transition-all duration-1000 delay-300 ${
+          {/* Location Badge with Imperceptible Transition */}
+          <div className={`inline-flex items-center space-x-2 glass px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-4 sm:mb-6 transition-all duration-5000 ease-in-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
+          } ${isTransitioning ? 'opacity-98' : 'opacity-100'}`}>
             <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
             <span className="text-xs sm:text-sm font-medium text-primary">{currentHero.location}</span>
             <div className="flex items-center space-x-0.5 sm:space-x-1 ml-1 sm:ml-2">
@@ -186,45 +214,50 @@ export const HeroSection = () => {
             </div>
           </div>
 
-          {/* Main Headline */}
-          <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-playfair font-bold leading-tight mb-4 sm:mb-6 transition-all duration-1000 delay-500 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          } ${isTransitioning ? 'opacity-50' : 'opacity-100'}`}>
-            <span className="text-white">{currentHero.headline.text1}</span>
-            <span className="text-gradient">{currentHero.headline.highlight1}</span>
-            <span className="text-white">{currentHero.headline.text2}</span>
-            <span className="text-gradient">{currentHero.headline.highlight2}</span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className={`text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-2xl leading-relaxed mb-6 sm:mb-8 px-2 sm:px-0 transition-all duration-1000 delay-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          } ${isTransitioning ? 'opacity-50' : 'opacity-100'}`}>
-            {currentHero.subtitle}
-          </p>
-
-          {/* CTA Buttons */}
-          <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 max-w-md sm:max-w-none mx-auto sm:mx-0 transition-all duration-1000 delay-900 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
-            <Button size="lg" className="btn-luxury text-sm sm:text-base lg:text-lg px-6 py-3 sm:px-8 sm:py-4" onClick={() => window.dispatchEvent(new Event('openBooking'))}>
-              Book Your Escape
-            </Button>
-            <Button size="lg" variant="outline" className="btn-ghost-luxury text-sm sm:text-base lg:text-lg px-6 py-3 sm:px-8 sm:py-4">
-              Explore Experiences
-            </Button>
+          {/* Main Headline with Imperceptible Transition */}
+          <div className="mb-4 sm:mb-6">
+            <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-playfair font-bold leading-tight transition-all duration-6000 ease-in-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            } ${isTransitioning ? 'opacity-98' : 'opacity-100'}`}>
+              <span className="text-white">{currentHero.headline.text1}</span>
+              <span className="text-gradient">{currentHero.headline.highlight1}</span>
+              <span className="text-white">{currentHero.headline.text2}</span>
+              <span className="text-gradient">{currentHero.headline.highlight2}</span>
+            </h1>
           </div>
 
-          {/* Stats */}
-          <div className={`grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-sm sm:max-w-md lg:max-w-xl mx-auto sm:mx-0 transition-all duration-1000 delay-1100 ${
+          {/* Subtitle with Imperceptible Transition */}
+          <div className="mb-4 sm:mb-6">
+            <p className={`text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-2xl leading-relaxed mx-auto px-2 sm:px-0 transition-all duration-6000 ease-in-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } ${isTransitioning ? 'opacity-97' : 'opacity-100'}`}>
+              {currentHero.subtitle}
+            </p>
+          </div>
+
+          {/* Supporting Lines with Imperceptible Transition */}
+          <div className={`max-w-2xl mx-auto mb-6 sm:mb-8 px-2 sm:px-0 transition-all duration-6000 ease-in-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          } ${isTransitioning ? 'opacity-50' : 'opacity-100'}`}>
-            {currentHero.stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-playfair font-bold text-white mb-0.5 sm:mb-1">{stat.number}</div>
-                <div className="text-xs sm:text-sm text-white/70">{stat.label}</div>
-              </div>
+          } ${isTransitioning ? 'opacity-96' : 'opacity-100'}`}>
+            {currentHero.supportingLines.map((line, index) => (
+              <p key={index} className={`text-sm sm:text-base lg:text-lg text-white/80 leading-relaxed mb-2 last:mb-0 transition-all duration-6000 ease-in-out ${
+                isTransitioning ? 'opacity-96' : 'opacity-100'
+              }`}>
+                • {line}
+              </p>
             ))}
+          </div>
+
+          {/* CTA Buttons with Imperceptible Transition */}
+          <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 max-w-md sm:max-w-none mx-auto sm:mx-0 transition-all duration-6000 ease-in-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          } ${isTransitioning ? 'opacity-97' : 'opacity-100'}`}>
+            <Button size="lg" className="btn-luxury text-sm sm:text-base lg:text-lg px-6 py-3 sm:px-8 sm:py-4 transform hover:scale-105 transition-transform duration-300" onClick={() => window.dispatchEvent(new Event('openBooking'))}>
+              {currentHero.ctaText}
+            </Button>
+            <Button size="lg" variant="outline" className="btn-ghost-luxury text-sm sm:text-base lg:text-lg px-6 py-3 sm:px-8 sm:py-4 transform hover:scale-105 transition-transform duration-300">
+              Learn More
+            </Button>
           </div>
         </div>
       </div>
@@ -270,7 +303,7 @@ export const HeroSection = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className={`absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-1000 delay-1300 ${
+      <div className={`absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 delay-400 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}>
         <a href="#accommodations" className="flex flex-col items-center text-white/70 hover:text-white transition-colors duration-300">

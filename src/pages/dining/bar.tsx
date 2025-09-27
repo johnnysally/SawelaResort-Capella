@@ -5,7 +5,7 @@ import { Wine, Clock, Music, Users, Phone, Star, Grape, GlassWater, MapPin } fro
 import diningImage from '@/assets/dining-experience.jpg';
 import heroImage from '@/assets/hero-image.jpg';
 import spaImage from '@/assets/spa-wellness.jpg';
-import roomImage from '@/assets/room-luxury.jpg';
+import roomImage from '@/assets/rooms/deluxe-romms7.jpg.jpg';
 
 export default function BarPage() {
   const cocktailMenu = [

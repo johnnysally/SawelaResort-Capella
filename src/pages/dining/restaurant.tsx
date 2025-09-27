@@ -5,7 +5,7 @@ import { Utensils, Clock, ChefHat, Award, Phone, Star, Leaf, Heart, MapPin, User
 import diningImage from '@/assets/dining-experience.jpg';
 import heroImage from '@/assets/hero-image.jpg';
 import spaImage from '@/assets/spa-wellness.jpg';
-import roomImage from '@/assets/room-luxury.jpg';
+import roomImage from '@/assets/rooms/deluxe-romms5.jpg.jpg';
 
 export default function RestaurantPage() {
   const menuSections = [

@@ -2,9 +2,15 @@ import { useState } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import heroImage from '@/assets/hero-image.jpg';
-import roomImage from '@/assets/room-luxury.jpg';
+import roomImage1 from '@/assets/rooms/deluxe-romms2.jpg.jpg';
+import roomImage2 from '@/assets/rooms/deluxe-romms3.jpg.jpg';
 import diningImage from '@/assets/dining-experience.jpg';
 import spaImage from '@/assets/spa-wellness.jpg';
+// Additional gallery images
+import gallery8 from '@/assets/gallery/gallery8.jpg.jpg';
+import gallery9 from '@/assets/gallery/gallery9.jpg.jpg';
+import gallery11 from '@/assets/gallery/gallery11.jpg.jpg';
+import gallery12 from '@/assets/gallery/gallery12.jpg.jpg';
 
 export const GallerySection = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -16,7 +22,7 @@ export const GallerySection = () => {
       category: "Views"
     },
     {
-      src: roomImage,
+      src: roomImage1,
       alt: "Luxurious suite interior with elegant African-inspired decor",
       category: "Accommodations"
     },
@@ -36,7 +42,7 @@ export const GallerySection = () => {
       category: "Wildlife"
     },
     {
-      src: roomImage,
+      src: roomImage2,
       alt: "Private villa terrace with infinity pool",
       category: "Accommodations"
     },
@@ -49,6 +55,26 @@ export const GallerySection = () => {
       src: spaImage,
       alt: "Outdoor yoga session overlooking the lake",
       category: "Wellness"
+    },
+    {
+      src: gallery8,
+      alt: "Luxury resort grounds with manicured gardens",
+      category: "Views"
+    },
+    {
+      src: gallery9,
+      alt: "Wildlife viewing experience at sunset",
+      category: "Wildlife"
+    },
+    {
+      src: gallery11,
+      alt: "Resort pool area with stunning lake views",
+      category: "Views"
+    },
+    {
+      src: gallery12,
+      alt: "Elegant resort lobby and reception area",
+      category: "Accommodations"
     }
   ];
 

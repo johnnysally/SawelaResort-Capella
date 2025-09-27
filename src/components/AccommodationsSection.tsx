@@ -2,7 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { Wifi, Tv, Coffee, Bath, Bed, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import roomLuxury from '@/assets/room-luxury.jpg';
+// Room images from rooms folder
+import safariSuite from '@/assets/rooms/rooms1.jpg.jpg';
+import deluxeVilla from '@/assets/rooms/deluxe-rooms1.jpg.jpg';
+import presidentialLodge from '@/assets/rooms/deluxe-romms2.jpg.jpg';
+import capellaSuite from '@/assets/rooms/deluxe-romms3.jpg.jpg';
+import capellaVilla from '@/assets/rooms/deluxe-romms4.jpg.jpg';
 
 const accommodations = [
   {
@@ -11,7 +16,7 @@ const accommodations = [
     description: 'Elegant suite with panoramic savanna views and premium amenities',
     price: 'From $450/night',
     guests: 2,
-    image: roomLuxury,
+    image: safariSuite,
     amenities: ['King Size Bed', 'Private Balcony', 'Mini Bar', 'WiFi', '24/7 Service'],
   },
   {
@@ -20,7 +25,7 @@ const accommodations = [
     description: 'Spacious villa perfect for families with private pool access',
     price: 'From $680/night',
     guests: 4,
-    image: roomLuxury,
+    image: deluxeVilla,
     amenities: ['Two Bedrooms', 'Private Pool', 'Kitchen', 'Garden View', 'Concierge'],
   },
   {
@@ -29,7 +34,7 @@ const accommodations = [
     description: 'Ultimate luxury with private chef and exclusive safari experiences',
     price: 'From $1200/night',
     guests: 6,
-    image: roomLuxury,
+    image: presidentialLodge,
     amenities: ['Three Bedrooms', 'Private Chef', 'Game Drive Vehicle', 'Spa Services', 'Butler'],
   },
   // Capella additions
@@ -39,7 +44,7 @@ const accommodations = [
     description: 'Ultra-private suite in the Capella wing with lake views and butler service',
     price: 'From $2500/night',
     guests: 4,
-    image: roomLuxury,
+    image: capellaSuite,
     amenities: ['Private Terrace', 'Butler', 'Infinity Pool', 'Private Dining'],
   },
   {
@@ -48,7 +53,7 @@ const accommodations = [
     description: 'Secluded villa with private chef and exclusive suite amenities',
     price: 'From $1800/night',
     guests: 6,
-    image: roomLuxury,
+    image: capellaVilla,
     amenities: ['Two Bedrooms', 'Private Chef', 'Garden View', 'Luxury Transfers'],
   },
 ];

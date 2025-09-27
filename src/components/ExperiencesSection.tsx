@@ -2,7 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { Camera, Sunrise, Utensils, Waves, Mountain, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import diningImage from '@/assets/dining-experience.jpg';
+// Services images
+import service1 from '@/assets/services/service1.jpg.jpg';
+import service2 from '@/assets/services/service.jpg.jpg';
+import service3 from '@/assets/services/service3.jpg.jpg';
+// Gallery images
+import gallery1 from '@/assets/gallery/gallery2.jpg.jpg';
+import gallery2 from '@/assets/gallery/gallery5.jpg.jpg';
+import gallery3 from '@/assets/gallery/gallery7.jpg.jpg';
 
 const experiences = [
   {
@@ -11,7 +18,7 @@ const experiences = [
     description: 'Witness the African wilderness awakening with our expert guides',
     duration: '3-4 hours',
     price: '$120',
-    image: diningImage,
+    image: service1,
   },
   {
     icon: Camera,
@@ -19,7 +26,7 @@ const experiences = [
     description: 'Capture stunning wildlife moments with professional guidance',
     duration: 'Full day',
     price: '$280',
-    image: diningImage,
+    image: gallery1,
   },
   {
     icon: Waves,
@@ -27,7 +34,7 @@ const experiences = [
     description: 'Serene boat excursions with hippo and bird watching',
     duration: '2 hours',
     price: '$85',
-    image: diningImage,
+    image: service2,
   },
   {
     icon: Mountain,
@@ -35,7 +42,7 @@ const experiences = [
     description: 'Immerse yourself in authentic Maasai traditions and culture',
     duration: '4 hours',
     price: '$95',
-    image: diningImage,
+    image: gallery2,
   },
   {
     icon: Utensils,
@@ -43,7 +50,7 @@ const experiences = [
     description: 'Gourmet meals under the stars in the heart of nature',
     duration: '3 hours',
     price: '$160',
-    image: diningImage,
+    image: service3,
   },
   {
     icon: Star,
@@ -51,7 +58,7 @@ const experiences = [
     description: 'Explore the African night sky with our astronomy experts',
     duration: '2 hours',
     price: '$75',
-    image: diningImage,
+    image: gallery3,
   },
 ];
 

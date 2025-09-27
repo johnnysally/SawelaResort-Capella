@@ -13,11 +13,11 @@ import {
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 
-// ✅ Import images from src/assets
-import suiteImg from "@/assets/dining-experience.jpg";
-import villaImg from "@/assets/room-luxury.jpg";
-import honeymoonImg from "@/assets/hero-image.jpg";
-import heroImg from "@/assets/spa-wellness.jpg";
+// ✅ Import room images from rooms folder
+import suiteImg from "@/assets/rooms/rooms1.jpg.jpg";
+import villaImg from "@/assets/rooms/deluxe-rooms1.jpg.jpg";
+import honeymoonImg from "@/assets/rooms/deluxe-romms.jpg.jpg";
+import heroImg from "@/assets/rooms/rooms2.jpg.jpg";
 
 // ✅ Import the new ConferenceGallery component
 import ConferenceGallery from "@/components/ConferenceGallery";

@@ -6,7 +6,7 @@ import { Coffee, Clock, Utensils, MapPin, Phone, Star, Leaf, Sun, Heart, Chevron
 import diningImage from '@/assets/dining-experience.jpg';
 import heroImage from '@/assets/hero-image.jpg';
 import spaImage from '@/assets/spa-wellness.jpg';
-import roomImage from '@/assets/room-luxury.jpg';
+import roomImage from '@/assets/rooms/deluxe-romms6.jpg.jpg';
 
 // Import hero images
 import breadcrumb from '@/assets/hero_section/breadcrumb.jpg';
