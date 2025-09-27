@@ -72,26 +72,26 @@ export const GallerySection = () => {
   };
 
   return (
-    <section id="gallery" className="py-20 bg-background">
-      <div className="container mx-auto px-6">
+    <section id="gallery" className="py-12 sm:py-16 lg:py-20 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-playfair font-bold text-gradient mb-6">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-playfair font-bold text-gradient mb-4 sm:mb-6">
             Gallery
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
+          <p className="text-sm sm:text-base lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-6 sm:mb-8 px-2">
             Discover the beauty and elegance of Sawela Lodge through our curated collection of moments, 
             from breathtaking landscapes to intimate luxury details.
           </p>
 
           {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 px-2">
             {categories.map((category) => (
               <Button
                 key={category}
                 variant={activeCategory === category ? "default" : "outline"}
                 onClick={() => setActiveCategory(category)}
-                className={`${activeCategory === category ? 'btn-luxury' : 'hover:bg-primary/10'}`}
+                className={`text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2.5 ${activeCategory === category ? 'btn-luxury' : 'hover:bg-primary/10'}`}
               >
                 {category}
               </Button>
@@ -100,7 +100,7 @@ export const GallerySection = () => {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
           {filteredImages.map((image, index) => (
             <div
               key={index}

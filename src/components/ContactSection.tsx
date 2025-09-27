@@ -73,47 +73,47 @@ export const ContactSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="contact" className="section-padding bg-gradient-earth">
-      <div className="container mx-auto px-6">
+    <section ref={sectionRef} id="contact" className="py-12 sm:py-16 lg:py-20 xl:py-24 bg-gradient-earth">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-1000 ${
+        <div className={`text-center max-w-3xl mx-auto mb-8 sm:mb-12 lg:mb-16 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
         }`}>
-          <h2 className="text-5xl md:text-6xl font-playfair font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-4 sm:mb-6">
             <span className="text-foreground">Get in</span>
             <span className="text-gradient"> Touch</span>
           </h2>
-          <p className="text-xl text-muted-foreground leading-relaxed">
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed px-2">
             Ready to embark on your luxury safari adventure? Our dedicated team is here to craft 
             the perfect experience tailored to your dreams.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
           {/* Contact Information */}
           <div className={`transition-all duration-1000 delay-300 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
           }`}>
-            <h3 className="text-3xl font-playfair font-bold mb-8">Contact Information</h3>
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-playfair font-bold mb-6 sm:mb-8">Contact Information</h3>
             
-            <div className="grid sm:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
               {contactInfo.map((info, index) => {
                 const Icon = info.icon;
                 return (
                   <Card 
                     key={index}
-                    className="p-6 border-0 shadow-warm hover:shadow-luxury transition-all duration-300 hover:-translate-y-1"
+                    className="p-4 sm:p-6 border-0 shadow-warm hover:shadow-luxury transition-all duration-300 hover:-translate-y-1"
                   >
-                    <div className="flex items-start space-x-4">
+                    <div className="flex items-start space-x-3 sm:space-x-4">
                       <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                          <Icon className="h-6 w-6 text-primary" />
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                          <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                         </div>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold mb-2">{info.title}</h4>
+                        <h4 className="text-sm sm:text-base font-semibold mb-1 sm:mb-2">{info.title}</h4>
                         {info.details.map((detail, idx) => (
-                          <p key={idx} className="text-sm text-muted-foreground">
+                          <p key={idx} className="text-xs sm:text-sm text-muted-foreground">
                             {info.href && idx === 0 ? (
                               <a href={info.href} className="hover:text-primary transition-colors duration-300">
                                 {detail}
@@ -131,12 +131,12 @@ export const ContactSection = () => {
             </div>
 
             {/* Map placeholder */}
-            <Card className="p-6 border-0 shadow-warm">
-              <div className="bg-gradient-primary rounded-xl h-64 flex items-center justify-center">
+            <Card className="p-4 sm:p-6 border-0 shadow-warm">
+              <div className="bg-gradient-primary rounded-xl h-48 sm:h-56 lg:h-64 flex items-center justify-center">
                 <div className="text-center text-primary-foreground">
-                  <MapPin className="h-12 w-12 mx-auto mb-4 opacity-80" />
-                  <p className="font-medium">Interactive Map</p>
-                  <p className="text-sm opacity-80">Click to view location</p>
+                  <MapPin className="h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 mx-auto mb-2 sm:mb-4 opacity-80" />
+                  <p className="text-sm sm:text-base font-medium">Interactive Map</p>
+                  <p className="text-xs sm:text-sm opacity-80">Click to view location</p>
                 </div>
               </div>
             </Card>

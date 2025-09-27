@@ -152,16 +152,16 @@ Total: KSh ${calculateTotal().toLocaleString()}`
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            className="bg-gradient-earth p-6 rounded-2xl grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
             {HOTELS.map((hotel) => (
               <button
                 key={hotel}
                 onClick={() => setBooking({ ...booking, hotel, step: 1 })}
-                className="flex flex-col items-center p-6 rounded-2xl shadow-lg bg-gradient-to-r from-blue-400 to-blue-600 hover:scale-105 transition-transform"
+                className="flex flex-col items-center p-6 rounded-2xl shadow-luxury bg-gradient-primary hover:scale-105 transition-transform duration-300 ease-luxury"
               >
-                <BedDouble className="w-8 h-8 text-white mb-2" />
-                <span className="font-semibold text-white">{hotel}</span>
+                <BedDouble className="w-8 h-8 text-primary-foreground mb-2" />
+                <span className="font-semibold text-primary-foreground">{hotel}</span>
               </button>
             ))}
           </motion.div>
