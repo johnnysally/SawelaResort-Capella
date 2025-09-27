@@ -2,7 +2,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Leaf, Sprout, Fish, Beef, Phone, Heart, Globe, Tractor, Sun, Award } from 'lucide-react';
-import diningImage from '@/assets/dining-experience.jpg';
+import diningImage from '@/assets/gallery/gallery5.jpg.jpg';
 import heroImage from '@/assets/hero-image.jpg';
 import spaImage from '@/assets/spa-wellness.jpg';
 import roomImage from '@/assets/rooms/deluxe-romms8.jpg.jpg';

@@ -1,6 +1,6 @@
 import { Coffee, Clock, Utensils } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import diningImage from '@/assets/dining-experience.jpg';
+import diningImage from '@/assets/services/service1.jpg.jpg';
 
 export const TeaBreakfastSection = () => {
   const teaBreakfastFeatures = [

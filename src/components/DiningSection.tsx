@@ -1,6 +1,6 @@
 import { Clock, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import diningImage from '@/assets/dining-experience.jpg';
+import diningImage from '@/assets/gallery/gallery11.jpg.jpg';
 
 export const DiningSection = () => {
   const restaurants = [

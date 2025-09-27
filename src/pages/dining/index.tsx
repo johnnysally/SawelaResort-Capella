@@ -1,6 +1,6 @@
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
-import diningImage from '@/assets/dining-experience.jpg';
+import diningImage from '@/assets/gallery/gallery12.jpg.jpg';
 import { Button } from '@/components/ui/button';
 
 const Section = ({ id, title, children }: { id: string; title: string; children: React.ReactNode }) => (
@@ -30,8 +30,13 @@ export default function DiningIndex() {
 
       <main className="flex-1">
         {/* Hero */}
-            <div className="relative bg-[url('/src/assets/dining-experience.jpg')] bg-center bg-cover h-[90vh] flex items-center">
-            <div className="container mx-auto px-6 text-center">
+        <div className="relative h-[90vh] flex items-center">
+          <div 
+            className="absolute inset-0 bg-center bg-cover"
+            style={{ backgroundImage: `url(${diningImage})` }}
+          />
+          <div className="absolute inset-0 bg-black/40" />
+          <div className="relative z-10 container mx-auto px-6 text-center">
                 <h1 className="text-5xl md:text-6xl font-playfair font-bold text-white mb-4">Dining at Sawela & Capella</h1>
                 <p className="text-white/90 max-w-3xl mx-auto">Savor extraordinary flavors in breathtaking settings — from intimate private pavilions to our signature restaurant and bar.</p>
                 <div className="mt-8 flex justify-center gap-4">

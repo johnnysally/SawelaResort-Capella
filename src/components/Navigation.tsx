@@ -123,13 +123,13 @@ export const Navigation = () => {
           <div className="flex items-center justify-between h-20 sm:h-24">
             {/* Logo */}
             <div className="flex-shrink-0 mr-4 sm:mr-12">
-              <Link to="/" className="flex items-center space-x-3">
+              <Link to="/" className="flex items-center space-x-2 sm:space-x-3">
                 <img 
                   src={logo} 
                   alt="Sawela Lodge Logo" 
-                  className="h-12 w-auto sm:h-16 object-contain"
+                  className="h-10 w-auto sm:h-16 object-contain"
                 />
-                <h1 className="text-xl sm:text-2xl font-playfair font-bold text-gradient hidden md:block">
+                <h1 className="text-lg sm:text-2xl font-playfair font-bold text-gradient">
                   {hotelName}
                 </h1>
               </Link>

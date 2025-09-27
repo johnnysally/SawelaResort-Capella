@@ -2,7 +2,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Wine, Clock, Music, Users, Phone, Star, Grape, GlassWater, MapPin } from 'lucide-react';
-import diningImage from '@/assets/dining-experience.jpg';
+import diningImage from '@/assets/services/service.jpg.jpg';
 import heroImage from '@/assets/hero-image.jpg';
 import spaImage from '@/assets/spa-wellness.jpg';
 import roomImage from '@/assets/rooms/deluxe-romms7.jpg.jpg';

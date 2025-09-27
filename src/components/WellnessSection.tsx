@@ -1,6 +1,6 @@
 import { Flower, Heart, Sparkles, Timer } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import spaImage from '@/assets/spa-wellness.jpg';
+import spaImage from '@/assets/services/service3.jpg.jpg';
 
 export const WellnessSection = () => {
   const treatments = [

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import heroImage from '@/assets/hero-image.jpg';
 import roomImage1 from '@/assets/rooms/deluxe-romms2.jpg.jpg';
 import roomImage2 from '@/assets/rooms/deluxe-romms3.jpg.jpg';
-import diningImage from '@/assets/dining-experience.jpg';
+import diningImage from '@/assets/gallery/gallery9.jpg.jpg';
 import spaImage from '@/assets/spa-wellness.jpg';
 // Additional gallery images
 import gallery8 from '@/assets/gallery/gallery8.jpg.jpg';
