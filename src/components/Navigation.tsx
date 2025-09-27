@@ -175,7 +175,7 @@ export const Navigation = () => {
                             <Link
                               key={option.name}
                               to={option.href}
-                              className="block px-10 py-5 text-xl text-gray-700 hover:bg-gray-100 whitespace-nowrap"
+                              className="block px-10 py-5 text-base sm:text-lg lg:text-xl text-gray-700 hover:bg-gray-100 whitespace-nowrap"
                               onClick={() => setIsDiningOpen(false)}
                             >
                               {option.name}
@@ -253,7 +253,7 @@ export const Navigation = () => {
                       <Link
                         key={hotel.name}
                         to={hotel.href}
-                        className="block px-10 py-5 text-xl text-gray-700 hover:bg-gray-100 whitespace-nowrap"
+                        className="block px-10 py-5 text-base sm:text-lg lg:text-xl text-gray-700 hover:bg-gray-100 whitespace-nowrap"
                       >
                         {hotel.name}
                       </Link>
@@ -312,7 +312,7 @@ export const Navigation = () => {
                         <div key={item.name}>
                           <button
                             onClick={toggleMobileDining}
-                            className="w-full flex items-center justify-between px-4 py-3 text-lg text-gray-800 font-semibold border-b border-gray-200 hover:bg-gray-50"
+                            className="w-full flex items-center justify-between px-4 py-3 text-sm xs:text-base sm:text-lg text-gray-800 font-semibold border-b border-gray-200 hover:bg-gray-50"
                           >
                             <span>{item.name}</span>
                             <ChevronDown className={`h-5 w-5 transition-transform duration-200 ${mobileDiningOpen ? 'rotate-180' : ''}`} />
@@ -346,7 +346,7 @@ export const Navigation = () => {
                         <a
                           key={item.name}
                           href={item.href}
-                          className="block px-4 py-3 text-lg text-gray-800 hover:text-primary hover:bg-primary/5 rounded transition-all duration-200 font-semibold"
+                          className="block px-4 py-3 text-sm xs:text-base sm:text-lg text-gray-800 hover:text-primary hover:bg-primary/5 rounded transition-all duration-200 font-semibold"
                           onClick={() => setIsOpen(false)}
                         >
                           {item.name}
@@ -358,7 +358,7 @@ export const Navigation = () => {
                       <Link
                         key={item.name}
                         to={item.href}
-                        className="block px-4 py-3 text-lg text-gray-800 hover:text-primary hover:bg-primary/5 rounded transition-all duration-200 font-semibold"
+                        className="block px-4 py-3 text-sm xs:text-base sm:text-lg text-gray-800 hover:text-primary hover:bg-primary/5 rounded transition-all duration-200 font-semibold"
                         onClick={() => setIsOpen(false)}
                       >
                         {item.name}
@@ -370,7 +370,7 @@ export const Navigation = () => {
                   <div>
                     <button
                       onClick={toggleMobileHotels}
-                      className="w-full flex items-center justify-between px-4 py-3 text-lg text-gray-800 font-semibold border-b border-gray-200 hover:bg-gray-50"
+                      className="w-full flex items-center justify-between px-4 py-3 text-sm xs:text-base sm:text-lg text-gray-800 font-semibold border-b border-gray-200 hover:bg-gray-50"
                     >
                       <span>Our Hotels</span>
                       <ChevronDown className={`h-5 w-5 transition-transform duration-200 ${mobileHotelsOpen ? 'rotate-180' : ''}`} />
