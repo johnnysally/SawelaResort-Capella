@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 // Services images
 import service1 from '@/assets/services/service1.jpg.jpg';
 import service2 from '@/assets/services/service.jpg.jpg';
-import service3 from '@/assets/services/service3.jpg.jpg';
+import diningExperience from '@/assets/dining-experience.jpg';
 // Gallery images
 import gallery1 from '@/assets/gallery/gallery2.jpg.jpg';
 import gallery2 from '@/assets/gallery/gallery5.jpg.jpg';
@@ -50,7 +50,7 @@ const experiences = [
     description: 'Gourmet meals under the stars in the heart of nature',
     duration: '3 hours',
     price: '$160',
-    image: service3,
+    image: diningExperience,
   },
   {
     icon: Star,

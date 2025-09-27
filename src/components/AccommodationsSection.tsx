@@ -1,13 +1,24 @@
 import { useState, useEffect, useRef } from 'react';
-import { Wifi, Tv, Coffee, Bath, Bed, Users } from 'lucide-react';
+import { Wifi, Tv, Coffee, Bath, Bed, Users, Heart, Briefcase, Gift, Calendar, Clock, MapPin, Phone, Mail, Star, Check, Camera, Music, Utensils, Car } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-// Room images from rooms folder
+import { Badge } from '@/components/ui/badge';
+// Room images from rooms folder and conference images for categorization
 import safariSuite from '@/assets/rooms/rooms1.jpg.jpg';
 import deluxeVilla from '@/assets/rooms/deluxe-rooms1.jpg.jpg';
 import presidentialLodge from '@/assets/rooms/deluxe-romms2.jpg.jpg';
-import capellaSuite from '@/assets/rooms/deluxe-romms3.jpg.jpg';
-import capellaVilla from '@/assets/rooms/deluxe-romms4.jpg.jpg';
+// Conference images for Capella suites and conference facilities
+import capellaSuite from '@/assets/conferences/conference1.jpg.jpg';
+import capellaVilla from '@/assets/conferences/conference2.jpg.jpg';
+import boardroom from '@/assets/conferences/conference3.jpg.jpg';
+import conferenceHall from '@/assets/conferences/conference4.jpg.jpg';
+// Special events images
+import weddingEvent from '@/assets/specialevents/wedding1.jpg.jpg';
+import corporateEvent from '@/assets/specialevents/team1.jpg.jpg';
+import privateEvent from '@/assets/specialevents/wedding-venue-in-kenya6.jpg';
+import weddingVenue from '@/assets/specialevents/wedding-venue-in-kenya8.jpg';
+import teamBuilding from '@/assets/specialevents/team5.jpg.jpg';
+import celebration from '@/assets/specialevents/wedding3.jpg.jpg';
 
 const accommodations = [
   {
@@ -55,6 +66,25 @@ const accommodations = [
     guests: 6,
     image: capellaVilla,
     amenities: ['Two Bedrooms', 'Private Chef', 'Garden View', 'Luxury Transfers'],
+  },
+  // Conference Facilities
+  {
+    id: 6,
+    name: 'Executive Boardroom',
+    description: 'Intimate boardroom perfect for executive meetings and strategic planning',
+    price: 'From $200/day',
+    guests: 12,
+    image: boardroom,
+    amenities: ['Video Conferencing', 'Smart Board', 'Premium WiFi', 'Catering Service', 'Lake Views'],
+  },
+  {
+    id: 7,
+    name: 'Capella Conference Hall',
+    description: 'Grand conference hall ideal for large events, seminars, and corporate gatherings',
+    price: 'From $500/day',
+    guests: 100,
+    image: conferenceHall,
+    amenities: ['Multimedia Systems', 'Stage & Podium', 'Professional Lighting', 'Break-out Rooms', 'Full Catering'],
   },
 ];
 
@@ -228,6 +258,358 @@ export const AccommodationsSection = () => {
               </div>
             </Card>
           ))}
+        </div>
+
+        {/* Special Events Section */}
+        <div className={`mt-12 sm:mt-16 lg:mt-20 xl:mt-24 transition-all duration-1000 delay-900 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
+          <div className="text-center mb-8 sm:mb-12">
+            <h3 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-playfair font-bold mb-4 sm:mb-6">
+              <span className="text-foreground">Special</span>
+              <span className="text-gradient"> Events</span>
+            </h3>
+            <p className="text-sm xs:text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed px-2">
+              Create unforgettable memories with our comprehensive event planning services. From intimate celebrations 
+              to grand corporate gatherings, we provide the perfect setting, professional coordination, and luxury amenities 
+              for your special moments.
+            </p>
+          </div>
+
+          {/* Event Statistics */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
+            <Card className="text-center p-4 sm:p-6 bg-gradient-to-br from-primary/5 to-secondary/5">
+              <Calendar className="h-8 w-8 sm:h-10 sm:w-10 text-primary mx-auto mb-2" />
+              <div className="text-xl sm:text-2xl font-bold text-foreground">500+</div>
+              <p className="text-xs sm:text-sm text-muted-foreground">Events Hosted</p>
+            </Card>
+            <Card className="text-center p-4 sm:p-6 bg-gradient-to-br from-primary/5 to-secondary/5">
+              <Users className="h-8 w-8 sm:h-10 sm:w-10 text-primary mx-auto mb-2" />
+              <div className="text-xl sm:text-2xl font-bold text-foreground">2000+</div>
+              <p className="text-xs sm:text-sm text-muted-foreground">Happy Guests</p>
+            </Card>
+            <Card className="text-center p-4 sm:p-6 bg-gradient-to-br from-primary/5 to-secondary/5">
+              <Star className="h-8 w-8 sm:h-10 sm:w-10 text-primary mx-auto mb-2" />
+              <div className="text-xl sm:text-2xl font-bold text-foreground">4.9/5</div>
+              <p className="text-xs sm:text-sm text-muted-foreground">Event Rating</p>
+            </Card>
+            <Card className="text-center p-4 sm:p-6 bg-gradient-to-br from-primary/5 to-secondary/5">
+              <Clock className="h-8 w-8 sm:h-10 sm:w-10 text-primary mx-auto mb-2" />
+              <div className="text-xl sm:text-2xl font-bold text-foreground">10+</div>
+              <p className="text-xs sm:text-sm text-muted-foreground">Years Experience</p>
+            </Card>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+            {/* Wedding Events */}
+            <Card className="group overflow-hidden border-0 shadow-warm hover:shadow-luxury transition-all duration-500">
+              <div className="relative overflow-hidden">
+                <img
+                  src={weddingEvent}
+                  alt="Wedding celebrations at Sawela Lodge"
+                  className="w-full h-48 sm:h-56 object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute top-4 right-4">
+                  <Badge className="bg-primary/90 text-white border-0">
+                    <Heart className="h-3 w-3 mr-1" />
+                    Wedding
+                  </Badge>
+                </div>
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h4 className="text-white text-lg sm:text-xl font-semibold mb-2">Wedding Celebrations</h4>
+                  <p className="text-white/90 text-sm">Romantic lakeside ceremonies with personalized planning</p>
+                </div>
+              </div>
+              <div className="p-4 sm:p-6">
+                <div className="mb-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm font-medium text-primary">Starting from</span>
+                    <span className="text-lg font-bold text-foreground">$5,000</span>
+                  </div>
+                  <div className="flex items-center text-xs text-muted-foreground mb-4">
+                    <Users className="h-3 w-3 mr-1" />
+                    <span>50-200 guests</span>
+                    <span className="mx-2">•</span>
+                    <Clock className="h-3 w-3 mr-1" />
+                    <span>Full day event</span>
+                  </div>
+                </div>
+                
+                <div className="space-y-2 mb-6">
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Lakeside ceremony venues</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Bridal suite accommodations</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Professional photography</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Customized catering menus</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Wedding coordination</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Floral arrangements</span>
+                  </div>
+                </div>
+                
+                <div className="flex gap-2">
+                  <Button className="flex-1 btn-luxury text-sm">Plan Wedding</Button>
+                  <Button variant="outline" size="sm" className="px-3">
+                    <Phone className="h-3 w-3" />
+                  </Button>
+                </div>
+              </div>
+            </Card>
+
+            {/* Corporate Events */}
+            <Card className="group overflow-hidden border-0 shadow-warm hover:shadow-luxury transition-all duration-500">
+              <div className="relative overflow-hidden">
+                <img
+                  src={corporateEvent}
+                  alt="Corporate events at Sawela Lodge"
+                  className="w-full h-48 sm:h-56 object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute top-4 right-4">
+                  <Badge className="bg-secondary/90 text-white border-0">
+                    <Briefcase className="h-3 w-3 mr-1" />
+                    Corporate
+                  </Badge>
+                </div>
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h4 className="text-white text-lg sm:text-xl font-semibold mb-2">Corporate Retreats</h4>
+                  <p className="text-white/90 text-sm">Team building in stunning natural settings</p>
+                </div>
+              </div>
+              <div className="p-4 sm:p-6">
+                <div className="mb-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm font-medium text-primary">Starting from</span>
+                    <span className="text-lg font-bold text-foreground">$2,500</span>
+                  </div>
+                  <div className="flex items-center text-xs text-muted-foreground mb-4">
+                    <Users className="h-3 w-3 mr-1" />
+                    <span>10-150 attendees</span>
+                    <span className="mx-2">•</span>
+                    <Clock className="h-3 w-3 mr-1" />
+                    <span>1-3 days</span>
+                  </div>
+                </div>
+                
+                <div className="space-y-2 mb-6">
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Executive conference facilities</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Team building activities</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Business lunch arrangements</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Accommodation packages</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>AV equipment & tech support</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Transportation coordination</span>
+                  </div>
+                </div>
+                
+                <div className="flex gap-2">
+                  <Button className="flex-1 btn-luxury text-sm">Book Retreat</Button>
+                  <Button variant="outline" size="sm" className="px-3">
+                    <Mail className="h-3 w-3" />
+                  </Button>
+                </div>
+              </div>
+            </Card>
+
+            {/* Private Celebrations */}
+            <Card className="group overflow-hidden border-0 shadow-warm hover:shadow-luxury transition-all duration-500">
+              <div className="relative overflow-hidden">
+                <img
+                  src={privateEvent}
+                  alt="Private celebrations at Sawela Lodge"
+                  className="w-full h-48 sm:h-56 object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute top-4 right-4">
+                  <Badge className="bg-accent/90 text-white border-0">
+                    <Gift className="h-3 w-3 mr-1" />
+                    Private
+                  </Badge>
+                </div>
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h4 className="text-white text-lg sm:text-xl font-semibold mb-2">Private Celebrations</h4>
+                  <p className="text-white/90 text-sm">Anniversaries, birthdays, and special milestones</p>
+                </div>
+              </div>
+              <div className="p-4 sm:p-6">
+                <div className="mb-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm font-medium text-primary">Starting from</span>
+                    <span className="text-lg font-bold text-foreground">$1,500</span>
+                  </div>
+                  <div className="flex items-center text-xs text-muted-foreground mb-4">
+                    <Users className="h-3 w-3 mr-1" />
+                    <span>5-80 guests</span>
+                    <span className="mx-2">•</span>
+                    <Clock className="h-3 w-3 mr-1" />
+                    <span>4-12 hours</span>
+                  </div>
+                </div>
+                
+                <div className="space-y-2 mb-6">
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Intimate venue settings</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Personalized decoration</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Private chef experiences</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Guest accommodation deals</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Custom event themes</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Check className="h-3 w-3 text-primary" />
+                    <span>Professional photography</span>
+                  </div>
+                </div>
+                
+                <div className="flex gap-2">
+                  <Button className="flex-1 btn-luxury text-sm">Plan Celebration</Button>
+                  <Button variant="outline" size="sm" className="px-3">
+                    <Mail className="h-3 w-3" />
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Comprehensive Event Planning Section */}
+          <div className="mt-8 sm:mt-12">
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg sm:rounded-xl lg:rounded-2xl p-6 sm:p-8 lg:p-12">
+              <div className="text-center mb-8">
+                <h4 className="text-xl sm:text-2xl lg:text-3xl font-playfair font-bold mb-4">
+                  Complete Event Planning Services
+                </h4>
+                <p className="text-muted-foreground text-sm sm:text-base lg:text-lg mb-6 max-w-3xl mx-auto">
+                  Our dedicated event planning team brings over a decade of expertise in creating extraordinary experiences. 
+                  From concept to execution, we handle every detail to ensure your event is flawless and memorable.
+                </p>
+              </div>
+
+              {/* Service Features Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                <div className="flex items-start space-x-3">
+                  <div className="bg-primary/20 p-2 rounded-lg">
+                    <Calendar className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-sm sm:text-base mb-1">Timeline Planning</h5>
+                    <p className="text-xs sm:text-sm text-muted-foreground">Detailed scheduling and coordination</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="bg-primary/20 p-2 rounded-lg">
+                    <Users className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-sm sm:text-base mb-1">Vendor Coordination</h5>
+                    <p className="text-xs sm:text-sm text-muted-foreground">Trusted network of professionals</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="bg-primary/20 p-2 rounded-lg">
+                    <Camera className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-sm sm:text-base mb-1">Design & Décor</h5>
+                    <p className="text-xs sm:text-sm text-muted-foreground">Custom themes and styling</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="bg-primary/20 p-2 rounded-lg">
+                    <Utensils className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-sm sm:text-base mb-1">Catering Excellence</h5>
+                    <p className="text-xs sm:text-sm text-muted-foreground">Gourmet menus and service</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="bg-primary/20 p-2 rounded-lg">
+                    <Music className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-sm sm:text-base mb-1">Entertainment</h5>
+                    <p className="text-xs sm:text-sm text-muted-foreground">Music, lighting, and activities</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="bg-primary/20 p-2 rounded-lg">
+                    <Car className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-sm sm:text-base mb-1">Logistics Support</h5>
+                    <p className="text-xs sm:text-sm text-muted-foreground">Transportation and setup</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact and Booking Section */}
+              <div className="text-center border-t border-primary/20 pt-6">
+                <h5 className="text-lg sm:text-xl font-semibold mb-4">Ready to Plan Your Event?</h5>
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-lg mx-auto mb-4">
+                  <Button className="btn-luxury flex-1">
+                    <Calendar className="h-4 w-4 mr-2" />
+                    Free Consultation
+                  </Button>
+                  <Button variant="outline" className="btn-ghost-luxury flex-1">
+                    <Phone className="h-4 w-4 mr-2" />
+                    Call +254 123 456 789
+                  </Button>
+                </div>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  Available 24/7 for event planning consultations • Average response time: 2 hours
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

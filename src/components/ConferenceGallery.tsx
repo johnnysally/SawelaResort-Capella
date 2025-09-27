@@ -2,6 +2,16 @@
 
 import React from "react";
 
+// Import conference images
+import conference1 from "@/assets/conferences/conference1.jpg.jpg";
+import conference2 from "@/assets/conferences/conference2.jpg.jpg";
+import conference3 from "@/assets/conferences/conference3.jpg.jpg";
+import conference4 from "@/assets/conferences/conference4.jpg.jpg";
+import conference5 from "@/assets/conferences/conference5.jpg.jpg";
+import conference6 from "@/assets/conferences/conference6.jpg.jpg";
+import conference7 from "@/assets/conferences/conference7.jpg.jpg";
+import conference8 from "@/assets/conferences/conference8.jpg.jpg";
+
 interface GalleryItem {
   title: string;
   image: string;
@@ -11,43 +21,43 @@ interface GalleryItem {
 const galleryItems: GalleryItem[] = [
   {
     title: "Executive Conference Hall",
-    image: "https://source.unsplash.com/800x600/?conference,hall",
+    image: conference1,
     price: "$500 / Day",
   },
   {
     title: "Boardroom Meeting Space",
-    image: "https://source.unsplash.com/800x600/?meeting,room",
+    image: conference2,
     price: "$250 / Day",
   },
   {
     title: "Outdoor Event Space",
-    image: "https://source.unsplash.com/800x600/?outdoor,event",
+    image: conference3,
     price: "$400 / Day",
   },
   {
     title: "Luxury Accommodation Suite",
-    image: "https://source.unsplash.com/800x600/?hotel,room",
+    image: conference4,
     price: "$300 / Night",
   },
   {
     title: "Standard Double Room",
-    image: "https://source.unsplash.com/800x600/?resort,bedroom",
+    image: conference5,
     price: "$180 / Night",
   },
   {
     title: "Deluxe Spa Room",
-    image: "https://source.unsplash.com/800x600/?spa,room",
+    image: conference6,
     price: "$220 / Night",
   },
   // Capella-specific conference & accommodation offerings
   {
     title: "Capella Private Pavilion",
-    image: "https://source.unsplash.com/800x600/?pavilion,luxury",
+    image: conference7,
     price: "$3,000 / Day",
   },
   {
     title: "Capella Presidential Suite",
-    image: "https://source.unsplash.com/800x600/?presidential,suite",
+    image: conference8,
     price: "$2,500 / Night",
   },
 ];

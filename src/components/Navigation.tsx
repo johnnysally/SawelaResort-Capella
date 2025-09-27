@@ -87,7 +87,7 @@ export const Navigation = () => {
     { name: 'Home', href: '/' },
     { name: 'Accommodations & Conferences', href: '/accommodations' },
     { name: 'Dining', href: '/#dining', dropdown: true },
-    { name: 'Gallery', href: '/#gallery' },
+    { name: 'Gallery', href: '/gallery' },
     { name: 'Contact', href: '/#contact' },
   ];
 

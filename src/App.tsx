@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import AccommodationsPage from "./pages/accommodations"; // ✅ new page
 import CapellaPage from "./pages/capella"; // new Capella page
+import GalleryPage from "./pages/gallery"; // ✅ new gallery page
 // Dining pages
 import TeaBreakfastPage from "./pages/dining/tea-breakfast";
 import BarPage from "./pages/dining/bar";
@@ -58,6 +59,9 @@ const App = () => (
 
           {/* Capella lodge page */}
           <Route path="/capella" element={<CapellaPage />} />
+
+          {/* Gallery page */}
+          <Route path="/gallery" element={<GalleryPage />} />
 
           {/* Dining pages from navbar dropdown */}
           <Route path="/dining/tea-breakfast" element={<TeaBreakfastPage />} />

@@ -115,13 +115,15 @@ export const HeroSection = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Auto-advance slides
+  // Auto-advance slides with systematic transition - image first, then content
   useEffect(() => {
     const interval = setInterval(() => {
       setIsTransitioning(true);
+      // Image starts changing immediately (0ms delay)
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-      setTimeout(() => setIsTransitioning(false), 1500);
-    }, 6000); // Change slide every 6 seconds for cinematic timing
+      // Content transition starts after image begins (slower, more graceful timing)
+      setTimeout(() => setIsTransitioning(false), 3500); // Slower, more elegant cycle
+    }, 7000); // Change slide every 7 seconds for more relaxed pace
 
     return () => clearInterval(interval);
   }, []); // Remove currentSlide dependency to prevent interval reset
@@ -130,21 +132,21 @@ export const HeroSection = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    setTimeout(() => setIsTransitioning(false), 1500); // Cinematic transition timing
+    setTimeout(() => setIsTransitioning(false), 3500); // Slower, more elegant manual timing
   };
 
   const prevSlide = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-    setTimeout(() => setIsTransitioning(false), 1500); // Cinematic transition timing
+    setTimeout(() => setIsTransitioning(false), 3500); // Slower, more elegant manual timing
   };
 
   const goToSlide = (index: number) => {
     if (isTransitioning || index === currentSlide) return;
     setIsTransitioning(true);
     setCurrentSlide(index);
-    setTimeout(() => setIsTransitioning(false), 1500); // Cinematic transition timing
+    setTimeout(() => setIsTransitioning(false), 3500); // Slower, more elegant direct navigation
   };
 
   const currentHero = heroSlides[currentSlide];
@@ -167,19 +169,20 @@ export const HeroSection = () => {
               className={`absolute inset-0 w-full h-full`}
               style={{
                 opacity: isActive ? 1 : 0,
-                transition: 'opacity 4000ms ease-in-out',
+                transition: 'opacity 2000ms ease-in-out',
                 zIndex: isActive ? 2 : 1,
               }}
             >
-              {/* Ultra-smooth crossfade background */}
+              {/* Systematic image transition with prominent blur effect */}
               <div className="absolute inset-0 w-full h-full">
                 <img
                   src={slide.image}
                   alt={`Luxury Safari Lodge - ${slide.headline.text1}${slide.headline.highlight1}${slide.headline.text2}${slide.headline.highlight2}`}
                   className="w-full h-full object-cover"
                   style={{
-                    transform: isActive ? 'scale(1.02)' : 'scale(1)',
-                    transition: 'transform 8000ms ease-out',
+                    transform: isActive ? 'scale(1.01)' : 'scale(1)',
+                    filter: isTransitioning && isActive ? 'blur(2px)' : 'blur(0px)',
+                    transition: 'transform 7000ms ease-out, filter 1200ms ease-in-out',
                   }}
                 />
               </div>
@@ -201,10 +204,15 @@ export const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl">
-          {/* Location Badge with Imperceptible Transition */}
-          <div className={`inline-flex items-center space-x-2 glass px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-4 sm:mb-6 transition-all duration-5000 ease-in-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          } ${isTransitioning ? 'opacity-98' : 'opacity-100'}`}>
+          {/* Location Badge with Systematic Transition */}
+          <div 
+            className={`inline-flex items-center space-x-2 glass px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-4 sm:mb-6 transition-all duration-1200 ease-in-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } ${isTransitioning ? 'opacity-92' : 'opacity-100'}`}
+            style={{
+              transitionDelay: isTransitioning ? '1000ms' : '0ms'
+            }}
+          >
             <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
             <span className="text-xs sm:text-sm font-medium text-primary">{currentHero.location}</span>
             <div className="flex items-center space-x-0.5 sm:space-x-1 ml-1 sm:ml-2">
@@ -214,11 +222,16 @@ export const HeroSection = () => {
             </div>
           </div>
 
-          {/* Main Headline with Imperceptible Transition */}
+          {/* Main Headline with Systematic Transition */}
           <div className="mb-4 sm:mb-6">
-            <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-playfair font-bold leading-tight transition-all duration-6000 ease-in-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-            } ${isTransitioning ? 'opacity-98' : 'opacity-100'}`}>
+            <h1 
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-playfair font-bold leading-tight transition-all duration-1400 ease-in-out ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              } ${isTransitioning ? 'opacity-90' : 'opacity-100'}`}
+              style={{
+                transitionDelay: isTransitioning ? '1300ms' : '0ms'
+              }}
+            >
               <span className="text-white">{currentHero.headline.text1}</span>
               <span className="text-gradient">{currentHero.headline.highlight1}</span>
               <span className="text-white">{currentHero.headline.text2}</span>
@@ -226,32 +239,53 @@ export const HeroSection = () => {
             </h1>
           </div>
 
-          {/* Subtitle with Imperceptible Transition */}
+          {/* Subtitle with Systematic Transition */}
           <div className="mb-4 sm:mb-6">
-            <p className={`text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-2xl leading-relaxed mx-auto px-2 sm:px-0 transition-all duration-6000 ease-in-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            } ${isTransitioning ? 'opacity-97' : 'opacity-100'}`}>
+            <p 
+              className={`text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-2xl leading-relaxed mx-auto px-2 sm:px-0 transition-all duration-1100 ease-in-out ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } ${isTransitioning ? 'opacity-88' : 'opacity-100'}`}
+              style={{
+                transitionDelay: isTransitioning ? '1700ms' : '0ms'
+              }}
+            >
               {currentHero.subtitle}
             </p>
           </div>
 
-          {/* Supporting Lines with Imperceptible Transition */}
-          <div className={`max-w-2xl mx-auto mb-6 sm:mb-8 px-2 sm:px-0 transition-all duration-6000 ease-in-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          } ${isTransitioning ? 'opacity-96' : 'opacity-100'}`}>
+          {/* Supporting Lines with Systematic Transition */}
+          <div 
+            className={`max-w-2xl mx-auto mb-6 sm:mb-8 px-2 sm:px-0 transition-all duration-1000 ease-in-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } ${isTransitioning ? 'opacity-85' : 'opacity-100'}`}
+            style={{
+              transitionDelay: isTransitioning ? '2100ms' : '0ms'
+            }}
+          >
             {currentHero.supportingLines.map((line, index) => (
-              <p key={index} className={`text-sm sm:text-base lg:text-lg text-white/80 leading-relaxed mb-2 last:mb-0 transition-all duration-6000 ease-in-out ${
-                isTransitioning ? 'opacity-96' : 'opacity-100'
-              }`}>
+              <p 
+                key={index} 
+                className={`text-sm sm:text-base lg:text-lg text-white/80 leading-relaxed mb-2 last:mb-0 transition-all duration-900 ease-in-out ${
+                  isTransitioning ? 'opacity-85' : 'opacity-100'
+                }`}
+                style={{
+                  transitionDelay: isTransitioning ? `${2300 + index * 150}ms` : '0ms'
+                }}
+              >
                 • {line}
               </p>
             ))}
           </div>
 
-          {/* CTA Buttons with Imperceptible Transition */}
-          <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 max-w-md sm:max-w-none mx-auto sm:mx-0 transition-all duration-6000 ease-in-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          } ${isTransitioning ? 'opacity-97' : 'opacity-100'}`}>
+          {/* CTA Buttons with Systematic Transition */}
+          <div 
+            className={`flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 max-w-md sm:max-w-none mx-auto sm:mx-0 transition-all duration-1000 ease-in-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } ${isTransitioning ? 'opacity-88' : 'opacity-100'}`}
+            style={{
+              transitionDelay: isTransitioning ? '2800ms' : '0ms'
+            }}
+          >
             <Button size="lg" className="btn-luxury text-sm sm:text-base lg:text-lg px-6 py-3 sm:px-8 sm:py-4 transform hover:scale-105 transition-transform duration-300" onClick={() => window.dispatchEvent(new Event('openBooking'))}>
               {currentHero.ctaText}
             </Button>
