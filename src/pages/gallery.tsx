@@ -252,6 +252,7 @@ const GalleryPage = () => {
                   <img
                     src={item.src}
                     alt={item.title}
+                    loading="lazy"
                     className="w-full h-36 xs:h-44 sm:h-56 lg:h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -290,6 +291,7 @@ const GalleryPage = () => {
             <img
               src={selectedImage.src}
               alt={selectedImage.title}
+              loading="lazy"
               className="w-full h-auto max-h-[60vh] xs:max-h-[70vh] sm:max-h-[80vh] object-contain rounded-lg"
             />
             <div className="absolute bottom-0 left-0 right-0 p-2 xs:p-4 sm:p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
@@ -309,6 +311,7 @@ const GalleryPage = () => {
               <img
                 src={selectedDetailsImage.src}
                 alt={selectedDetailsImage.title}
+                loading="lazy"
                 className="w-full h-48 xs:h-64 sm:h-80 object-cover md:rounded-l-lg md:rounded-tr-none rounded-t-lg"
               />
             </div>

@@ -155,6 +155,7 @@ export const AccommodationsSection = () => {
             <img
               src={accommodations[selectedRoom].image}
               alt={`${accommodations[selectedRoom].name} interior with luxury amenities`}
+              loading="lazy"
               className="w-full h-48 xs:h-56 sm:h-72 lg:h-80 xl:h-96 object-cover transition-transform duration-700 hover:scale-105"
             />
             <div className="absolute top-4 left-4">
@@ -220,6 +221,7 @@ export const AccommodationsSection = () => {
                 <img
                   src={room.image}
                   alt={`${room.name} accommodation`}
+                  loading="lazy"
                   className="w-full h-40 xs:h-48 sm:h-56 lg:h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -289,6 +291,7 @@ export const AccommodationsSection = () => {
                 <img
                   src={weddingEvent}
                   alt="Wedding celebrations at Sawela Lodge"
+                  loading="lazy"
                   className="w-full h-48 sm:h-56 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
@@ -360,6 +363,7 @@ export const AccommodationsSection = () => {
                 <img
                   src={corporateEvent}
                   alt="Corporate events at Sawela Lodge"
+                  loading="lazy"
                   className="w-full h-48 sm:h-56 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
@@ -431,6 +435,7 @@ export const AccommodationsSection = () => {
                 <img
                   src={privateEvent}
                   alt="Private celebrations at Sawela Lodge"
+                  loading="lazy"
                   className="w-full h-48 sm:h-56 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>

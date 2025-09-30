@@ -6,18 +6,18 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 // Pages
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import AccommodationsPage from "./pages/accommodations"; // ✅ new page
-import CapellaPage from "./pages/capella"; // new Capella page
-import GalleryPage from "./pages/gallery"; // ✅ new gallery page
-// Dining pages
-import TeaBreakfastPage from "./pages/dining/tea-breakfast";
-import BarPage from "./pages/dining/bar";
-import RestaurantPage from "./pages/dining/restaurant";
-import OurFoodsPage from "./pages/dining/our-foods";
-import DiningAreasPage from "./pages/dining/areas";
-import DiningIndex from "./pages/dining";
+import React, { Suspense } from "react";
+const Index = React.lazy(() => import("./pages/Index"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
+const AccommodationsPage = React.lazy(() => import("./pages/accommodations"));
+const CapellaPage = React.lazy(() => import("./pages/capella"));
+const GalleryPage = React.lazy(() => import("./pages/gallery"));
+const TeaBreakfastPage = React.lazy(() => import("./pages/dining/tea-breakfast"));
+const BarPage = React.lazy(() => import("./pages/dining/bar"));
+const RestaurantPage = React.lazy(() => import("./pages/dining/restaurant"));
+const OurFoodsPage = React.lazy(() => import("./pages/dining/our-foods"));
+const DiningAreasPage = React.lazy(() => import("./pages/dining/areas"));
+const DiningIndex = React.lazy(() => import("./pages/dining"));
 
 // ✅ ScrollToHash component to handle #contact, #gallery etc.
 const ScrollToHash = () => {
@@ -39,6 +39,7 @@ const ScrollToHash = () => {
 
 const queryClient = new QueryClient();
 
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -47,33 +48,29 @@ const App = () => (
       <BrowserRouter>
         {/* ✅ Always active to listen for hash changes */}
         <ScrollToHash />
-        <Routes>
-          {/* Homepage */}
-          <Route path="/" element={<Index />} />
-
-          {/* Sawela (explicit route) */}
-          <Route path="/sawela" element={<Index />} />
-
-          {/* Accommodations page */}
-          <Route path="/accommodations" element={<AccommodationsPage />} />
-
-          {/* Capella lodge page */}
-          <Route path="/capella" element={<CapellaPage />} />
-
-          {/* Gallery page */}
-          <Route path="/gallery" element={<GalleryPage />} />
-
-          {/* Dining pages from navbar dropdown */}
-          <Route path="/dining/tea-breakfast" element={<TeaBreakfastPage />} />
-          <Route path="/dining/bar" element={<BarPage />} />
-          <Route path="/dining/restaurant" element={<RestaurantPage />} />
-          <Route path="/dining/our-foods" element={<OurFoodsPage />} />
-          <Route path="/dining/areas" element={<DiningAreasPage />} />
-          <Route path="/dining" element={<DiningIndex />} />
-
-          {/* Catch-all for 404s */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-lg">Loading...</div>}>
+          <Routes>
+            {/* Homepage */}
+            <Route path="/" element={<Index />} />
+            {/* Sawela (explicit route) */}
+            <Route path="/sawela" element={<Index />} />
+            {/* Accommodations page */}
+            <Route path="/accommodations" element={<AccommodationsPage />} />
+            {/* Capella lodge page */}
+            <Route path="/capella" element={<CapellaPage />} />
+            {/* Gallery page */}
+            <Route path="/gallery" element={<GalleryPage />} />
+            {/* Dining pages from navbar dropdown */}
+            <Route path="/dining/tea-breakfast" element={<TeaBreakfastPage />} />
+            <Route path="/dining/bar" element={<BarPage />} />
+            <Route path="/dining/restaurant" element={<RestaurantPage />} />
+            <Route path="/dining/our-foods" element={<OurFoodsPage />} />
+            <Route path="/dining/areas" element={<DiningAreasPage />} />
+            <Route path="/dining" element={<DiningIndex />} />
+            {/* Catch-all for 404s */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
