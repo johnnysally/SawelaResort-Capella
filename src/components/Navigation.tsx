@@ -119,24 +119,24 @@ export const Navigation = () => {
           isScrolled ? 'glass shadow-warm' : 'glass-dark'
         }`}
       >
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between h-20 sm:h-24">
+  <div className="container mx-auto px-2 xs:px-4 sm:px-6">
+          <div className="flex items-center justify-between h-14 xs:h-16 sm:h-20 lg:h-24">
             {/* Logo */}
-            <div className="flex-shrink-0 mr-4 sm:mr-12">
+            <div className="flex-shrink-0 mr-2 xs:mr-4 sm:mr-12">
               <Link to="/" className="flex items-center space-x-2 sm:space-x-3">
                 <img 
                   src={logo} 
                   alt="Sawela Lodge Logo" 
-                  className="h-10 w-auto sm:h-16 object-contain"
+                  className="h-7 xs:h-9 sm:h-12 w-auto object-contain"
                 />
-                <h1 className="text-lg sm:text-2xl font-playfair font-bold text-gradient">
+                <h1 className="text-base xs:text-lg sm:text-2xl font-playfair font-bold text-gradient">
                   {hotelName}
                 </h1>
               </Link>
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-12">
+            <div className="hidden lg:flex items-center space-x-4 xs:space-x-8 md:space-x-12">
               {navItems.map((item) => {
                 if (item.dropdown) {
                   return (
@@ -269,7 +269,7 @@ export const Navigation = () => {
             </div>
 
             {/* Contact Info & CTA */}
-            <div className="hidden xl:flex items-center space-x-8 ml-8">
+            <div className="hidden xl:flex items-center space-x-4 xs:space-x-8 ml-4 xs:ml-8">
               <div
                 className={`flex items-center space-x-3 text-sm ${contactColor} whitespace-nowrap`}
               >

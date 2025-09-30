@@ -51,10 +51,10 @@ export const Footer = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 pt-4 sm:pt-12 lg:pt-16 pb-3 sm:pb-6">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 pt-2 xs:pt-4 sm:pt-12 lg:pt-16 pb-2 xs:pb-3 sm:pb-6">
+        <div className="container mx-auto px-2 xs:px-4 sm:px-6 lg:px-8">
           {/* Main Footer Content */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-6 lg:gap-8 mb-4 sm:mb-6 lg:mb-8">
+          <div className="grid grid-cols-2 xs:grid-cols-3 lg:grid-cols-5 gap-2 xs:gap-3 sm:gap-6 lg:gap-8 mb-2 xs:mb-4 sm:mb-6 lg:mb-8">
             {/* Brand Section */}
             <div className="col-span-2 sm:col-span-1 lg:col-span-2">
               <div className="flex items-center space-x-2 mb-1 sm:mb-3">

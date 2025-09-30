@@ -64,27 +64,27 @@ const galleryItems: GalleryItem[] = [
 
 export default function ConferenceGallery() {
   return (
-    <section className="my-16">
-      <h2 className="text-3xl md:text-5xl font-bold mb-10 text-center">
+    <section className="my-10 xs:my-12 sm:my-16">
+      <h2 className="text-2xl xs:text-3xl md:text-5xl font-bold mb-6 xs:mb-8 md:mb-10 text-center">
         Conferences & Accommodation
       </h2>
 
-      {/* ✅ Container with spacing and max width */}
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      {/* Responsive container and grid */}
+      <div className="max-w-7xl mx-auto px-2 xs:px-4 md:px-10">
+        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4 xs:gap-6 md:gap-10">
           {galleryItems.map((item, index) => (
             <div
               key={index}
-              className="rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:scale-105 transition-transform duration-300"
+              className="rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:scale-105 transition-transform duration-300 bg-white"
             >
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-72 object-cover"  // 🔥 Increased height from h-56 → h-72
+                className="w-full h-40 xs:h-56 md:h-72 object-cover"
               />
-              <div className="p-4 text-center">
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-gray-700 font-medium">{item.price}</p>
+              <div className="p-3 xs:p-4 text-center">
+                <h3 className="text-base xs:text-lg md:text-xl font-semibold mb-1 xs:mb-2">{item.title}</h3>
+                <p className="text-gray-700 font-medium text-sm xs:text-base">{item.price}</p>
               </div>
             </div>
           ))}

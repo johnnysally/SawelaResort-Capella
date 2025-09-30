@@ -171,6 +171,7 @@ const categories = ['All', 'Gallery', 'Accommodations', 'Services', 'Scenic View
 const GalleryPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
+  const [selectedDetailsImage, setSelectedDetailsImage] = useState<GalleryItem | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -236,9 +237,9 @@ const GalleryPage = () => {
       </section>
 
       {/* Gallery Grid */}
-      <section className="py-8 sm:py-12 lg:py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+      <section className="py-6 xs:py-8 sm:py-12 lg:py-16">
+        <div className="container mx-auto px-2 xs:px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 xs:gap-4 sm:gap-6">
             {filteredItems.map((item, index) => (
               <Card 
                 key={item.id}
@@ -246,20 +247,27 @@ const GalleryPage = () => {
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ animationDelay: `${index * 50}ms` }}
-                onClick={() => setSelectedImage(item)}
               >
-                <div className="relative overflow-hidden">
+                <div className="relative overflow-hidden" onClick={() => setSelectedImage(item)}>
                   <img
                     src={item.src}
                     alt={item.title}
-                    className="w-full h-48 sm:h-56 lg:h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-36 xs:h-44 sm:h-56 lg:h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <Badge className="mb-2 text-xs">{item.category}</Badge>
-                    <h3 className="text-sm sm:text-base font-semibold text-white mb-1">{item.title}</h3>
+                  <div className="absolute bottom-0 left-0 right-0 p-2 xs:p-3 sm:p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <Badge className="mb-1 xs:mb-2 text-xs">{item.category}</Badge>
+                    <h3 className="text-xs xs:text-sm sm:text-base font-semibold text-white mb-0.5 xs:mb-1">{item.title}</h3>
                     <p className="text-xs sm:text-sm text-white/80 line-clamp-2">{item.description}</p>
                   </div>
+                </div>
+                <div className="p-2 xs:p-3 flex justify-center bg-white">
+                  <button
+                    className="btn-luxury text-xs xs:text-sm px-3 xs:px-4 py-1.5 rounded shadow hover:bg-primary/90 transition-colors duration-200"
+                    onClick={e => { e.stopPropagation(); setSelectedDetailsImage(item); }}
+                  >
+                    View Details
+                  </button>
                 </div>
               </Card>
             ))}
@@ -269,8 +277,8 @@ const GalleryPage = () => {
 
       {/* Image Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="relative max-w-4xl w-full">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 xs:p-4 bg-black/80 backdrop-blur-sm">
+          <div className="relative w-full max-w-lg xs:max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl">
             <Button
               variant="outline"
               size="icon"
@@ -282,13 +290,52 @@ const GalleryPage = () => {
             <img
               src={selectedImage.src}
               alt={selectedImage.title}
-              className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
+              className="w-full h-auto max-h-[60vh] xs:max-h-[70vh] sm:max-h-[80vh] object-contain rounded-lg"
             />
-            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
-              <Badge className="mb-2">{selectedImage.category}</Badge>
-              <h2 className="text-lg sm:text-xl font-bold text-white mb-2">{selectedImage.title}</h2>
-              <p className="text-sm sm:text-base text-white/90">{selectedImage.description}</p>
+            <div className="absolute bottom-0 left-0 right-0 p-2 xs:p-4 sm:p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
+              <Badge className="mb-1 xs:mb-2">{selectedImage.category}</Badge>
+              <h2 className="text-base xs:text-lg sm:text-xl font-bold text-white mb-1 xs:mb-2">{selectedImage.title}</h2>
+              <p className="text-xs xs:text-sm sm:text-base text-white/90">{selectedImage.description}</p>
             </div>
+          </div>
+        </div>
+      )}
+      {/* Details Modal (Sawela Lodges style) */}
+      {selectedDetailsImage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 xs:p-4 bg-black/70 backdrop-blur-sm">
+          <div className="relative w-full max-w-md xs:max-w-lg sm:max-w-xl md:max-w-2xl bg-white rounded-lg shadow-2xl overflow-hidden flex flex-col md:flex-row">
+            {/* Image section */}
+            <div className="md:w-1/2 w-full flex-shrink-0 bg-gray-100 flex items-center justify-center">
+              <img
+                src={selectedDetailsImage.src}
+                alt={selectedDetailsImage.title}
+                className="w-full h-48 xs:h-64 sm:h-80 object-cover md:rounded-l-lg md:rounded-tr-none rounded-t-lg"
+              />
+            </div>
+            {/* Details section */}
+            <div className="md:w-1/2 w-full p-3 xs:p-6 flex flex-col justify-between">
+              <div>
+                <Badge className="mb-1 xs:mb-2">{selectedDetailsImage.category}</Badge>
+                <h2 className="text-lg xs:text-2xl font-bold mb-1 xs:mb-2 text-primary font-playfair">{selectedDetailsImage.title}</h2>
+                {/* Star rating (static 5 stars for demo) */}
+                <div className="flex items-center mb-2 xs:mb-3">
+                  {[1,2,3,4,5].map(i => (
+                    <svg key={i} className="h-4 w-4 xs:h-5 xs:w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><polygon points="10 1.5 12.59 7.36 18.9 7.97 14 12.26 15.18 18.45 10 15.27 4.82 18.45 6 12.26 1.1 7.97 7.41 7.36 10 1.5"/></svg>
+                  ))}
+                </div>
+                <p className="text-xs xs:text-base text-gray-700 mb-2 xs:mb-4">{selectedDetailsImage.description}</p>
+                <div className="text-xs text-gray-400 mb-2 xs:mb-4">Image ID: {selectedDetailsImage.id}</div>
+              </div>
+              <Button className="btn-luxury w-full py-2 xs:py-3 text-base xs:text-lg mt-1 xs:mt-2">Book Now</Button>
+            </div>
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute top-4 right-4 z-10"
+              onClick={() => setSelectedDetailsImage(null)}
+            >
+              <X className="h-4 w-4" />
+            </Button>
           </div>
         </div>
       )}

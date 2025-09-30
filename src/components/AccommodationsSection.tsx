@@ -111,22 +111,22 @@ export const AccommodationsSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="accommodations" className="py-12 sm:py-16 lg:py-20 xl:py-24 bg-gradient-earth">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} id="accommodations" className="py-8 sm:py-12 lg:py-20 xl:py-24 bg-gradient-earth">
+      <div className="container mx-auto px-2 sm:px-4 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 lg:mb-12 opacity-100">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-playfair font-bold mb-3 sm:mb-4 lg:mb-6 leading-tight">
+  <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-8 lg:mb-12 opacity-100">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-playfair font-bold mb-2 sm:mb-4 lg:mb-6 leading-tight">
             <span className="text-foreground">Luxury</span>
             <span className="text-gradient"> Accommodations</span>
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed px-2 sm:px-4">
+          <p className="text-sm xs:text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed px-1 sm:px-4">
             Each suite is meticulously designed to offer the perfect blend of comfort and authentic African elegance, 
             ensuring every guest experiences the ultimate in luxury hospitality.
           </p>
         </div>
 
         {/* Room Selection Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 lg:gap-4 mb-6 sm:mb-8 lg:mb-12 px-2 sm:px-4 opacity-100">
+  <div className="flex flex-wrap justify-center gap-1 xs:gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-8 lg:mb-12 px-1 sm:px-4 opacity-100">
           {accommodations.map((room, index) => (
             <button
               key={room.id}
@@ -149,13 +149,13 @@ export const AccommodationsSection = () => {
         </div>
 
         {/* Featured Room Display */}
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center mb-8 lg:mb-12 opacity-100">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center mb-6 lg:mb-12 opacity-100">
           {/* Room Image */}
-          <div className="relative overflow-hidden rounded-lg lg:rounded-2xl shadow-luxury order-2 lg:order-1">
+          <div className="relative overflow-hidden rounded-lg lg:rounded-2xl shadow-luxury order-2 lg:order-1 min-h-[220px] xs:min-h-[260px]">
             <img
               src={accommodations[selectedRoom].image}
               alt={`${accommodations[selectedRoom].name} interior with luxury amenities`}
-              className="w-full h-64 sm:h-72 lg:h-80 xl:h-96 object-cover transition-transform duration-700 hover:scale-105"
+              className="w-full h-48 xs:h-56 sm:h-72 lg:h-80 xl:h-96 object-cover transition-transform duration-700 hover:scale-105"
             />
             <div className="absolute top-4 left-4">
               <span className="glass px-3 py-1.5 rounded-full text-sm font-medium">
@@ -165,18 +165,18 @@ export const AccommodationsSection = () => {
           </div>
 
           {/* Room Details */}
-          <div className="space-y-4 lg:space-y-6 order-1 lg:order-2">
+          <div className="space-y-3 xs:space-y-4 lg:space-y-6 order-1 lg:order-2">
             <div>
-              <h3 className="text-xl sm:text-2xl lg:text-4xl font-playfair font-bold mb-3 lg:mb-4 leading-tight">
+              <h3 className="text-lg xs:text-xl sm:text-2xl lg:text-4xl font-playfair font-bold mb-2 lg:mb-4 leading-tight">
                 {accommodations[selectedRoom].name}
               </h3>
-              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground mb-4 lg:mb-6 leading-relaxed">
+              <p className="text-xs xs:text-sm sm:text-base lg:text-lg text-muted-foreground mb-3 lg:mb-6 leading-relaxed">
                 {accommodations[selectedRoom].description}
               </p>
             </div>
 
             {/* Quick Info */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-6 py-3 sm:py-4 border-y border-border">
+            <div className="flex flex-col xs:flex-row items-start xs:items-center space-y-2 xs:space-y-0 xs:space-x-6 py-2 xs:py-3 sm:py-4 border-y border-border">
               <div className="flex items-center space-x-2">
                 <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
                 <span className="text-sm font-medium">Up to {accommodations[selectedRoom].guests} guests</span>
@@ -189,8 +189,8 @@ export const AccommodationsSection = () => {
 
             {/* Amenities */}
             <div>
-              <h4 className="text-sm sm:text-base font-semibold mb-3 sm:mb-4">Premium Amenities</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+              <h4 className="text-xs xs:text-sm sm:text-base font-semibold mb-2 sm:mb-4">Premium Amenities</h4>
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-1 xs:gap-2 sm:gap-3">
                 {accommodations[selectedRoom].amenities.map((amenity, index) => (
                   <div key={index} className="flex items-center space-x-2">
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary rounded-full flex-shrink-0"></div>
@@ -201,7 +201,7 @@ export const AccommodationsSection = () => {
             </div>
 
             {/* CTA */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-4 sm:pt-6">
+            <div className="flex flex-col xs:flex-row gap-2 xs:gap-3 pt-3 sm:pt-6">
               <Button className="btn-luxury flex-1" onClick={() => window.dispatchEvent(new Event('openBooking'))}>
                 Book This Suite
               </Button>
@@ -213,28 +213,28 @@ export const AccommodationsSection = () => {
         </div>
 
         {/* All Rooms Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 opacity-100">
+  <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8 opacity-100">
           {accommodations.map((room, index) => (
             <Card key={room.id} className="group overflow-hidden border-0 shadow-warm hover:shadow-luxury transition-all duration-500">
               <div className="relative overflow-hidden">
                 <img
                   src={room.image}
                   alt={`${room.name} accommodation`}
-                  className="w-full h-48 sm:h-56 lg:h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-40 xs:h-48 sm:h-56 lg:h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Button size="sm" className="btn-luxury text-sm">
+                <div className="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <Button size="sm" className="btn-luxury text-xs xs:text-sm py-1 px-3">
                     View Details
                   </Button>
                 </div>
               </div>
-              <div className="p-4 sm:p-5 lg:p-6">
-                <h3 className="text-base sm:text-lg lg:text-xl font-playfair font-semibold mb-2 line-clamp-2 leading-tight">{room.name}</h3>
-                <p className="text-muted-foreground text-sm mb-3 sm:mb-4 line-clamp-2 leading-relaxed">{room.description}</p>
+              <div className="p-3 xs:p-4 sm:p-5 lg:p-6">
+                <h3 className="text-xs xs:text-base sm:text-lg lg:text-xl font-playfair font-semibold mb-1 xs:mb-2 line-clamp-2 leading-tight">{room.name}</h3>
+                <p className="text-muted-foreground text-xs xs:text-sm mb-2 xs:mb-3 sm:mb-4 line-clamp-2 leading-relaxed">{room.description}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm sm:text-base lg:text-lg font-semibold text-primary">{room.price}</span>
-                  <div className="flex items-center space-x-1 text-sm text-muted-foreground">
+                  <span className="text-xs xs:text-sm sm:text-base lg:text-lg font-semibold text-primary">{room.price}</span>
+                  <div className="flex items-center space-x-1 text-xs xs:text-sm text-muted-foreground">
                     <Users className="h-4 w-4 flex-shrink-0" />
                     <span className="whitespace-nowrap">{room.guests} guests</span>
                   </div>
@@ -346,7 +346,7 @@ export const AccommodationsSection = () => {
                 </div>
                 
                 <div className="flex gap-2">
-                  <Button className="flex-1 btn-luxury text-sm">Plan Wedding</Button>
+                  <Button className="flex-1 btn-luxury text-sm" onClick={() => window.dispatchEvent(new Event('openBooking'))}>Plan Wedding</Button>
                   <Button variant="outline" size="sm" className="px-3">
                     <Phone className="h-3 w-3" />
                   </Button>
@@ -417,7 +417,7 @@ export const AccommodationsSection = () => {
                 </div>
                 
                 <div className="flex gap-2">
-                  <Button className="flex-1 btn-luxury text-sm">Book Retreat</Button>
+                  <Button className="flex-1 btn-luxury text-sm" onClick={() => window.dispatchEvent(new Event('openBooking'))}>Book Retreat</Button>
                   <Button variant="outline" size="sm" className="px-3">
                     <Mail className="h-3 w-3" />
                   </Button>
@@ -488,7 +488,7 @@ export const AccommodationsSection = () => {
                 </div>
                 
                 <div className="flex gap-2">
-                  <Button className="flex-1 btn-luxury text-sm">Plan Celebration</Button>
+                  <Button className="flex-1 btn-luxury text-sm" onClick={() => window.dispatchEvent(new Event('openBooking'))}>Plan Celebration</Button>
                   <Button variant="outline" size="sm" className="px-3">
                     <Mail className="h-3 w-3" />
                   </Button>
