@@ -12,6 +12,13 @@ def create_room_booking():
     data = request.get_json()
 
     try:
+        # Validate required fields
+        required_fields = ["hotel_id", "first_name", "last_name", "email", "phone",
+                           "room_type", "check_in_date", "check_out_date", "guests"]
+        for field in required_fields:
+            if field not in data:
+                return jsonify({"error": f"{field} is required"}), 400
+
         # parent booking
         booking = Booking(
             hotel_id=data["hotel_id"],
@@ -35,7 +42,16 @@ def create_room_booking():
         db.session.add(room_booking)
         db.session.commit()
 
-        return jsonify({"message": "Room booking created", "booking_id": booking.id}), 201
+        return jsonify({
+            "message": "Room booking created",
+            "booking_id": booking.id,
+            "room_booking": {
+                "room_type": room_booking.room_type,
+                "check_in_date": str(room_booking.check_in_date),
+                "check_out_date": str(room_booking.check_out_date),
+                "guests": room_booking.guests
+            }
+        }), 201
 
     except Exception as e:
         db.session.rollback()
