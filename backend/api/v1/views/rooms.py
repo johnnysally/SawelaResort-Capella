@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from flask import Blueprint, request, jsonify
 from models.Room_booking import Booking, RoomBooking
-from backend.api.v1.app import db  # import db from app
+from api.v1.app import db # import db from app
 
 rooms_bp = Blueprint("rooms", __name__, url_prefix="/api/bookings/rooms")
 
