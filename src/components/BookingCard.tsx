@@ -135,7 +135,7 @@ export default function BookingCard({ onClose }: { onClose?: () => void }) {
     };
 
     try {
-      const response = await fetch("http://192.168.1.232:5000/api/bookings/rooms", {
+      const response = await fetch("http://192.168.1.233:5000/api/bookings/rooms", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bookingPayload)
