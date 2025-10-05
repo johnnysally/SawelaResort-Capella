@@ -1,29 +1,26 @@
 #!/usr/bin/python3
 from flask import Flask
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-
-# Create SQLAlchemy instance
-db = SQLAlchemy()
+from api.v1.extensions import db  # ✅ import the single shared db instance
 
 def create_app():
     app = Flask(__name__)
     CORS(app)
 
-    # Database Configuration
+    # ✅ Database configuration
     app.config['SQLALCHEMY_DATABASE_URI'] = (
         "mysql+pymysql://booking_user:Adm1ntest@192.168.1.232/hotel_booking"
     )
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # Initialize db with app
+    # ✅ Initialize extensions
     db.init_app(app)
 
-    # Import and register blueprints AFTER db init
+    # ✅ Import routes *after* db.init_app
     from api.v1.views.rooms import rooms_bp
     app.register_blueprint(rooms_bp)
 
-    # Create tables if not exist
+    # ✅ Create tables
     with app.app_context():
         db.create_all()
 

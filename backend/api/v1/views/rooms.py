@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from flask import Blueprint, request, jsonify
-from api.v1.app import db  # ✅ Safe because app.py only imports this after init_app
+from api.v1.extensions import db  # ✅ the shared db instance
 from models.Room_booking import Booking, RoomBooking
 
 rooms_bp = Blueprint("rooms", __name__, url_prefix="/api/bookings/rooms")
@@ -17,7 +17,6 @@ def create_room_booking():
             if field not in data:
                 return jsonify({"error": f"{field} is required"}), 400
 
-        # Create parent booking
         booking = Booking(
             hotel_id=data["hotel_id"],
             service_type="room",
@@ -29,7 +28,6 @@ def create_room_booking():
         db.session.add(booking)
         db.session.commit()
 
-        # Create child room booking
         room_booking = RoomBooking(
             booking_id=booking.id,
             room_type=data["room_type"],
