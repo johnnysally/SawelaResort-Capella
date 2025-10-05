@@ -1,27 +1,23 @@
 #!/usr/bin/python3
-from flask import Blueprint, request, jsonify
-from models.Room_booking import Booking, RoomBooking
+from flask import Blueprint, request, jsonify, current_app
 from api.v1.app import db
+from models.Room_booking import Booking, RoomBooking
 
-rooms_bp = Blueprint("rooms", __name__, url_prefix="/api/bookings/rooms")
+rooms_bp = Blueprint("rooms_bp", __name__)
 
-
-@rooms_bp.route("", methods=["POST"])
+@rooms_bp.route("/rooms", methods=["POST"])
 def create_room_booking():
     """Create a new room booking"""
     data = request.get_json()
 
     try:
-        # Validate required fields
-        required_fields = [
-            "hotel_id", "first_name", "last_name", "email", "phone",
-            "room_type", "check_in_date", "check_out_date", "guests"
-        ]
+        required_fields = ["hotel_id", "first_name", "last_name", "email", "phone",
+                           "room_type", "check_in_date", "check_out_date", "guests"]
         for field in required_fields:
             if field not in data:
                 return jsonify({"error": f"{field} is required"}), 400
 
-        # ✅ Parent booking
+        # Create parent booking
         booking = Booking(
             hotel_id=data["hotel_id"],
             service_type="room",
@@ -33,7 +29,7 @@ def create_room_booking():
         db.session.add(booking)
         db.session.commit()
 
-        # ✅ Room booking details
+        # Create child room booking
         room_booking = RoomBooking(
             booking_id=booking.id,
             room_type=data["room_type"],
@@ -47,12 +43,7 @@ def create_room_booking():
         return jsonify({
             "message": "Room booking created successfully",
             "booking_id": booking.id,
-            "room_booking": {
-                "room_type": room_booking.room_type,
-                "check_in_date": str(room_booking.check_in_date),
-                "check_out_date": str(room_booking.check_out_date),
-                "guests": room_booking.guests
-            }
+            "room_booking": room_booking.to_dict()
         }), 201
 
     except Exception as e:
