@@ -1,43 +1,36 @@
 #!/usr/bin/python3
 """
-Contains class BaseModel and Base
+BaseModel class for all models
 """
+
+import uuid
 from datetime import datetime
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, DateTime
-from uuid import uuid4
+from api.v1.app import db
 
-Base = declarative_base()
+class BaseModel(db.Model):
+    __abstract__ = True  # This ensures no table is created for BaseModel
 
-time_format = "%Y-%m-%dT%H:%M:%S.%f"
-
-
-class BaseModel(Base):
-    __abstract__ = True  # Don't create a table for this base class
-
-    id = Column(String(60), primary_key=True, default=lambda: str(uuid4()))
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()), nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 
     def __init__(self, *args, **kwargs):
-        """Initialize base model"""
+        """Initialize model attributes"""
         super().__init__(*args, **kwargs)
-        if not hasattr(self, "id") or self.id is None:
-            self.id = str(uuid4())
-        if not hasattr(self, "created_at"):
+        if not getattr(self, "id", None):
+            self.id = str(uuid.uuid4())
+        if not getattr(self, "created_at", None):
             self.created_at = datetime.utcnow()
-        if not hasattr(self, "updated_at"):
+        if not getattr(self, "updated_at", None):
             self.updated_at = datetime.utcnow()
 
-    def __str__(self):
-        """String representation"""
+    def __repr__(self):
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def to_dict(self):
-        """Convert SQLAlchemy object to dictionary"""
-        d = {c.name: getattr(self, c.name) for c in self.__table__.columns}
-        if d.get("created_at"):
-            d["created_at"] = d["created_at"].strftime(time_format)
-        if d.get("updated_at"):
-            d["updated_at"] = d["updated_at"].strftime(time_format)
-        return d
+        """Convert SQLAlchemy model to dictionary"""
+        result = {column.name: getattr(self, column.name) for column in self.__table__.columns}
+        result["created_at"] = result["created_at"].isoformat() if result.get("created_at") else None
+        result["updated_at"] = result["updated_at"].isoformat() if result.get("updated_at") else None
+        return result
