@@ -1,22 +1,21 @@
-#!/usr/bin/python3
-"""Room and Booking models"""
-from api.v1.extensions import db
+import uuid
 from datetime import datetime
-import enum
-
-class BookingStatus(enum.Enum):
-    pending = "pending"
-    confirmed = "confirmed"
-    cancelled = "cancelled"
+from api.v1.app import db
 
 
 class Booking(db.Model):
     __tablename__ = "bookings"
 
-    id = db.Column(db.String(60), primary_key=True)
+    id = db.Column(db.String(60), primary_key=True, default=lambda: str(uuid.uuid4()), nullable=False)
     hotel_id = db.Column(db.Integer, nullable=False)
-    service_type = db.Column(db.Enum("room", "conference", "occasion", "table", name="service_type"), nullable=False)
-    status = db.Column(db.Enum(BookingStatus), default=BookingStatus.pending)
+    service_type = db.Column(
+        db.Enum("room", "conference", "occasion", "table", name="service_type_enum"),
+        nullable=False
+    )
+    status = db.Column(
+        db.Enum("pending", "confirmed", "cancelled", name="booking_status_enum"),
+        default="pending"
+    )
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
@@ -24,16 +23,15 @@ class Booking(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    room_booking = db.relationship("RoomBooking", back_populates="booking", uselist=False)
+    room_booking = db.relationship("RoomBooking", backref="booking", uselist=False, cascade="all, delete-orphan")
 
 
 class RoomBooking(db.Model):
     __tablename__ = "room_bookings"
 
-    booking_id = db.Column(db.String(60), db.ForeignKey("bookings.id"), primary_key=True)
-    room_type = db.Column(db.String(50), nullable=False)
+    id = db.Column(db.String(60), primary_key=True, default=lambda: str(uuid.uuid4()), nullable=False)
+    booking_id = db.Column(db.String(60), db.ForeignKey("bookings.id"), nullable=False)
+    room_type = db.Column(db.String(100), nullable=False)
     check_in_date = db.Column(db.Date, nullable=False)
     check_out_date = db.Column(db.Date, nullable=False)
     guests = db.Column(db.Integer, nullable=False)
-
-    booking = db.relationship("Booking", back_populates="room_booking")
