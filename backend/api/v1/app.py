@@ -5,8 +5,7 @@ from api.v1.extensions import db  # ✅ import the single shared db instance
 
 def create_app():
     app = Flask(__name__)
-    CORS(app)
-
+    CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
     # ✅ Database configuration
     app.config['SQLALCHEMY_DATABASE_URI'] = (
         "mysql+pymysql://booking_user:Adm1ntest@192.168.1.232/hotel_booking"
