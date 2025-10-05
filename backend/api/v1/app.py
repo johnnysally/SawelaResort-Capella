@@ -1,29 +1,28 @@
+#!/usr/bin/python3
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy()
+app = Flask(__name__)
+CORS(app)
 
-def create_app():
-    app = Flask(__name__)
-    CORS(app)
+# ✅ Connect to your MySQL database
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    "mysql+pymysql://booking_user:Adm1ntest@192.168.1.232/hotel_booking"
+)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # ✅ configure database
-    app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqldb://ventman_dev:ventman_dev_pwd@localhost/ventman_dev_db"
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# Initialize DB
+db = SQLAlchemy(app)
 
-    db.init_app(app)
-
-    # ✅ import routes
-    from api.v1.views import app_views
-    app.register_blueprint(app_views, url_prefix="/api/v1")
-
-    return app
+# ✅ Import and register routes
+from api.v1.views.rooms import rooms_bp
+app.register_blueprint(rooms_bp)
 
 if __name__ == "__main__":
-    app = create_app()
-    print("Starting Flask server...")
-    try:
-        app.run(debug=True, host="0.0.0.0", port=5000)
-    except Exception as e:
-        print("Flask failed to start:", e)
+    from models.Room_booking import Booking, RoomBooking  # import models
+    with app.app_context():
+        db.create_all()  # ✅ creates tables if they don’t exist
+
+    print("🚀 Flask backend running on http://0.0.0.0:5000")
+    app.run(debug=True, host="0.0.0.0", port=5000)

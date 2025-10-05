@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from flask import Blueprint, request, jsonify
 from models.Room_booking import Booking, RoomBooking
-from api.v1.app import db # import db from app
+from api.v1.app import db
 
 rooms_bp = Blueprint("rooms", __name__, url_prefix="/api/bookings/rooms")
 
@@ -13,13 +13,15 @@ def create_room_booking():
 
     try:
         # Validate required fields
-        required_fields = ["hotel_id", "first_name", "last_name", "email", "phone",
-                           "room_type", "check_in_date", "check_out_date", "guests"]
+        required_fields = [
+            "hotel_id", "first_name", "last_name", "email", "phone",
+            "room_type", "check_in_date", "check_out_date", "guests"
+        ]
         for field in required_fields:
             if field not in data:
                 return jsonify({"error": f"{field} is required"}), 400
 
-        # parent booking
+        # ✅ Parent booking
         booking = Booking(
             hotel_id=data["hotel_id"],
             service_type="room",
@@ -31,7 +33,7 @@ def create_room_booking():
         db.session.add(booking)
         db.session.commit()
 
-        # child room booking
+        # ✅ Room booking details
         room_booking = RoomBooking(
             booking_id=booking.id,
             room_type=data["room_type"],
@@ -43,7 +45,7 @@ def create_room_booking():
         db.session.commit()
 
         return jsonify({
-            "message": "Room booking created",
+            "message": "Room booking created successfully",
             "booking_id": booking.id,
             "room_booking": {
                 "room_type": room_booking.room_type,
