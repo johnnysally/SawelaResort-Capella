@@ -30,4 +30,11 @@ def create_app():
 if __name__ == "__main__":
     app = create_app()
     print("🚀 Starting Flask server on port 5000...")
+    # Explicitly import models before creating tables
+    from models.Room_booking import Booking, RoomBooking
+    from api.v1.extensions import db
+
+    with app.app_context():
+        print("🧱 Creating all database tables...")
+        db.create_all()
     app.run(debug=True, host="0.0.0.0", port=5000)
