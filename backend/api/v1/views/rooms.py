@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-from flask import Blueprint, request, jsonify, current_app
-from api.v1.app import db
+from flask import Blueprint, request, jsonify
+from api.v1.app import db  # ✅ Safe because app.py only imports this after init_app
 from models.Room_booking import Booking, RoomBooking
 
-rooms_bp = Blueprint("rooms_bp", __name__)
+rooms_bp = Blueprint("rooms", __name__, url_prefix="/api/bookings/rooms")
 
-@rooms_bp.route("/rooms", methods=["POST"])
+@rooms_bp.route("", methods=["POST"])
 def create_room_booking():
     """Create a new room booking"""
     data = request.get_json()
@@ -42,8 +42,7 @@ def create_room_booking():
 
         return jsonify({
             "message": "Room booking created successfully",
-            "booking_id": booking.id,
-            "room_booking": room_booking.to_dict()
+            "booking_id": booking.id
         }), 201
 
     except Exception as e:
