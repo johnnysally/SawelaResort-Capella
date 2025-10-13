@@ -152,7 +152,7 @@ export const HeroSection = () => {
   const currentHero = heroSlides[currentSlide];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-[3.5rem] sm:pt-[4rem] lg:pt-[5.5rem]">
       {/* Background Images with Parallax and Modern Sliding Transition */}
       <div 
         className="absolute inset-0 w-full h-full overflow-hidden"

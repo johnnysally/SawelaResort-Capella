@@ -115,29 +115,28 @@ export const Navigation = () => {
     <>
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
           isScrolled ? 'glass shadow-warm' : 'glass-dark'
         }`}
+        role="navigation"
+        aria-label="Main navigation"
       >
   <div className="container mx-auto px-2 xs:px-4 sm:px-6">
-          <div className="flex items-center justify-between h-14 xs:h-16 sm:h-20 lg:h-24">
-            {/* Logo */}
-            <div className="flex-shrink-0 mr-2 xs:mr-4 sm:mr-12">
+          <div className="flex flex-wrap items-center justify-between gap-3 h-14 xs:h-16 sm:h-20 lg:h-24">
+            {/* Compact logo at far-left + Site title */}
+            <div className="flex items-center flex-shrink-0 mr-2 xs:mr-4 sm:mr-12 min-w-0">
               <Link to="/" className="flex items-center space-x-2 sm:space-x-3">
-                <img 
-                  src={logo} 
-                  alt="Sawela Lodge Logo" 
-                  className="h-7 xs:h-9 sm:h-12 w-auto object-contain"
-                />
-                <h1 className="text-base xs:text-lg sm:text-2xl font-playfair font-bold text-gradient">
+                <img src={logo} alt="Sawela logo" className="hidden lg:block h-10 xl:h-12 w-auto flex-shrink-0 mr-2 ml-1" />
+                <h1 className="text-sm sm:text-base md:text-lg font-playfair font-bold text-gradient truncate max-w-[16rem] sm:max-w-[20rem]">
                   {hotelName}
                 </h1>
               </Link>
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-4 xs:space-x-8 md:space-x-12">
+            <div className="hidden lg:flex items-center space-x-2 xs:space-x-4 md:space-x-6 flex-1 justify-center min-w-0 flex-wrap">
               {navItems.map((item) => {
+                const isTwoLine = item.href === '/accommodations' || item.name.includes('Accommodations');
                 if (item.dropdown) {
                   return (
                     <div
@@ -157,14 +156,14 @@ export const Navigation = () => {
                     >
                       <button
                         onClick={handleDiningClick}
-                        className={`flex items-center space-x-2 ${linkColor} hover:text-primary transition-colors duration-300 font-semibold text-lg whitespace-nowrap`}
+                        className={`flex items-center space-x-2 ${linkColor} hover:text-primary transition-colors duration-300 font-semibold text-sm sm:text-base md:text-lg whitespace-nowrap max-w-[12rem] sm:max-w-[16rem] truncate`}
                       >
                         <span>{item.name}</span>
                         <ChevronDown className="h-5 w-5" />
                       </button>
                       {isDiningOpen && (
                         <div
-                          className="absolute mt-3 w-80 bg-white shadow-xl rounded-lg overflow-hidden z-50 transition-all duration-200"
+                          className="absolute mt-3 w-80 bg-white shadow-xl rounded-lg overflow-hidden z-50 transition-all duration-200 left-0 max-w-[calc(100vw-4rem)]"
                           onMouseEnter={() => {
                             if (!isMobile) {
                               clearTimeout(diningTimeout);
@@ -194,33 +193,47 @@ export const Navigation = () => {
 
                 // Use Link for full paths, anchor for hash fragments
                 const isHashLink = item.href.includes('#');
-                
+
                 if (isHashLink) {
                   return (
                     <a
                       key={item.name}
                       href={item.href}
-                      className={`${linkColor} hover:text-primary transition-colors duration-300 font-semibold text-lg whitespace-nowrap`}
+                      className={`${linkColor} hover:text-primary transition-colors duration-300 font-semibold text-sm sm:text-base md:text-lg max-w-[12rem] sm:max-w-[16rem]`}
                     >
-                      {item.name}
+                      {isTwoLine ? (
+                        <span className="whitespace-normal leading-tight block text-center sm:text-left">
+                          {item.name.replace(' & ', ' &\n')}
+                        </span>
+                      ) : (
+                        <span className="whitespace-nowrap truncate">{item.name}</span>
+                      )}
                     </a>
                   );
                 }
-                
+
                 return (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`${linkColor} hover:text-primary transition-colors duration-300 font-semibold text-lg whitespace-nowrap`}
+                    className={`${linkColor} hover:text-primary transition-colors duration-300 font-semibold text-sm sm:text-base md:text-lg max-w-[12rem] sm:max-w-[16rem]`}
                   >
-                    {item.name}
+                    {isTwoLine ? (
+                      <span className="whitespace-normal leading-tight block text-center sm:text-left">
+                        {item.name.split(' & ').map((part, idx) => (
+                          <span key={idx} className={idx === 0 ? '' : 'block'}>{part}{idx === 0 ? ' &' : ''}</span>
+                        ))}
+                      </span>
+                    ) : (
+                      <span className="whitespace-nowrap truncate">{item.name}</span>
+                    )}
                   </Link>
                 );
               })}
 
               {/* Our Hotels Dropdown */}
               <div
-                className="relative group ml-10"
+                className="relative group ml-6 lg:ml-10"
                 onMouseEnter={() => {
                   if (!isMobile) {
                     clearTimeout(hotelsTimeout);
@@ -235,14 +248,14 @@ export const Navigation = () => {
               >
                 <button
                   onClick={handleHotelsClick}
-                  className={`flex items-center space-x-2 ${linkColor} hover:text-primary transition-colors duration-300 font-semibold text-lg whitespace-nowrap`}
+                  className={`flex items-center space-x-2 ${linkColor} hover:text-primary transition-colors duration-300 font-semibold text-sm sm:text-base md:text-lg whitespace-nowrap max-w-[12rem] sm:max-w-[16rem] truncate`}
                 >
                   <span>Our Hotels</span>
                   <ChevronDown className="h-5 w-5" />
                 </button>
                 {isHotelsOpen && (
                   <div
-                    className="absolute mt-3 w-80 bg-white shadow-xl rounded-lg overflow-hidden z-50 transition-all duration-200"
+                    className="absolute mt-3 w-80 bg-white shadow-xl rounded-lg overflow-hidden z-50 transition-all duration-200 left-0 max-w-[calc(100vw-4rem)]"
                     onMouseEnter={() => {
                       if (!isMobile) {
                         clearTimeout(hotelsTimeout);
@@ -284,15 +297,8 @@ export const Navigation = () => {
               </Button>
             </div>
 
-            {/* Desktop Book Now Button (shown on lg, hidden on xl where full contact shows) */}
-            <div className="hidden lg:flex xl:hidden">
-              <Button
-                className="btn-luxury text-sm px-5 py-2 whitespace-nowrap"
-                onClick={() => window.dispatchEvent(new Event('openBooking'))}
-              >
-                Book Now
-              </Button>
-            </div>
+            {/* Desktop Book Now Button intentionally hidden on lg to preserve nav space; CTA available at xl */}
+            <div className="hidden" />
 
             {/* Mobile menu button */}
             <div className="lg:hidden">
