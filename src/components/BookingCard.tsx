@@ -121,24 +121,37 @@ export default function BookingCard({ onClose }: { onClose?: () => void }) {
     return total;
   };
 
-  const handleBookNow = () => {
-    alert(
-      `Booking Summary:
-Hotel: ${booking.hotel}
-Service: ${booking.service}
-Name: ${booking.guestDetails.firstName} ${booking.guestDetails.lastName}
-Email: ${booking.guestDetails.email}
-Phone: ${booking.guestDetails.phone}
-Room: ${booking.roomType}
-Check-in: ${booking.checkIn}
-Check-out: ${booking.checkOut}
-Guests: ${booking.guests}
-Conference: ${booking.conferenceGuests ? `${booking.conferenceHall} (${booking.conferenceGuests})` : "None"}
-Occasion: ${booking.occasionGuests ? `${booking.occasionType} (${booking.occasionGuests})` : "None"}
-Extras: ${booking.extras.length ? booking.extras.join(", ") : "None"}
-Total: KSh ${calculateTotal().toLocaleString()}`
-    );
-    if (onClose) onClose();
+  const handleBookNow = async () => {
+    const bookingPayload = {
+      hotel_id: booking.hotel === "Capella Lodge" ? 1 : 2,
+      first_name: booking.guestDetails.firstName,
+      last_name: booking.guestDetails.lastName,
+      email: booking.guestDetails.email,
+      phone: booking.guestDetails.phone,
+      room_type: booking.roomType,
+      check_in_date: booking.checkIn,
+      check_out_date: booking.checkOut,
+      guests: booking.guests
+    };
+
+    try {
+      const response = await fetch("http://192.168.1.233:5000/api/bookings/rooms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bookingPayload)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(`✅ Booking successful! Reference: ${result.booking_id}`);
+        if (onClose) onClose();
+      } else {
+        alert(`❌ Booking failed: ${result.error}`);
+      }
+    } catch (error) {
+      alert(`🚨 Network error: ${error}`);
+    }
   };
 
   const nextStep = () => setBooking((prev) => ({ ...prev, step: prev.step + 1 }));
